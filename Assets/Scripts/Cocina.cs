@@ -5,13 +5,21 @@ using UnityEngine;
 public class Cocina : MonoBehaviour
 {
     public Seat[] placesToPlaceOrders;
-    public Stack<Plato> platosListos;
+    public Stack<Plato> finishedFoods;
+
+    private void Start()
+    {
+        placesToPlaceOrders = GetComponentsInChildren<Seat>();
+    }
 
     private void Update()
     {
-        if (CanPlaceOrders())
+        if(finishedFoods != null)
         {
-            PlaceOrder();
+            if (CanPlaceOrders())
+            {
+                PlaceOrder();
+            }
         }
     }
 
@@ -23,7 +31,7 @@ public class Cocina : MonoBehaviour
     private IEnumerator Cook(Plato plato)
     {
         yield return new WaitForSeconds(plato.timeToCook);
-        platosListos.Push(plato);
+        finishedFoods.Push(plato);
     }
 
     private void PlaceOrder()
@@ -32,7 +40,7 @@ public class Cocina : MonoBehaviour
         {
             if (place.isFree())
             {
-                Plato plato = platosListos.Pop();
+                Plato plato = finishedFoods.Pop();
                 Instantiate(plato, place.transform.position, Quaternion.identity);
                 place.ChangeStatus();
                 continue;
@@ -52,7 +60,7 @@ public class Cocina : MonoBehaviour
         return false;
     }
 
-    public Plato EntregarPedido(Plato plato)
+    public Plato DeliverOrder(Plato plato)
     {
         plato.transform.position = plato.client.transform.position;
         return plato;

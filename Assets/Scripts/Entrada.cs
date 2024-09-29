@@ -7,6 +7,11 @@ public class Entrada : MonoBehaviour
 {
     public Seat[] placesToStand;
 
+    private void Start()
+    {
+        placesToStand = GetComponentsInChildren<Seat>();
+    }
+
     public bool PlaceAvailible()
     {
         foreach (Seat seat in placesToStand)

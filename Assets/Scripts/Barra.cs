@@ -10,6 +10,11 @@ public class Barra : MonoBehaviour
 
     public int cuenta;
 
+    private void Start()
+    {
+        seats = GetComponentsInChildren<Seat>();
+    }
+
     private void GetClientToPosition(Client client)
     {
         foreach (Seat seat in seats)
