@@ -15,4 +15,9 @@ public class Seat : MonoBehaviour
     {
         free = !free;
     }
+
+    public void SetFree()
+    {
+        free = true;
+    }
 }

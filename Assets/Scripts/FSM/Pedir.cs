@@ -16,9 +16,12 @@ public class Pedir : IState
 
     public void OnEnter()
     {
-        _client.comidaElegida = GameManager.instance.menu[Random.Range(0, GameManager.instance.menu.Length)];
+        _client.comidaElegida = FoodFactory.Instance.foodPrefabs[Random.Range(0, FoodFactory.Instance.foodPrefabs.Length)];
+        _client.comidaElegida.client = _client;
+        Debug.Log("Pido un: " + _client.comidaElegida.name);
         _client.StartWaitFood();
-        GameManager.instance.CrearPedido(_client.comidaElegida);
+        GameManager.instance.NewOrder(_client.comidaElegida);
+        
     }
 
     public void OnUpdate()
@@ -28,6 +31,6 @@ public class Pedir : IState
 
     public void OnExit()
     {
-        
+        _client.EndCoroutine();
     }
 }

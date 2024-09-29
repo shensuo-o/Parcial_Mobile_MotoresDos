@@ -16,6 +16,7 @@ public class Spawn : IState
 
     public void OnEnter()
     {
+        Debug.Log("Empiezo a esperar");
         _client.StartWaitSeat();
     }
 
@@ -26,6 +27,6 @@ public class Spawn : IState
 
     public void OnExit()
     {
-        _client.EndWaitSeat();
+        _client.EndCoroutine();
     }
 }

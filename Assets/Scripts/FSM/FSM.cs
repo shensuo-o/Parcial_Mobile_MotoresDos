@@ -23,6 +23,11 @@ public class FSM
         }
     }
 
+    public void ExitState()
+    {
+        _currentState.OnExit();
+    }
+
     public void ChangeState(ClientStates state)
     {
         if (_states.ContainsKey(state))

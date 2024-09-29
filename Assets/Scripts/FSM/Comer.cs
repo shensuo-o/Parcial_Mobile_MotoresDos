@@ -16,6 +16,7 @@ public class Comer : IState
 
     public void OnEnter()
     {
+        Debug.Log("A COMERRR");
         _client.StartWaitEat();
     }
 
@@ -26,9 +27,12 @@ public class Comer : IState
 
     public void OnExit()
     {
-        _client.barraAsignada.AddToTable(_client.comidaElegida.price);
+        if(_client.comidaElegida != null)
+        {
+            _client.barraAsignada.AddMoneyToTable(_client.comidaElegida.price);
+            FoodFactory.Instance.ReturnFood(_client.comidaElegida);
+        }
+        
         _client.Exit();
     }
-
-    
 }

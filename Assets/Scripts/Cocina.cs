@@ -5,7 +5,7 @@ using UnityEngine;
 public class Cocina : MonoBehaviour
 {
     public Seat[] placesToPlaceOrders;
-    public Stack<Plato> finishedFoods;
+    public List<Plato> finishedFoods;
 
     private void Start()
     {
@@ -14,11 +14,11 @@ public class Cocina : MonoBehaviour
 
     private void Update()
     {
-        if(finishedFoods != null)
+        if(finishedFoods.Count > 0)
         {
             if (CanPlaceOrders())
             {
-                PlaceOrder();
+                PlaceOrderOnCounter();
             }
         }
     }
@@ -30,20 +30,25 @@ public class Cocina : MonoBehaviour
 
     private IEnumerator Cook(Plato plato)
     {
+        Debug.Log("Cocinando: " + plato.name);
         yield return new WaitForSeconds(plato.timeToCook);
-        finishedFoods.Push(plato);
+        Debug.Log("Listo: " + plato.name);
+        finishedFoods.Add(plato);
     }
 
-    private void PlaceOrder()
+    private void PlaceOrderOnCounter()
     {
         foreach (Seat place in placesToPlaceOrders)
         {
             if (place.isFree())
             {
-                Plato plato = finishedFoods.Pop();
-                Instantiate(plato, place.transform.position, Quaternion.identity);
-                place.ChangeStatus();
-                continue;
+                Plato platoListo = finishedFoods[0];
+                Plato nuevoPlato = FoodFactory.Instance.GetFood(platoListo);
+                Debug.Log("Apoyo un " + nuevoPlato.name + " en la mesada!");
+                nuevoPlato.SetClient(platoListo.client);
+                nuevoPlato.MoveTo(place);
+                finishedFoods.Remove(platoListo);
+                break;
             }
         }
     }
@@ -58,11 +63,5 @@ public class Cocina : MonoBehaviour
             }
         }
         return false;
-    }
-
-    public Plato DeliverOrder(Plato plato)
-    {
-        plato.transform.position = plato.client.transform.position;
-        return plato;
     }
 }

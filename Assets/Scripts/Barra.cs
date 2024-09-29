@@ -1,39 +1,77 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.PackageManager;
 using UnityEngine;
 
 public class Barra : MonoBehaviour
 {
+    
     public Seat[] seats;
 
     public List<Client> clients;
 
     public int cuenta;
 
+    public GameObject coin;
+
     private void Start()
     {
+        coin.gameObject.SetActive(false);
         seats = GetComponentsInChildren<Seat>();
     }
 
-    private void GetClientToPosition(Client client)
+    public bool SpaceAvailable()
     {
         foreach (Seat seat in seats)
         {
             if (seat.isFree())
             {
-                client.transform.position = seat.transform.position;
-                client.barraAsignada = this;
-                seat.ChangeStatus();
-                client.Seated();
-                continue;
+                return true;
             }
         }
-        //Deseleccionar el cliente
+        return false;
     }
 
-    public void AddToTable(int d)
+    public void GetClientToPosition(Client client)
+    {
+        if(!client.seated)
+        {
+            foreach (Seat seat in seats)
+            {
+                if (seat.isFree())
+                {
+                    client.GoToSeat(seat, this);
+                    break;
+                }
+            }
+        }
+    }
+
+    public bool MoneyOnTable()
+    {
+        return cuenta > 0 ? true : false;
+    }
+
+    public void GetMoney()
+    {
+        GameManager.instance.GetBarMoney(cuenta);
+    }
+
+    public void ClearMoney()
+    {
+        cuenta = 0;
+        ActivateCoin(false);
+    }
+
+    public void AddMoneyToTable(int d)
     {
         cuenta += d;
+        ActivateCoin(true);
+    }
+
+    public void ActivateCoin(bool v)
+    {
+        coin.gameObject.SetActive(v);
     }
 }
 

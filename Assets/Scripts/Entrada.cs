@@ -5,14 +5,30 @@ using UnityEngine;
 
 public class Entrada : MonoBehaviour
 {
-    public Seat[] placesToStand;
+    private Seat[] placesToStand;
 
     private void Start()
     {
         placesToStand = GetComponentsInChildren<Seat>();
+        foreach (var place in placesToStand)
+        {
+            place.free = true;
+        }
     }
 
-    public bool PlaceAvailible()
+    public void SpawnClient(Client client)
+    {
+        foreach (var place in placesToStand)
+        {
+            if (place.isFree())
+            {
+                client.GoToSeat(place);
+                break;
+            }
+        }
+    }
+
+    public bool PlaceAvailable()
     {
         foreach (Seat seat in placesToStand)
         {
