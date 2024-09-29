@@ -1,89 +1,89 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
+using UnityEditor;
 using UnityEngine;
 
 public class Client : MonoBehaviour
 {
-    public int RandomComida;
-    public int RandomBebida;
-
-    public string comidaElegida;
-    public string bebidaElegida;
+    public Plato comidaElegida;
+    public Barra barraAsignada;
 
     public float timerEntrada;
     public float timerPedido;
     public float timerComida;
     public float timerConsume;
-    public float timerPago;
 
-    public State state;
+    private FSM _fsm;
 
-    // Start is called before the first frame update
     void Start()
     {
-        RandomComida = Random.Range(1, 4);
-        RandomBebida = Random.Range(1, 4);
-
-        switch(RandomComida)
-        {
-            case 1:
-                comidaElegida = "Pollo";
-                break;
-
-            case 2:
-                comidaElegida = "Fideos";
-                break;
-
-            case 3:
-                comidaElegida = "Milanesa";
-                break;
-
-            default:
-                break;
-        }
-
-        switch (RandomBebida)
-        {
-            case 1:
-                bebidaElegida = "Coca";
-                break;
-
-            case 2:
-                bebidaElegida = "Agua";
-                break;
-
-            case 3:
-                bebidaElegida = "Cerveza";
-                break;
-
-            default:
-                break;
-        }
+        _fsm = new FSM();
+        _fsm.CreateState(FSM.ClientStates.Spawn, new Spawn(_fsm, this));
+        _fsm.CreateState(FSM.ClientStates.Pidiendo, new Pedir(_fsm, this));
+        _fsm.CreateState(FSM.ClientStates.Comiendo, new Comer(_fsm, this));
+        _fsm.ChangeState(FSM.ClientStates.Spawn);
     }
 
-    // Update is called once per frame
-    void Update()
+    protected void Update()
     {
-        switch (state)
-        {
-            case State.Entrada:
-                RunTimer(timerEntrada);
-                break;
-        }
+        _fsm.ArtificialUpdate();
     }
 
-    public enum State
+    public void GetFood()
     {
-        Entrada,
-        Pedido,
-        Comida,
-        Consume,
-        Pago
+        _fsm.ChangeState(FSM.ClientStates.Comiendo);
+    }
+    
+    public void Seated()
+    {
+        _fsm.ChangeState(FSM.ClientStates.Pidiendo);
     }
 
-    void RunTimer(float TimeLimit)
+    public void StartWaitSeat()
     {
+        StartCoroutine(Wait(timerEntrada));
+    }
 
+    public void EndWaitSeat()
+    {
+        StopCoroutine(Wait(timerEntrada));
+    }
+
+    public void StartWaitFood()
+    {
+        StartCoroutine(Wait(timerComida));
+    }
+
+    public void EndWaitFood()
+    {
+        StopCoroutine(Wait(timerComida));
+    }
+
+    IEnumerator Wait(float time)
+    {
+        yield return new WaitForSeconds(time);
+        Exit();
+    }
+    public void StartWaitEat()
+    {
+        StartCoroutine(WaitEat(timerConsume));
+    }
+
+    public void EndWaitEat()
+    {
+        StopCoroutine(WaitEat(timerConsume));
+    }
+
+    IEnumerator WaitEat(float time)
+    {
+        yield return new WaitForSeconds(time);
+        _fsm.ChangeState(FSM.ClientStates.Spawn);
+    }
+
+    public void Exit()
+    {
+        GameManager.instance.lives--;
+        Destroy(this);
     }
 }

@@ -4,15 +4,57 @@ using UnityEngine;
 
 public class Cocina : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public Seat[] placesToPlaceOrders;
+    public Stack<Plato> platosListos;
+
+    private void Update()
     {
-        
+        if (CanPlaceOrders())
+        {
+            PlaceOrder();
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void GetOrder(Plato plato)
     {
-        
+        StartCoroutine(Cook(plato));
+    }
+
+    private IEnumerator Cook(Plato plato)
+    {
+        yield return new WaitForSeconds(plato.timeToCook);
+        platosListos.Push(plato);
+    }
+
+    private void PlaceOrder()
+    {
+        foreach (Seat place in placesToPlaceOrders)
+        {
+            if (place.isFree())
+            {
+                Plato plato = platosListos.Pop();
+                Instantiate(plato, place.transform.position, Quaternion.identity);
+                place.ChangeStatus();
+                continue;
+            }
+        }
+    }
+
+    private bool CanPlaceOrders()
+    {
+        foreach (Seat place in placesToPlaceOrders)
+        {
+            if (place.isFree())
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public Plato EntregarPedido(Plato plato)
+    {
+        plato.transform.position = plato.client.transform.position;
+        return plato;
     }
 }

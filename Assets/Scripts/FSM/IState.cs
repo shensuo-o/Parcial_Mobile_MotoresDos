@@ -2,7 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public interface IState
 {
-    
+    void OnEnter();
+    void OnUpdate();
+    void OnExit();
 }
