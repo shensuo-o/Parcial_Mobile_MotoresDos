@@ -57,19 +57,26 @@ public class InputHandler : MonoBehaviour
                 if (objectHit)
                 {
                     //We hit something
-                    if (objectHit.collider.GetComponent<Client>() && objectHit.collider.GetComponent<Client>().gameObject.activeSelf)
+                    if (objectHit.collider.GetComponent<Client>() && objectHit.collider.GetComponent<Client>().gameObject.activeInHierarchy)
                     {
                         SelectClient(objectHit.collider.GetComponent<Client>());
                     }
                     if (objectHit.collider.GetComponent<Barra>())
                     {
                         SelectBarra(objectHit.collider.GetComponent<Barra>());
-                        if(selectedClient != null && selectedClient.gameObject.activeSelf && !selectedClient.seated)
+                        if(selectedClient != null && selectedClient.gameObject.activeInHierarchy && !selectedClient.seated)
                         {
                             if (selectedBarra.SpaceAvailable())
                             {
-                                selectedClient.asiento.ChangeStatus();
-                                selectedBarra.GetClientToPosition(selectedClient);
+                                Debug.Log("ACA LLEGO");
+                                
+                                
+                                if (selectedClient.gameObject.activeInHierarchy)
+                                {
+                                    Debug.Log("estas activo nene");
+                                    selectedClient.asiento.ChangeStatus();
+                                    selectedBarra.GetClientToPosition(selectedClient);
+                                }
                             }
                             DeselectClient();
                             DeselectBarra();
@@ -85,10 +92,10 @@ public class InputHandler : MonoBehaviour
                             DeselectBarra();
                         }
                     }
-                    if (objectHit.collider.GetComponent<Plato>() && objectHit.collider.GetComponent<Plato>().gameObject.activeSelf)
+                    if (objectHit.collider.GetComponent<Plato>() && objectHit.collider.GetComponent<Plato>().gameObject.activeInHierarchy)
                     {
                         SelectPlato(objectHit.collider.GetComponent<Plato>());
-                        if (selectedPlato.client.gameObject.activeSelf)
+                        if (selectedPlato.client.gameObject.activeInHierarchy)
                         {
                             GameManager.instance.DeliverOrder(selectedPlato);
                         }
