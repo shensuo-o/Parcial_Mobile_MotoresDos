@@ -4,7 +4,11 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public int dinero = 0;
+    public string playerName = ""; //Unity Cloud
+    public int money = 0;
+    public int maxMoney; //Unity Cloud
+    public int points; 
+    public int maxPoints; //Unity Cloud
     public static GameManager instance;
     public Cocina cocina;
     public List<Barra> barras;
@@ -74,7 +78,7 @@ public class GameManager : MonoBehaviour
 
     public void GetBarMoney(int d)
     {
-        dinero += d;
-        Debug.Log(dinero);
+        maxMoney += d;
+        Debug.Log(maxMoney);
     }
 }
