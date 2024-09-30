@@ -16,8 +16,14 @@ public class Spawn : IState
 
     public void OnEnter()
     {
+        if (_client.co != null)
+        {
+            _client.EndCoroutine(); // Stop any previous coroutine
+        }
+        Debug.Log("Active? " + _client.gameObject.activeInHierarchy);
         Debug.Log("Empiezo a esperar");
         _client.StartWaitSeat();
+        Debug.Log(_client.co);
     }
 
     public void OnUpdate()

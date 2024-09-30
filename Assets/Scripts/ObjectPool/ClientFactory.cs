@@ -10,21 +10,46 @@ public class ClientFactory : MonoBehaviour
     public int stonks = 15;
     public bool dynamic = true;
 
-    public ObjectPool<Client> clientPool;
+    public Dictionary<Client, ObjectPool<Client>> clientPools = new Dictionary<Client, ObjectPool<Client>>();
 
     void Start()
     {
         Instance = this;
-        clientPool = new ObjectPool<Client>(ClientCreator, Client.TurnOnOff, stonks, dynamic);
+        foreach (Client c in clientPrefabs)
+        {
+            if (!clientPools.ContainsKey(c))
+            {
+                // Crear un pool si no existe una para esa comida
+                clientPools[c] = new ObjectPool<Client>(() => ClientCreator(c), Client.TurnOnOff, stonks, dynamic);
+            }
+        }
     }
 
-    public Client ClientCreator()
+    public Client ClientCreator(Client c)
     {
-        return Instantiate(clientPrefabs[Random.Range(0, clientPrefabs.Length)], transform);
+        return Instantiate(c, transform);
+    }
+
+    public Client GetClient(Client c)
+    {
+        if (!clientPools.ContainsKey(c))
+        {
+            clientPools[c] = new ObjectPool<Client>(() => ClientCreator(c), Client.TurnOnOff, stonks, dynamic);
+        }
+
+        return clientPools[c].GetObject();
     }
 
     public void ReturnClient(Client c)
     {
-        clientPool.ReturnObject(c);
+        // Encontrar la pool y traer el cliente
+        foreach (var poolEntry in clientPools)
+        {
+            if (poolEntry.Key.GetType() == c.GetType())
+            {
+                poolEntry.Value.ReturnObject(c);
+                return;
+            }
+        }
     }
 }

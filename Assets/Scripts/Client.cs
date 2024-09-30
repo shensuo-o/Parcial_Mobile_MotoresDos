@@ -1,9 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.Reflection;
-using UnityEditor;
 using UnityEditor.PackageManager;
-using UnityEditor.Search;
 using UnityEngine;
 
 public class Client : MonoBehaviour
@@ -21,7 +17,7 @@ public class Client : MonoBehaviour
 
     private FSM _fsm;
 
-    private IEnumerator co;
+    public IEnumerator co;
 
     private void Awake()
     {
@@ -36,7 +32,7 @@ public class Client : MonoBehaviour
         this.GetComponent<Renderer>().sortingOrder = 3;
         _timerEntrada = Random.Range(10, 15);
         _timerComida = Random.Range(10, 15);
-        _timerConsume = Random.Range(10, 15);
+        _timerConsume = Random.Range(3, 6);
         _fsm.CreateState(FSM.ClientStates.Spawn, new Spawn(_fsm, this));
         _fsm.CreateState(FSM.ClientStates.Pidiendo, new Pedir(_fsm, this));
         _fsm.CreateState(FSM.ClientStates.Comiendo, new Comer(_fsm, this));
@@ -45,9 +41,7 @@ public class Client : MonoBehaviour
 
     protected void Update()
     {
-
         _fsm.ArtificialUpdate();
-        
     }
 
     public void GetFood(Plato plato)
@@ -76,19 +70,33 @@ public class Client : MonoBehaviour
 
     public void StartWaitSeat()
     {
+        if (!gameObject.activeInHierarchy)
+        {
+            gameObject.SetActive(true);
+        }
+
         co = Wait(_timerEntrada);
         StartCoroutine(co);
     }
     
     public void StartWaitFood()
     {
+        if (!gameObject.activeInHierarchy)
+        {
+            gameObject.SetActive(true);
+        }
+
         co = Wait(_timerComida);
         StartCoroutine(co);
     }
 
     public void EndCoroutine()
     {
-        StopCoroutine(co);
+        if (co != null)
+        {
+            StopCoroutine(co);
+            co = null;
+        }
     }
 
     IEnumerator Wait(float time)
@@ -100,7 +108,8 @@ public class Client : MonoBehaviour
 
     public void StartWaitEat()
     {
-        StartCoroutine(WaitEat(_timerConsume));
+        co = WaitEat(_timerConsume);
+        StartCoroutine(co);
     }
 
     IEnumerator WaitEat(float time)
@@ -112,18 +121,22 @@ public class Client : MonoBehaviour
 
     public void Exit()
     {
+        EndCoroutine();
         asiento.ChangeStatus();
         ClientFactory.Instance.ReturnClient(this);
     }
 
     public static void TurnOnOff(Client c, bool active = true)
     {
+        if (!active) c.EndCoroutine();
         if (active) c.Reset();
         c.gameObject.SetActive(active);
     }
 
-    public void Reset()
+    private void Reset()
     {
+        this.GetComponent<Collider2D>().enabled = true;
+        EndCoroutine();
         seated = false;
         barraAsignada = null;
         comidaElegida = null;

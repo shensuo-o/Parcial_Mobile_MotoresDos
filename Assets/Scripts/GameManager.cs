@@ -9,7 +9,6 @@ public class GameManager : MonoBehaviour
     public Cocina cocina;
     public List<Barra> barras;
     public Entrada entrada;
-
     public bool isAlive;
 
     public int lives = 3;
@@ -37,10 +36,10 @@ public class GameManager : MonoBehaviour
             yield return wait;
             if (entrada.PlaceAvailable())
             {
-                var newclient = ClientFactory.Instance.clientPool.GetObject();
-                if (!newclient) yield return null;
+                var client = ClientFactory.Instance.GetClient(ClientFactory.Instance.clientPrefabs[Random.Range(0, ClientFactory.Instance.clientPrefabs.Length)]);
+                if (!client) yield return null;
 
-                entrada.SpawnClient(newclient);
+                entrada.SpawnClient(client);
             }
             spawnRate = Random.Range(3, 10);
         }
@@ -70,6 +69,7 @@ public class GameManager : MonoBehaviour
     {
         plato.MoveTo(plato.client.manos);
         plato.client.GetFood(plato);
+        plato.GetComponent<Collider2D>().enabled = false;
     }
 
     public void GetBarMoney(int d)

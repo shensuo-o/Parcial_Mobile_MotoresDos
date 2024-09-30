@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.Tilemaps;
 using UnityEngine;
 
 public class Plato : MonoBehaviour
@@ -46,6 +43,7 @@ public class Plato : MonoBehaviour
 
     public void Reset()
     {
+        this.GetComponent<Collider2D>().enabled = true;
         place = null;
         client = null;
     }

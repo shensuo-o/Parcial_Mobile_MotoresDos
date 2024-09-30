@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCounters;
 
 public class Comer : IState
 {
@@ -16,6 +13,11 @@ public class Comer : IState
 
     public void OnEnter()
     {
+        if (_client.co != null)
+        {
+            _client.EndCoroutine(); // Stop any previous coroutine
+        }
+
         Debug.Log("A COMERRR");
         _client.StartWaitEat();
     }
@@ -32,6 +34,8 @@ public class Comer : IState
             _client.barraAsignada.AddMoneyToTable(_client.comidaElegida.price);
             FoodFactory.Instance.ReturnFood(_client.comidaElegida);
         }
+
+        _client.EndCoroutine();
         
         _client.Exit();
     }

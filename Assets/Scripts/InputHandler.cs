@@ -56,8 +56,7 @@ public class InputHandler : MonoBehaviour
                 RaycastHit2D objectHit = Physics2D.Raycast(fingerRay, Vector2.zero);
                 if (objectHit)
                 {
-                    //We hit something
-                    if (objectHit.collider.GetComponent<Client>() && objectHit.collider.GetComponent<Client>().gameObject.activeInHierarchy)
+                    if (objectHit.collider.GetComponent<Client>())
                     {
                         SelectClient(objectHit.collider.GetComponent<Client>());
                     }
@@ -68,12 +67,8 @@ public class InputHandler : MonoBehaviour
                         {
                             if (selectedBarra.SpaceAvailable())
                             {
-                                Debug.Log("ACA LLEGO");
-                                
-                                
                                 if (selectedClient.gameObject.activeInHierarchy)
                                 {
-                                    Debug.Log("estas activo nene");
                                     selectedClient.asiento.ChangeStatus();
                                     selectedBarra.GetClientToPosition(selectedClient);
                                 }
@@ -98,6 +93,7 @@ public class InputHandler : MonoBehaviour
                         if (selectedPlato.client.gameObject.activeInHierarchy)
                         {
                             GameManager.instance.DeliverOrder(selectedPlato);
+                            DeselectPlato();
                         }
                         else
                         {
