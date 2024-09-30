@@ -802,11 +802,11 @@ PlayerSettings:
   apiCompatibilityLevel: 6
   activeInputHandler: 0
   windowsGamepadBackendHint: 0
-  cloudProjectId: ccc222d4-6e1c-4795-bee4-d767a85367c1
+  cloudProjectId: df324008-cf38-42c1-a0e7-7474d3acc683
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
   projectName: Parcial_Mobile_MotoresDos
-  organizationId: shensuoo
+  organizationId: cozycafe_mobile
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   hmiLoadingImage: {fileID: 0}
