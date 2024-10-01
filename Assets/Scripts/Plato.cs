@@ -4,13 +4,13 @@ public class Plato : MonoBehaviour
 {
     public Seat place = null;
 
-    public int timeToCook;
+    public float timeToCook;
 
     public int price;
 
     public Client client;
 
-    private void Start()
+    public virtual void Start()
     {
         this.GetComponent<Renderer>().sortingLayerName = "Default";
         this.GetComponent<Renderer>().sortingOrder = 4;

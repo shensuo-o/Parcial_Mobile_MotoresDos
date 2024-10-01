@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        spawnRate = Random.Range(3, 10);
+        spawnRate = RemoteConfigTest.instance.spawnRate;
         StartCoroutine(Spawner());
     }
 
@@ -45,7 +45,7 @@ public class GameManager : MonoBehaviour
 
                 entrada.SpawnClient(client);
             }
-            spawnRate = Random.Range(3, 10);
+            spawnRate = RemoteConfigTest.instance.spawnRate;
         }
     }
     
