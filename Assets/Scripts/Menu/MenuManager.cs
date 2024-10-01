@@ -27,6 +27,9 @@ public class MenuManager : MonoBehaviour
     public DateTime lastDay;
     public TimeSpan timePassed;
 
+    public TextMeshProUGUI scoreText;
+    public int savedScore = 0;
+
     private void Awake()
     {
         audioSrc = GetComponent<AudioSource>();
@@ -45,7 +48,7 @@ public class MenuManager : MonoBehaviour
 
             double minutesPassed = timePassed.TotalSeconds / 60;
 
-            for (int i = 0; i < minutesPassed / 60; i++)
+            for (int i = 0; i <= minutesPassed; i++)
             {
                 if (i == 3)
                 {
@@ -72,6 +75,11 @@ public class MenuManager : MonoBehaviour
         livesText.text = "Vidas: " + lives.ToString();
         timerText.text = TimeSpan.FromSeconds(timer).ToString("mm\\:ss");
 
+        if (lives > 5)
+        {
+            lives = 5;
+        }
+
         if (timerIsRunning)
         {
             timer += Time.deltaTime;
@@ -83,7 +91,7 @@ public class MenuManager : MonoBehaviour
             }
         }
 
-        if (lives == maxLives)
+        if (lives >= maxLives)
         {
             timerIsRunning = false;
         }
@@ -91,16 +99,28 @@ public class MenuManager : MonoBehaviour
         {
             timerIsRunning = true;
         }
+
+        if (GameManager.instance.maxPoints >= savedScore)
+        {
+            savedScore = GameManager.instance.maxMoney;
+        }
+        scoreText.text = savedScore.ToString();
     }
 
     private void OnApplicationPause()
     {
         SaveTime();
+        SaveScore();
     }
 
     private void SaveTime()
     {
         PlayerPrefs.SetString("save", DateTime.Now.ToString());    
+    }
+
+    private void SaveScore()
+    {
+        PlayerPrefs.SetInt("save", savedScore);
     }
 
     public void PlaySound(string name)

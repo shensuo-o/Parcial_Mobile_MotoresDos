@@ -1,18 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using TMPro;
+using System;
+using System.Net;
 
 public class HudManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public TextMeshProUGUI timerText;
+    public float timer;
+    public TextMeshProUGUI moneyText;
+    public int currentMoney = 0;
 
-    // Update is called once per frame
     void Update()
     {
-        
+        currentMoney = GameManager.instance.money;
+        timer += Time.deltaTime;
+
+        moneyText.text = "Money collected: " + currentMoney.ToString();
+        timerText.text = "Time : " + TimeSpan.FromSeconds(timer).ToString("mm\\:ss");
     }
+
+    
 }

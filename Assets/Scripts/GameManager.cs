@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
     public int lives = 3;
 
     private int spawnRate = 0;
-    private bool canSpawn = true;
+    public bool canSpawn = true;
 
     private void Awake()
     {
@@ -77,6 +77,7 @@ public class GameManager : MonoBehaviour
         {
             isAlive = false;
             canSpawn = false;
+            
         }
     }
 

@@ -15,4 +15,5 @@ EditorBuildSettings:
     path: Assets/Scenes/EscenaPrinc.unity
     guid: df42b108376590b4eb45d6052edd4b32
   m_configObjects:
+    com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: 665b85e3ea332f441bd296a71034a55e, type: 2}
     com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000, guid: 4c62522af4513d8498febfab9748362e, type: 2}
