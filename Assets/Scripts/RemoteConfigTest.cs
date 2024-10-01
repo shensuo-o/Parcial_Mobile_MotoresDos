@@ -5,6 +5,7 @@ using Unity.Services.RemoteConfig;
 using Unity.Services.Core;
 using Unity.Services.Authentication;
 using System.Threading.Tasks;
+using System;
 
 public class RemoteConfigTest : MonoBehaviour
 {
@@ -17,6 +18,9 @@ public class RemoteConfigTest : MonoBehaviour
     public int foodPrice;
     public int spriteNumber;
     public static RemoteConfigTest instance;
+    public bool isConfigFetched = false;
+
+    public event Action OnConfigFetched;
 
 
     private void Awake()
@@ -59,5 +63,8 @@ public class RemoteConfigTest : MonoBehaviour
         foodPrice = RemoteConfigService.Instance.appConfig.config.Value<int>("Price_FofD");
         cookTime = RemoteConfigService.Instance.appConfig.config.Value<float>("CookTime_FofD");
         spriteNumber = RemoteConfigService.Instance.appConfig.config.Value<int>("SpriteNumber_FofD");
+
+        isConfigFetched = true;
+        OnConfigFetched?.Invoke();
     }
 }

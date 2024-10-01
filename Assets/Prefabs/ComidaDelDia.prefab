@@ -102,12 +102,14 @@ MonoBehaviour:
   timeToCook: 0
   price: 0
   client: {fileID: 0}
+  foodName: 
   sprites:
   - {fileID: -2107197495, guid: 48c8d3c456409624d905aa294419914a, type: 3}
   - {fileID: -356157484, guid: 48c8d3c456409624d905aa294419914a, type: 3}
   - {fileID: -878291402, guid: 48c8d3c456409624d905aa294419914a, type: 3}
   - {fileID: -1813356603, guid: 48c8d3c456409624d905aa294419914a, type: 3}
   - {fileID: 195682093, guid: 48c8d3c456409624d905aa294419914a, type: 3}
+  spriteRenderer: {fileID: 6440808839746156507}
 --- !u!61 &8475465696329365718
 BoxCollider2D:
   m_ObjectHideFlags: 0

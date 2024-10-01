@@ -27,8 +27,24 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        if(RemoteConfigTest.instance.isConfigFetched)
+        {
+            InitializeVariables();
+            StartCoroutine(Spawner());
+        }
+        else
+        {
+            RemoteConfigTest.instance.OnConfigFetched += () =>
+            {
+                InitializeVariables();
+                StartCoroutine(Spawner());
+            };
+        }
+    }
+
+    void InitializeVariables()
+    {
         spawnRate = RemoteConfigTest.instance.spawnRate;
-        StartCoroutine(Spawner());
     }
 
     private IEnumerator Spawner()

@@ -1574,6 +1574,7 @@ MonoBehaviour:
   foodName: 
   foodPrice: 0
   spriteNumber: 0
+  isConfigFetched: 0
 --- !u!4 &1441518304
 Transform:
   m_ObjectHideFlags: 0
