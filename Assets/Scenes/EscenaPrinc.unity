@@ -157,6 +157,8 @@ MonoBehaviour:
   maxMoney: 0
   points: 0
   maxPoints: 0
+  savedScore: 0
+  Pause: {fileID: 1108850834}
   cocina: {fileID: 808991436}
   barras:
   - {fileID: 717892955}

@@ -9,7 +9,9 @@ public class GameManager : MonoBehaviour
     public int maxMoney; //Unity Cloud
     public int points; 
     public int maxPoints; //Unity Cloud
+    public int savedScore;
     public static GameManager instance;
+    public GameObject Pause;
     public Cocina cocina;
     public List<Barra> barras;
     public Entrada entrada;
@@ -77,8 +79,14 @@ public class GameManager : MonoBehaviour
         {
             isAlive = false;
             canSpawn = false;
-            
+            SaveScore();
+            Pause.GetComponent<PauseMenu>().LoadlMenu();
         }
+    }
+
+    private void SaveScore()
+    {
+        PlayerPrefs.SetInt("saveScoreGame", savedScore);
     }
 
     public void NewOrder(Plato plato)

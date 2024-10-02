@@ -39,9 +39,9 @@ public class MenuManager : MonoBehaviour
 
         currentDay = DateTime.Now;
 
-        if (PlayerPrefs.HasKey("save"))
+        if (PlayerPrefs.HasKey("saveTime"))
         {
-            string timeAsString = PlayerPrefs.GetString("save");
+            string timeAsString = PlayerPrefs.GetString("saveTime");
             lastDay = DateTime.Parse(timeAsString);
 
             timePassed = currentDay - lastDay;
@@ -72,7 +72,7 @@ public class MenuManager : MonoBehaviour
 
     private void Update()
     {
-        livesText.text = "Vidas: " + lives.ToString();
+        livesText.text = "Vidas: " + lives.ToString() + "/5";
         timerText.text = TimeSpan.FromSeconds(timer).ToString("mm\\:ss");
 
         if (lives > 5)
@@ -100,9 +100,9 @@ public class MenuManager : MonoBehaviour
             timerIsRunning = true;
         }
 
-        if (GameManager.instance.maxPoints >= savedScore)
+        if (PlayerPrefs.GetInt("saveScoreGame") >= savedScore)
         {
-            savedScore = GameManager.instance.maxMoney;
+            savedScore = PlayerPrefs.GetInt("saveScoreGame");
         }
         scoreText.text = savedScore.ToString();
     }
@@ -115,12 +115,12 @@ public class MenuManager : MonoBehaviour
 
     private void SaveTime()
     {
-        PlayerPrefs.SetString("save", DateTime.Now.ToString());    
+        PlayerPrefs.SetString("saveTime", DateTime.Now.ToString());    
     }
 
     private void SaveScore()
     {
-        PlayerPrefs.SetInt("save", savedScore);
+        PlayerPrefs.SetInt("saveScoreMenu", savedScore);
     }
 
     public void PlaySound(string name)
