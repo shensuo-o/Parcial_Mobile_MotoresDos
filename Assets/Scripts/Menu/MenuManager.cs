@@ -72,6 +72,7 @@ public class MenuManager : MonoBehaviour
 
     private void Update()
     {
+        lives = PlayerPrefs.GetInt("saveLives");
         livesText.text = "Vidas: " + lives.ToString() + "/5";
         timerText.text = TimeSpan.FromSeconds(timer).ToString("mm\\:ss");
 
@@ -111,6 +112,12 @@ public class MenuManager : MonoBehaviour
     {
         SaveTime();
         SaveScore();
+        SaveLives();
+    }
+
+    private void OnDestroy()
+    {
+        SaveLives();
     }
 
     private void SaveTime()
@@ -121,6 +128,11 @@ public class MenuManager : MonoBehaviour
     private void SaveScore()
     {
         PlayerPrefs.SetInt("saveScoreMenu", savedScore);
+    }
+
+    private void SaveLives()
+    {
+        PlayerPrefs.SetInt("saveLives", lives);
     }
 
     public void PlaySound(string name)
