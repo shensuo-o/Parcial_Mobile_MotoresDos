@@ -68,11 +68,11 @@ public class MenuManager : MonoBehaviour
     private void Start()
     {
         timerIsRunning = true;
+        lives = PlayerPrefs.GetInt("saveLives");
     }
 
     private void Update()
     {
-        lives = PlayerPrefs.GetInt("saveLives");
         livesText.text = "Vidas: " + lives.ToString() + "/5";
         timerText.text = TimeSpan.FromSeconds(timer).ToString("mm\\:ss");
 
@@ -115,11 +115,6 @@ public class MenuManager : MonoBehaviour
         SaveLives();
     }
 
-    private void OnDestroy()
-    {
-        SaveLives();
-    }
-
     private void SaveTime()
     {
         PlayerPrefs.SetString("saveTime", DateTime.Now.ToString());    
@@ -146,7 +141,8 @@ public class MenuManager : MonoBehaviour
         if (lives >= 1)
         {
             lives--;
-            SceneManager.LoadScene(lvl);
+            SaveLives();
+            SceneManager.LoadScene(lvl, LoadSceneMode.Additive);
         }
     }
 

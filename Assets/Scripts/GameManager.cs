@@ -9,7 +9,6 @@ public class GameManager : MonoBehaviour
     public int maxMoney; //Unity Cloud
     public int points; 
     public int maxPoints; //Unity Cloud
-    public int savedScore;
     public static GameManager instance;
     public GameObject Pause;
     public Cocina cocina;
@@ -86,7 +85,7 @@ public class GameManager : MonoBehaviour
 
     private void SaveScore()
     {
-        PlayerPrefs.SetInt("saveScoreGame", savedScore);
+        PlayerPrefs.SetInt("saveScoreGame", money);
     }
 
     public void NewOrder(Plato plato)

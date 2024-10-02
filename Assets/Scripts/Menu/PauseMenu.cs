@@ -29,7 +29,7 @@ public class PauseMenu : MonoBehaviour
     }
     public void LoadlMenu()
     {
-        SceneManager.LoadScene("Menu");
+        SceneManager.LoadScene("Menu", LoadSceneMode.Additive);
     }
 
     public void ExitApp()
