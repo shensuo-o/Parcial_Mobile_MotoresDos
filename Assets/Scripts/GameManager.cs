@@ -103,7 +103,7 @@ public class GameManager : MonoBehaviour
 
     public void GetBarMoney(int d)
     {
-        maxMoney += d;
-        Debug.Log(maxMoney);
+        money += d;
+        Debug.Log(money);
     }
 }
