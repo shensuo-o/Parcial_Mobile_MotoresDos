@@ -21,28 +21,31 @@ public class GameManager : MonoBehaviour
     private int spawnRate = 0;
     public bool canSpawn = true;
 
-    private void Awake()
-    {
-        instance = this;
-    }
-
     private void Start()
     {
-        if(RemoteConfigTest.instance.isConfigFetched)
+        instance = this;
+
+        if (RemoteConfigTest.instance.isConfigFetched)
         {
             InitializeVariables();
             StartCoroutine(Spawner());
         }
         else
         {
-            RemoteConfigTest.instance.OnConfigFetched += () =>
-            {
-                InitializeVariables();
-                StartCoroutine(Spawner());
-            };
+            RemoteConfigTest.instance.OnConfigFetched += ConfigFetch;
         }
     }
 
+    private void OnDestroy()
+    {
+        RemoteConfigTest.instance.OnConfigFetched -= ConfigFetch;
+    }
+
+    void ConfigFetch()
+    {
+        InitializeVariables();
+        StartCoroutine(Spawner());
+    }
     void InitializeVariables()
     {
         spawnRate = RemoteConfigTest.instance.spawnRate;
@@ -83,7 +86,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void SaveScore()
+    public void SaveScore()
     {
         PlayerPrefs.SetInt("saveScoreGame", money);
     }

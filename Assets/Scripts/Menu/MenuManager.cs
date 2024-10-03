@@ -142,7 +142,7 @@ public class MenuManager : MonoBehaviour
         {
             lives--;
             SaveLives();
-            SceneManager.LoadScene(lvl, LoadSceneMode.Additive);
+            SceneManager.LoadScene(lvl);
         }
     }
 
