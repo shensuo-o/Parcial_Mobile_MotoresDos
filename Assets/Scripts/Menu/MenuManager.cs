@@ -5,10 +5,12 @@ using UnityEngine.SceneManagement;
 using TMPro;
 using System;
 using System.Net;
+using UnityEditor;
 
 public class MenuManager : MonoBehaviour
 {
     public static AudioClip ClickEffect;
+    public static MenuManager instance;
     static AudioSource audioSrc;
     public GameObject mainPannel;
     public GameObject instructionsPannel;
@@ -33,6 +35,8 @@ public class MenuManager : MonoBehaviour
     {
         audioSrc = GetComponent<AudioSource>();
         instructionsPannel.SetActive(false);
+
+        instance = this;
 
         currentDay = DateTime.Now;
 
@@ -114,6 +118,15 @@ public class MenuManager : MonoBehaviour
         SaveLives();
     }
 
+    public void AddLife()
+    {
+        if(lives < maxLives)
+        {
+            lives++;
+        }
+        SaveLives();
+    }
+
     private void SaveTime()
     {
         PlayerPrefs.SetString("saveTime", DateTime.Now.ToString());
@@ -174,5 +187,10 @@ public class MenuManager : MonoBehaviour
     public void ExitApp()
     {
         Application.Quit();
+    }
+
+    public bool HasFullLife()
+    {
+        return !(lives < maxLives);
     }
 }
