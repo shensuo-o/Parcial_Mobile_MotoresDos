@@ -15,6 +15,7 @@ public class MenuManager : MonoBehaviour
     public GameObject mainPannel;
     public GameObject instructionsPannel;
     public GameObject shopPannel;
+    public GameObject settingsPannel;
 
     public TextMeshProUGUI timerText;
     public float timer;
@@ -35,6 +36,8 @@ public class MenuManager : MonoBehaviour
     {
         audioSrc = GetComponent<AudioSource>();
         instructionsPannel.SetActive(false);
+        settingsPannel.SetActive(false);
+        shopPannel.SetActive(false);
 
         instance = this;
 
@@ -166,7 +169,8 @@ public class MenuManager : MonoBehaviour
     public void PanelHowToPlay()
     {
         mainPannel.SetActive(false);
-        shopPannel.SetActive(true);
+        shopPannel.SetActive(false);
+        settingsPannel.SetActive(false);
         instructionsPannel.SetActive(true);
     }
     
@@ -174,6 +178,7 @@ public class MenuManager : MonoBehaviour
     {
         instructionsPannel.SetActive(false);
         mainPannel.SetActive(false);
+        settingsPannel.SetActive(false);
         shopPannel.SetActive(true);
     }
 
@@ -181,8 +186,17 @@ public class MenuManager : MonoBehaviour
     {
         instructionsPannel.SetActive(false);
         shopPannel.SetActive(false);
+        settingsPannel.SetActive(false);
         mainPannel.SetActive(true);
     }
+
+    public void Settings()
+    {
+        instructionsPannel.SetActive(false);
+        shopPannel.SetActive(false);
+        settingsPannel.SetActive(true);
+    }
+
 
     public void ExitApp()
     {
