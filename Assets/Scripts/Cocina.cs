@@ -30,9 +30,9 @@ public class Cocina : MonoBehaviour
 
     private IEnumerator Cook(Plato plato)
     {
-        Debug.Log("Cocinando: " + plato.name);
+        Debug.Log("Cocinando: " + plato.foodName);
         yield return new WaitForSeconds(plato.timeToCook);
-        Debug.Log("Listo: " + plato.name);
+        Debug.Log("Listo: " + plato.foodName);
         finishedFoods.Add(plato);
     }
 
@@ -44,8 +44,6 @@ public class Cocina : MonoBehaviour
             {
                 Plato platoListo = finishedFoods[0];
                 Plato nuevoPlato = FoodFactory.Instance.GetFood(platoListo);
-                Debug.Log("Apoyo un " + nuevoPlato.name + " en la mesada!");
-                nuevoPlato.SetClient(platoListo.client);
                 nuevoPlato.MoveTo(place);
                 finishedFoods.Remove(platoListo);
                 break;

@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 8361733208388050851}
   - component: {fileID: 6887555862627269873}
   - component: {fileID: -5912899107043606676}
-  m_Layer: 0
+  - component: {fileID: -3546379415183883012}
+  m_Layer: 3
   m_Name: Torta
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -74,7 +75,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 3
   m_Sprite: {fileID: 1914873391, guid: 48c8d3c456409624d905aa294419914a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -98,10 +99,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3907b233e1c4a2a418f676150342b012, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  foodName: Torta
   place: {fileID: 0}
   timeToCook: 2
   price: 1
-  client: {fileID: 0}
 --- !u!61 &-5912899107043606676
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -147,3 +148,15 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2, y: 2}
   m_EdgeRadius: 0
+--- !u!114 &-3546379415183883012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8317372742905822401}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc60f7f5424a7bb4bbf8fc07435a34b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -96,10 +96,10 @@ public class GameManager : MonoBehaviour
         cocina.GetOrder(plato);
     }
 
-    public void DeliverOrder(Plato plato)
+    public void DeliverOrder(Client client, Plato plato)
     {
-        plato.MoveTo(plato.client.manos);
-        plato.client.GetFood(plato);
+        plato.MoveTo(client.hands);
+        client.GetFood(plato);
         plato.GetComponent<Collider2D>().enabled = false;
     }
 

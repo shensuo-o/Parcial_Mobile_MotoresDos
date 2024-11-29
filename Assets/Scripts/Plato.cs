@@ -2,13 +2,14 @@ using UnityEngine;
 
 public class Plato : MonoBehaviour
 {
+    public string foodName = "";
     public Seat place = null;
 
     public float timeToCook;
 
     public int price;
 
-    public Client client;
+    public Vector3 lastPosition = Vector3.zero;
 
     public virtual void Start()
     {
@@ -16,22 +17,11 @@ public class Plato : MonoBehaviour
         this.GetComponent<Renderer>().sortingOrder = 4;
     }
 
-    public void SetClient(Client c)
-    {
-        if(client == null)
-        {
-            client = c;
-        }
-    }
-
     public void MoveTo(Seat seat)
     {
-        if(place != null)
-        {
-            place.ChangeStatus();
-        }
         place = seat;
         transform.position = place.transform.position;
+        lastPosition = place.transform.position;
         place.ChangeStatus();
     }
 
@@ -44,7 +34,7 @@ public class Plato : MonoBehaviour
     public void Reset()
     {
         this.GetComponent<Collider2D>().enabled = true;
+        lastPosition = Vector3.zero;
         place = null;
-        client = null;
     }
 }

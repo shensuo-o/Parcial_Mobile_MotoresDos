@@ -3,34 +3,39 @@ using UnityEngine;
 
 public class Client : MonoBehaviour
 {
-    private float _timerEntrada;
-    private float _timerComida;
+    private float _timerEntrance;
+    private float _timerFoodWait;
     private float _timerConsume;
 
-    public Plato comidaElegida = null;
-    public Barra barraAsignada = null;
-    public Seat asiento = null;
-    public Seat manos = null;
+    public Vector3 lastPosition;
+
+    public Plato selectedFood = null;
+    public Plato onHandFood = null;
+    public Barra assignedBar = null;
+    public Seat clientSeat = null;
+    public Seat hands = null;
 
     public bool seated = false;
 
     private FSM _fsm;
 
+    public DragDrop dragdrop;
+
     public IEnumerator co;
 
     private void Awake()
     {
-        manos = GetComponentInChildren<Seat>();
+        dragdrop = GetComponent<DragDrop>();
+        hands = GetComponentInChildren<Seat>();
         _fsm = new FSM();
     }
 
     void Start()
     {
-        
         this.GetComponent<Renderer>().sortingLayerName = "Default";
         this.GetComponent<Renderer>().sortingOrder = 3;
-        _timerEntrada = Random.Range(10, 15);
-        _timerComida = Random.Range(10, 15);
+        _timerEntrance = Random.Range(10, 15);
+        _timerFoodWait = Random.Range(10, 15);
         _timerConsume = Random.Range(3, 6);
         _fsm.CreateState(FSM.ClientStates.Spawn, new Spawn(_fsm, this));
         _fsm.CreateState(FSM.ClientStates.Pidiendo, new Pedir(_fsm, this));
@@ -45,26 +50,27 @@ public class Client : MonoBehaviour
 
     public void GetFood(Plato plato)
     {
-        comidaElegida = plato;
+        onHandFood = plato;
         _fsm.ChangeState(FSM.ClientStates.Comiendo);
     }
 
     public void Seated()
     {
-        seated = true;
         _fsm.ChangeState(FSM.ClientStates.Pidiendo);
     }
 
     public void GoToSeat(Seat seat, Barra barra = null)
     {
-        barraAsignada = barra;
-        asiento = seat;
-        transform.position = seat.transform.position;
-        seat.ChangeStatus();
         if (barra != null)
         {
             Seated();
         }
+        seated = true;
+        assignedBar = barra;
+        clientSeat = seat;
+        lastPosition = seat.transform.position;
+        transform.position = seat.transform.position;        
+        seat.ChangeStatus();
     }
 
     public void StartWaitSeat()
@@ -74,7 +80,7 @@ public class Client : MonoBehaviour
             gameObject.SetActive(true);
         }
 
-        co = Wait(_timerEntrada);
+        co = Wait(_timerEntrance);
         StartCoroutine(co);
     }
     
@@ -85,7 +91,7 @@ public class Client : MonoBehaviour
             gameObject.SetActive(true);
         }
 
-        co = Wait(_timerComida);
+        co = Wait(_timerFoodWait);
         StartCoroutine(co);
     }
 
@@ -121,7 +127,8 @@ public class Client : MonoBehaviour
     public void Exit()
     {
         EndCoroutine();
-        asiento.ChangeStatus();
+        clientSeat.ChangeStatus();
+        assignedBar.DeleteClient(this);
         ClientFactory.Instance.ReturnClient(this);
     }
 
@@ -134,15 +141,22 @@ public class Client : MonoBehaviour
 
     private void Reset()
     {
-        this.GetComponent<Collider2D>().enabled = true;
+        dragdrop.enabled = true;
         EndCoroutine();
         seated = false;
-        barraAsignada = null;
-        comidaElegida = null;
-        asiento = null;
-        manos.SetFree();
-        _timerEntrada = Random.Range(10, 15);
-        _timerComida = Random.Range(10, 15);
+        assignedBar = null;
+        lastPosition = Vector3.zero;
+        selectedFood = null;
+        onHandFood = null;
+        clientSeat = null;
+        hands.SetFree();
+        _timerEntrance = Random.Range(10, 15);
+        _timerFoodWait = Random.Range(10, 15);
         _timerConsume = Random.Range(3, 6);
+    }
+
+    internal void DisableDrag()
+    {
+        dragdrop.enabled = false;
     }
 }

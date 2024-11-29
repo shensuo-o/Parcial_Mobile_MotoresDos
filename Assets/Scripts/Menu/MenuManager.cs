@@ -12,8 +12,7 @@ public class MenuManager : MonoBehaviour
     static AudioSource audioSrc;
     public GameObject mainPannel;
     public GameObject instructionsPannel;
-    //public GameObject lvlsPannel;
-    //public GameObject creditPannel;
+    public GameObject shopPannel;
 
     public TextMeshProUGUI timerText;
     public float timer;
@@ -34,8 +33,6 @@ public class MenuManager : MonoBehaviour
     {
         audioSrc = GetComponent<AudioSource>();
         instructionsPannel.SetActive(false);
-        //lvlsPannel.SetActive(false);
-        //creditPannel.SetActive(false);
 
         currentDay = DateTime.Now;
 
@@ -73,12 +70,12 @@ public class MenuManager : MonoBehaviour
 
     private void Update()
     {
-        livesText.text = "Vidas: " + lives.ToString() + "/5";
+        livesText.text = "Vidas: " + lives.ToString() + "/" + maxLives;
         timerText.text = TimeSpan.FromSeconds(timer).ToString("mm\\:ss");
 
-        if (lives > 5)
+        if (lives > maxLives)
         {
-            lives = 5;
+            lives = maxLives;
         }
 
         if (timerIsRunning)
@@ -140,41 +137,35 @@ public class MenuManager : MonoBehaviour
     {
         if (lives >= 1)
         {
+            PlaySound("SFX_UI_Confirm");
             lives--;
             SaveLives();
             SceneManager.LoadScene(lvl);
+        }
+        else
+        {
+            PlaySound("SFX_UI_Cancel");
         }
     }
 
     public void PanelHowToPlay()
     {
         mainPannel.SetActive(false);
-        //creditPannel.SetActive(false);
-        //lvlsPannel.SetActive(false);
+        shopPannel.SetActive(true);
         instructionsPannel.SetActive(true);
     }
-
-    //public void PanelLvlSelect()
-    //{
-    //    instructionsPannel.SetActive(false);
-    //    //creditPannel.SetActive(false);
-    //    mainPannel.SetActive(false);
-    //    //lvlsPannel.SetActive(true);
-    //}
-
-    //public void PanelCredits()
-    //{
-    //    instructionsPannel.SetActive(false);
-    //    mainPannel.SetActive(false);
-    //    //lvlsPannel.SetActive(false);
-    //    //creditPannel.SetActive(true);
-    //}
+    
+    public void PanelShop()
+    {
+        instructionsPannel.SetActive(false);
+        mainPannel.SetActive(false);
+        shopPannel.SetActive(true);
+    }
 
     public void BackToMenu()
     {
         instructionsPannel.SetActive(false);
-        //lvlsPannel.SetActive(false);
-        //creditPannel.SetActive(false);
+        shopPannel.SetActive(false);
         mainPannel.SetActive(true);
     }
 

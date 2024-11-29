@@ -29,10 +29,10 @@ public class Comer : IState
 
     public void OnExit()
     {
-        if(_client.comidaElegida != null)
+        if(_client.selectedFood != null)
         {
-            _client.barraAsignada.AddMoneyToTable(_client.comidaElegida.price);
-            FoodFactory.Instance.ReturnFood(_client.comidaElegida);
+            _client.assignedBar.AddMoneyToTable(_client.selectedFood.price);
+            FoodFactory.Instance.ReturnFood(_client.onHandFood);
         }
 
         _client.EndCoroutine();

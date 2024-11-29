@@ -1,11 +1,7 @@
-using JetBrains.Annotations;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ComidaDia : Plato
 {
-    public string foodName;
     public Sprite[] sprites;
     public SpriteRenderer spriteRenderer;
     public override void Start()

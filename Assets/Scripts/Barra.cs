@@ -1,10 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class Barra : MonoBehaviour
+public class Barra : MonoBehaviour, IPointerClickHandler
 {
-    
     public Seat[] seats;
 
     public List<Client> clients;
@@ -40,6 +41,8 @@ public class Barra : MonoBehaviour
                 if (seat.isFree())
                 {
                     client.GoToSeat(seat, this);
+                    client.DisableDrag();
+                    clients.Add(client);
                     break;
                 }
             }
@@ -71,6 +74,35 @@ public class Barra : MonoBehaviour
     public void ActivateCoin(bool v)
     {
         coin.gameObject.SetActive(v);
+    }
+
+    public Client WhoOrderedThis(Plato p)
+    {
+        foreach (Client client in clients)
+        {
+            if(client.selectedFood.foodName == p.foodName)
+            {
+                return client;
+            }
+        }
+        return null;
+    }
+
+    public void DeleteClient(Client client)
+    {
+        if (clients.Contains(client))
+        {
+            clients.Remove(client);
+        }
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        if (MoneyOnTable())
+        {
+            GetMoney();
+            ClearMoney();
+        }
     }
 }
 

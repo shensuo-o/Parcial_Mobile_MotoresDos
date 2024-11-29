@@ -13,7 +13,8 @@ GameObject:
   - component: {fileID: 3283657010632118769}
   - component: {fileID: 315422695950949777}
   - component: {fileID: 7061115882578657555}
-  m_Layer: 0
+  - component: {fileID: -1011259333826992442}
+  m_Layer: 3
   m_Name: ClientPorcupine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -76,7 +77,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 3
   m_Sprite: {fileID: 217762442, guid: f9555a81a8846164c98a0c44cd432e1a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -145,10 +146,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10deb6fdc1a2fd848b5d1b39e42aa471, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  comidaElegida: {fileID: 0}
-  barraAsignada: {fileID: 0}
-  asiento: {fileID: 0}
-  manos: {fileID: 0}
+  selectedFood: {fileID: 0}
+  assignedBar: {fileID: 0}
+  clientSeat: {fileID: 0}
+  hands: {fileID: 0}
   seated: 0
 --- !u!95 &7061115882578657555
 Animator:
@@ -171,6 +172,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &-1011259333826992442
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3990408035544324135}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc60f7f5424a7bb4bbf8fc07435a34b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8110092542881407151
 GameObject:
   m_ObjectHideFlags: 0
@@ -181,7 +194,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1323160143759941262}
   - component: {fileID: 6297630915088614499}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Manos
   m_TagString: Untagged
   m_Icon: {fileID: 0}

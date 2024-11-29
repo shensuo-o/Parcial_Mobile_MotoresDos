@@ -13,7 +13,8 @@ GameObject:
   - component: {fileID: 8261466769926992009}
   - component: {fileID: 6081956035689941829}
   - component: {fileID: 5342590835314329764}
-  m_Layer: 0
+  - component: {fileID: -8683961576213826446}
+  m_Layer: 3
   m_Name: ClientRabbit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -76,7 +77,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 3
   m_Sprite: {fileID: 313203648, guid: 5cd1d209ca044464cb390656e623a2d7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -145,10 +146,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10deb6fdc1a2fd848b5d1b39e42aa471, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  comidaElegida: {fileID: 0}
-  barraAsignada: {fileID: 0}
-  asiento: {fileID: 0}
-  manos: {fileID: 0}
+  selectedFood: {fileID: 0}
+  assignedBar: {fileID: 0}
+  clientSeat: {fileID: 0}
+  hands: {fileID: 0}
   seated: 0
 --- !u!95 &5342590835314329764
 Animator:
@@ -171,6 +172,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &-8683961576213826446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 138561463294779847}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc60f7f5424a7bb4bbf8fc07435a34b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1390732073191848412
 GameObject:
   m_ObjectHideFlags: 0
@@ -181,7 +194,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4973984057767040438}
   - component: {fileID: 1226247325186346533}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Manos
   m_TagString: Untagged
   m_Icon: {fileID: 0}

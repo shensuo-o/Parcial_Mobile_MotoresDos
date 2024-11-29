@@ -21,6 +21,4 @@ public class HudManager : MonoBehaviour
         moneyText.text = "Money collected: " + currentMoney.ToString();
         timerText.text = "Time : " + TimeSpan.FromSeconds(timer).ToString("mm\\:ss");
     }
-
-    
 }

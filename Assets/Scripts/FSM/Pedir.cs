@@ -13,7 +13,6 @@ public class Pedir : IState
         _client = client;
     }
 
-
     public void OnEnter()
     {
         _client.GetComponent<Collider2D>().enabled = false;
@@ -22,18 +21,16 @@ public class Pedir : IState
             _client.EndCoroutine(); // Stop any previous coroutine
         }
 
-        _client.comidaElegida = FoodFactory.Instance.foodPrefabs[Random.Range(0, FoodFactory.Instance.foodPrefabs.Length)];
-        _client.comidaElegida.client = _client;
-        Debug.Log("Pido un: " + _client.comidaElegida.name);
+        _client.selectedFood = FoodFactory.Instance.foodPrefabs[Random.Range(0, FoodFactory.Instance.foodPrefabs.Length)];
+        Debug.Log("Pido un: " + _client.selectedFood.foodName);
         _client.StartWaitFood();
         Debug.Log("Espero la comida loco");
-        GameManager.instance.NewOrder(_client.comidaElegida);
-        
+        GameManager.instance.NewOrder(_client.selectedFood);
     }
 
     public void OnUpdate()
     {
-        
+
     }
 
     public void OnExit()

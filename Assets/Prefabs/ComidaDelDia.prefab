@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 6440808839746156507}
   - component: {fileID: 6404299983962235939}
   - component: {fileID: 8475465696329365718}
-  m_Layer: 0
+  - component: {fileID: 2901352587750568626}
+  m_Layer: 3
   m_Name: ComidaDelDia
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -74,7 +75,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 3
   m_Sprite: {fileID: 195682093, guid: 48c8d3c456409624d905aa294419914a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -98,11 +99,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c70a49af540e424cb13281614582991, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  foodName: 
   place: {fileID: 0}
   timeToCook: 0
   price: 0
-  client: {fileID: 0}
-  foodName: 
   sprites:
   - {fileID: -2107197495, guid: 48c8d3c456409624d905aa294419914a, type: 3}
   - {fileID: -356157484, guid: 48c8d3c456409624d905aa294419914a, type: 3}
@@ -155,3 +155,15 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2, y: 2}
   m_EdgeRadius: 0
+--- !u!114 &2901352587750568626
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2129386245727831651}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc60f7f5424a7bb4bbf8fc07435a34b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
