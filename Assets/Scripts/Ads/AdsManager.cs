@@ -6,7 +6,7 @@ using UnityEngine.Advertisements;
 public class AdsManager : MonoBehaviour, IUnityAdsInitializationListener, IUnityAdsShowListener
 {
     [SerializeField] private string _gameID = "5740305";
-    [SerializeField] private string _adID = "Rewarded_Android";
+    private string _adID = "Interstitial_Android";
 
     private void Start()
     {
