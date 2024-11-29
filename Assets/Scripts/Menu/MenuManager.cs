@@ -60,6 +60,8 @@ public class MenuManager : MonoBehaviour
         Debug.Log("Time passed = " + timePassed.TotalSeconds);
         Debug.Log("Time now = " + currentDay);
         Debug.Log("Time Saved = " + lastDay);
+
+        timer += (float)timePassed.TotalSeconds;
     }
 
     private void Start()
@@ -114,7 +116,7 @@ public class MenuManager : MonoBehaviour
 
     private void SaveTime()
     {
-        PlayerPrefs.SetString("saveTime", DateTime.Now.ToString());    
+        PlayerPrefs.SetString("saveTime", DateTime.Now.ToString());
     }
 
     private void SaveScore()
