@@ -17,6 +17,7 @@ public class ObjectSlot : MonoBehaviour, IDropHandler
         Debug.Log("Drop " + this.name);
         if (eventData.pointerDrag != null)
         {
+            eventData.pointerDrag.GetComponent<DragDrop>().canDrop = true;
             if (eventData.pointerDrag.GetComponent<Client>() != null)
             {
                 var c = eventData.pointerDrag.GetComponent<Client>();

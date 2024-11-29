@@ -15,6 +15,7 @@ public class Pedir : IState
 
     public void OnEnter()
     {
+        _client.seated = true;
         _client.GetComponent<Collider2D>().enabled = false;
         if (_client.co != null)
         {

@@ -7,8 +7,6 @@ public class Client : MonoBehaviour
     private float _timerFoodWait;
     private float _timerConsume;
 
-    public Vector3 lastPosition;
-
     public Plato selectedFood = null;
     public Plato onHandFood = null;
     public Barra assignedBar = null;
@@ -65,11 +63,9 @@ public class Client : MonoBehaviour
         {
             Seated();
         }
-        seated = true;
         assignedBar = barra;
         clientSeat = seat;
-        lastPosition = seat.transform.position;
-        transform.position = seat.transform.position;        
+        transform.position = seat.transform.position;
         seat.ChangeStatus();
     }
 
@@ -145,7 +141,6 @@ public class Client : MonoBehaviour
         EndCoroutine();
         seated = false;
         assignedBar = null;
-        lastPosition = Vector3.zero;
         selectedFood = null;
         onHandFood = null;
         clientSeat = null;
