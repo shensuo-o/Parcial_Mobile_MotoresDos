@@ -6,6 +6,7 @@ using TMPro;
 using System;
 using System.Net;
 using UnityEditor;
+using UnityEngine.UI;
 
 public class MenuManager : MonoBehaviour
 {
@@ -31,6 +32,16 @@ public class MenuManager : MonoBehaviour
 
     public TextMeshProUGUI scoreText;
     public int savedScore = 0;
+
+    public TextMeshProUGUI moneyText;
+    public int savedMoney = 0;
+    public int newMoney = 0;
+
+    public GameObject failedBuy;
+    public GameObject failedBuyLock;
+
+    public GameObject[] BuyButtons;
+    public GameObject[] EquipButtons;
 
     private void Awake()
     {
@@ -75,6 +86,12 @@ public class MenuManager : MonoBehaviour
     {
         timerIsRunning = true;
         lives = PlayerPrefs.GetInt("saveLives");
+
+        savedScore = PlayerPrefs.GetInt("saveScoreMenu");
+        savedMoney = PlayerPrefs.GetInt("saveMoneyShop");
+        newMoney = PlayerPrefs.GetInt("saveScoreGame");
+        savedMoney += newMoney;
+        moneyText.text = savedMoney.ToString();
     }
 
     private void Update()
@@ -119,6 +136,7 @@ public class MenuManager : MonoBehaviour
         SaveTime();
         SaveScore();
         SaveLives();
+        PlayerPrefs.Save();
     }
 
     public void AddLife()
@@ -138,6 +156,7 @@ public class MenuManager : MonoBehaviour
     private void SaveScore()
     {
         PlayerPrefs.SetInt("saveScoreMenu", savedScore);
+        PlayerPrefs.SetInt("saveMoneyShop", savedMoney);
     }
 
     private void SaveLives()
@@ -157,7 +176,10 @@ public class MenuManager : MonoBehaviour
         {
             PlaySound("SFX_UI_Confirm");
             lives--;
+            SaveTime();
+            SaveScore();
             SaveLives();
+            PlayerPrefs.Save();
             SceneManager.LoadScene(lvl);
         }
         else
@@ -180,6 +202,22 @@ public class MenuManager : MonoBehaviour
         mainPannel.SetActive(false);
         settingsPannel.SetActive(false);
         shopPannel.SetActive(true);
+
+        for (int i = 0; i < BuyButtons.Length; i++)
+        {
+            if (PlayerPrefs.GetInt("Color" + i) == i)
+            {
+                BuyButtons[i].SetActive(false);
+            }
+        }
+
+        for (int i = 0; i < EquipButtons.Length; i++)
+        {
+            if (PlayerPrefs.GetInt("Color" + i) == i)
+            {
+                EquipButtons[i].SetActive(true);
+            }
+        }
     }
 
     public void BackToMenu()
@@ -188,6 +226,7 @@ public class MenuManager : MonoBehaviour
         shopPannel.SetActive(false);
         settingsPannel.SetActive(false);
         mainPannel.SetActive(true);
+        moneyText.text = savedMoney.ToString();
     }
 
     public void Settings()
@@ -206,5 +245,50 @@ public class MenuManager : MonoBehaviour
     public bool HasFullLife()
     {
         return !(lives < maxLives);
+    }
+
+    public void BuyLife(int amount)
+    {
+        if (lives < 5 - amount)
+        {
+            if (savedMoney >= (amount * 4) - (amount - 1))
+            {
+                lives += amount;
+                savedMoney -= (amount * 4) - (amount - 1);
+                SaveScore();
+                SaveLives();
+                moneyText.text = savedMoney.ToString();
+            }
+        }
+        else
+        {
+            Instantiate(failedBuy, failedBuyLock.transform);
+        }
+    }
+
+    public void BuyColor(int code, int price, GameObject Button)
+    {
+        Button.SetActive(false);
+
+        if (savedMoney >= price)
+        {
+            savedMoney -= price;
+            SaveScore();
+            moneyText.text = savedMoney.ToString();
+
+            for (int i = 0; i < BuyButtons.Length; i++)
+            {
+                if (code == i)
+                {
+                    PlayerPrefs.SetInt("Color" + i, i);
+                }
+            }
+        }
+    }
+
+    public void EquipColor(int colorCode)
+    {
+        PlayerPrefs.SetInt("BarColor", colorCode);
+        PlayerPrefs.Save();
     }
 }

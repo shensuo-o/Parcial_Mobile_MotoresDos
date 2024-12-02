@@ -14,10 +14,23 @@ public class Barra : MonoBehaviour, IPointerClickHandler
 
     public GameObject coin;
 
+    public Material[] colors;
+
+    public Renderer Renderer;
+
     private void Start()
     {
         coin.gameObject.SetActive(false);
         seats = GetComponentsInChildren<Seat>();
+        Renderer = GetComponent<Renderer>();
+
+        for (int i = 0; i < colors.Length; i++)
+        {
+            if (PlayerPrefs.GetInt("BarColor") == i)
+            {
+                Renderer.material = colors[i];
+            }
+        }
     }
 
     public bool SpaceAvailable()

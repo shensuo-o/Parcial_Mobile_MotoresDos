@@ -89,6 +89,7 @@ public class GameManager : MonoBehaviour
     public void SaveScore()
     {
         PlayerPrefs.SetInt("saveScoreGame", money);
+        PlayerPrefs.Save();
     }
 
     public void NewOrder(Plato plato)
