@@ -148,6 +148,7 @@ public class Client : MonoBehaviour
         _timerEntrance = Random.Range(10, 15);
         _timerFoodWait = Random.Range(10, 15);
         _timerConsume = Random.Range(3, 6);
+        this.gameObject.GetComponent<Collider2D>().enabled = true;
     }
 
     internal void DisableDrag()

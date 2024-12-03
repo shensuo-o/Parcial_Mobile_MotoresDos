@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public string playerName = ""; //Unity Cloud
+    public string playerName = ""; // Unity Cloud
     public int money = 0;
-    public int maxMoney; //Unity Cloud
-    public int points; 
-    public int maxPoints; //Unity Cloud
+    public int maxMoney; // Unity Cloud
+    public int points;
+    public int maxPoints; // Unity Cloud
     public static GameManager instance;
     public GameObject Pause;
     public Cocina cocina;
@@ -46,6 +46,7 @@ public class GameManager : MonoBehaviour
         InitializeVariables();
         StartCoroutine(Spawner());
     }
+
     void InitializeVariables()
     {
         spawnRate = RemoteConfigTest.instance.spawnRate;
@@ -68,7 +69,7 @@ public class GameManager : MonoBehaviour
             spawnRate = RemoteConfigTest.instance.spawnRate;
         }
     }
-    
+
     public void ClientGotOut()
     {
         lives--;
@@ -90,6 +91,7 @@ public class GameManager : MonoBehaviour
     {
         PlayerPrefs.SetInt("saveScoreGame", money);
         PlayerPrefs.Save();
+        Debug.Log($"Score saved: {money}");
     }
 
     public void NewOrder(Plato plato)
@@ -107,5 +109,6 @@ public class GameManager : MonoBehaviour
     public void GetBarMoney(int d)
     {
         money += d;
+        SaveScore(); // Save score whenever money is updated
     }
 }

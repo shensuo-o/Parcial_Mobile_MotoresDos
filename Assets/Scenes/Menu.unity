@@ -153,36 +153,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8325531dda92724aa99e20426a2b3a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainPannel: {fileID: 1493336859}
-  instructionsPannel: {fileID: 967473235}
-  shopPannel: {fileID: 420650060}
-  settingsPannel: {fileID: 1272638571}
+  mainPanel: {fileID: 1493336859}
+  instructionsPanel: {fileID: 967473235}
+  shopPanel: {fileID: 420650060}
+  settingsPanel: {fileID: 1272638571}
   timerText: {fileID: 1424837037}
+  livesText: {fileID: 533512431}
+  scoreText: {fileID: 242069718}
+  moneyText: {fileID: 639577287}
   timer: 0
   liveGetTime: 3
-  livesText: {fileID: 533512431}
   lives: 4
   maxLives: 5
-  timerIsRunning: 0
-  scoreText: {fileID: 242069718}
   savedScore: 0
-  moneyText: {fileID: 639577287}
-  savedMoney: 10
-  newMoney: 0
+  savedMoney: 0
   failedBuy: {fileID: 8527380663252346494, guid: e32ee4470a2ba9343a4792f46a9d4016, type: 3}
   failedBuyLock: {fileID: 461791904}
-  BuyButtons:
-  - {fileID: 1305862193}
-  - {fileID: 1700078783}
-  - {fileID: 1697003208}
-  - {fileID: 324680461}
-  - {fileID: 323607956}
-  EquipButtons:
-  - {fileID: 246781875}
-  - {fileID: 247834446}
-  - {fileID: 1256983988}
-  - {fileID: 2118972777}
-  - {fileID: 1004821364}
+  buyButtons: []
+  equipButtons: []
 --- !u!4 &11216557
 Transform:
   m_ObjectHideFlags: 0
@@ -3357,7 +3345,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 11216556}
         m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
-        m_MethodName: LoadlLevel
+        m_MethodName: LoadLevel
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6283,6 +6271,18 @@ MonoBehaviour:
           m_StringArgument: SFX_UI_Exit
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 11216556}
+        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
+        m_MethodName: ResetPlayerData
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &900133724
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8208,7 +8208,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -113, y: -99}
+  m_AnchoredPosition: {x: -135, y: -111.99}
   m_SizeDelta: {x: 59.189087, y: 49.95221}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1231348263
@@ -8788,8 +8788,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -3.8981934, y: 0}
+  m_SizeDelta: {x: 7.7965, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1272638573
 MonoBehaviour:
@@ -10274,8 +10274,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -3.847168, y: 0}
+  m_SizeDelta: {x: -16.1046, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1493336861
 MonoBehaviour:
