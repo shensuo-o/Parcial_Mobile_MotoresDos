@@ -4,12 +4,16 @@ public class ComidaDia : Plato
 {
     public Sprite[] sprites;
     public SpriteRenderer spriteRenderer;
+
     public override void Start()
     {
         this.GetComponent<Renderer>().sortingLayerName = "Default";
         this.GetComponent<Renderer>().sortingOrder = 4;
+    }
 
-        if(RemoteConfigTest.instance.isConfigFetched)
+    public void Initialize()
+    {
+        if (RemoteConfigTest.instance.isConfigFetched)
         {
             InitializeVariables();
         }
@@ -17,9 +21,8 @@ public class ComidaDia : Plato
         {
             RemoteConfigTest.instance.OnConfigFetched += InitializeVariables;
         }
-
-
     }
+
     void InitializeVariables()
     {
         price = RemoteConfigTest.instance.foodPrice;

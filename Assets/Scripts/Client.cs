@@ -66,7 +66,7 @@ public class Client : MonoBehaviour
         assignedBar = barra;
         clientSeat = seat;
         transform.position = seat.transform.position;
-        seat.ChangeStatus();
+        seat.SetUsed();
     }
 
     public void StartWaitSeat()
@@ -123,8 +123,8 @@ public class Client : MonoBehaviour
     public void Exit()
     {
         EndCoroutine();
-        clientSeat.ChangeStatus();
-        assignedBar.DeleteClient(this);
+        if(clientSeat != null) clientSeat.SetFree();
+        if(assignedBar != null) assignedBar.DeleteClient(this);
         ClientFactory.Instance.ReturnClient(this);
     }
 
@@ -137,8 +137,8 @@ public class Client : MonoBehaviour
 
     private void Reset()
     {
-        dragdrop.enabled = true;
         EndCoroutine();
+        dragdrop.enabled = true;
         seated = false;
         assignedBar = null;
         selectedFood = null;

@@ -82,7 +82,7 @@ public class GameManager : MonoBehaviour
             isAlive = false;
             canSpawn = false;
             SaveScore();
-            Pause.GetComponent<PauseMenu>().LoadlMenu();
+            Pause.GetComponent<PauseMenu>().EndPanel();
         }
     }
 
@@ -107,6 +107,5 @@ public class GameManager : MonoBehaviour
     public void GetBarMoney(int d)
     {
         money += d;
-        Debug.Log(money);
     }
 }

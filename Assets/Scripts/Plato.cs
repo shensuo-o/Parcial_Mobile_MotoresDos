@@ -19,10 +19,12 @@ public class Plato : MonoBehaviour
 
     public void MoveTo(Seat seat)
     {
+        if(place != null) place.SetFree();
+
         place = seat;
         transform.position = place.transform.position;
         lastPosition = place.transform.position;
-        place.ChangeStatus();
+        place.SetUsed();
     }
 
     public static void TurnOnOff(Plato f, bool active = true)

@@ -98,6 +98,7 @@ public class Barra : MonoBehaviour, IPointerClickHandler
                 return client;
             }
         }
+        Debug.Log("Nadie pidió esto!");
         return null;
     }
 

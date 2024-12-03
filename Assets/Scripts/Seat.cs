@@ -11,9 +11,9 @@ public class Seat : MonoBehaviour
         return free;
     }
 
-    public void ChangeStatus()
+    public void SetUsed()
     {
-        free = !free;
+        free = false;
     }
 
     public void SetFree()

@@ -103,6 +103,7 @@ MonoBehaviour:
   place: {fileID: 0}
   timeToCook: 2
   price: 1
+  lastPosition: {x: 0, y: 0, z: 0}
 --- !u!61 &-5912899107043606676
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -146,7 +147,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2, y: 2}
+  m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
 --- !u!114 &-3546379415183883012
 MonoBehaviour:
@@ -160,3 +161,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc60f7f5424a7bb4bbf8fc07435a34b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canDrop: 0

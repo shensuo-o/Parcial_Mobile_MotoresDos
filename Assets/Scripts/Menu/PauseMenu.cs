@@ -7,11 +7,22 @@ using UnityEngine.SceneManagement;
 public class PauseMenu : MonoBehaviour
 {
     public GameObject pausePanel;
+    public GameObject endPanel;
+    public TextMeshProUGUI endScore;
     public bool gamePaused;
-    // Start is called before the first frame update
+
     void Start()
     {
-        gamePaused = false;    
+        gamePaused = false;
+        endPanel.SetActive(false);
+        pausePanel.SetActive(false);
+    }
+
+    public void EndPanel()
+    {
+        Time.timeScale = 0;
+        endPanel.SetActive(true);
+        endScore.text = "You got " + GameManager.instance.money + " coins!";
     }
 
     public void PauseGame()
@@ -23,6 +34,7 @@ public class PauseMenu : MonoBehaviour
     }
     public void LoadlMenu()
     {
+        Time.timeScale = 1;
         GameManager.instance.SaveScore();
         SceneManager.LoadScene("Menu");
     }

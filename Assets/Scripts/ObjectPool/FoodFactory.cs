@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class FoodFactory : MonoBehaviour
@@ -11,7 +12,7 @@ public class FoodFactory : MonoBehaviour
     public int stonks = 15;
     public bool dynamic = true;
 
-    void Start()
+    void Awake()
     {
         Instance = this;
         foreach (Plato p in foodPrefabs)
@@ -26,8 +27,16 @@ public class FoodFactory : MonoBehaviour
 
     public Plato FoodCreator(Plato p)
     {
-        return Instantiate(p, transform);
+        Plato instance = Instantiate(p, transform);
+        instance.gameObject.SetActive(false);
+        if (instance is ComidaDia comida)
+        {
+            comida.Initialize();
+        }
+        instance.gameObject.SetActive(true);
+        return instance;
     }
+
     public Plato GetFood(Plato p)
     {
         if (!foodPools.ContainsKey(p))
