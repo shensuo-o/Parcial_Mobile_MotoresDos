@@ -97,10 +97,10 @@ public class MenuManager : MonoBehaviour
     {
         // Load saved values or set defaults
         lives = PlayerPrefs.GetInt("saveLives", maxLives);
-        savedScore = PlayerPrefs.GetInt("saveScoreMenu", 0);  // Load high score
-        savedMoney = PlayerPrefs.GetInt("saveMoneyShop", 0);  // Load total money from shop
-        newMoney = PlayerPrefs.GetInt("saveScoreGame", 0);  // Load the last game's earned money
-
+        savedScore = PlayerPrefs.GetInt("saveScoreMenu");  // Load high score
+        savedMoney = PlayerPrefs.GetInt("saveMoneyShop");  // Load total money from shop
+        newMoney = PlayerPrefs.GetInt("saveScoreGame");  // Load the last game's earned money
+        
         // Add the new money from the last game session to the saved total money
         savedMoney += newMoney;
 
@@ -118,7 +118,7 @@ public class MenuManager : MonoBehaviour
         PlayerPrefs.SetInt("saveMoneyShop", savedMoney);  // Save updated total money
         PlayerPrefs.Save();  // Ensure changes are written to disk
 
-        Debug.Log($"Loaded Data: Lives={lives}, High Score={savedScore}, Money={savedMoney}");
+        Debug.Log($"Loaded Data: Lives={lives}, High Score={savedScore}, Money={savedMoney}, newMoney={newMoney}");
     }
 
 
@@ -230,7 +230,7 @@ public class MenuManager : MonoBehaviour
         newMoney = 0;
         timer = 0;
 
-        PlayerPrefs.Save();
+        SavePlayerData();
 
         UpdateUI("all");
 
@@ -326,6 +326,21 @@ public class MenuManager : MonoBehaviour
             button.SetActive(false);
             UpdateUI("money");
             SavePlayerData();
+        }
+    }
+
+    private void OnApplicationQuit()
+    {
+        SavePlayerData();
+        Debug.Log("Application quitting, data saved.");
+    }
+
+    private void OnApplicationPause(bool pauseStatus)
+    {
+        if (pauseStatus)
+        {
+            SavePlayerData();
+            Debug.Log("Application paused, data saved.");
         }
     }
 
