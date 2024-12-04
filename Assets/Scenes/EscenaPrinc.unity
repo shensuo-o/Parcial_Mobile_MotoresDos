@@ -159,9 +159,6 @@ MonoBehaviour:
   maxPoints: 0
   Pause: {fileID: 1108850834}
   cocina: {fileID: 808991436}
-  barras:
-  - {fileID: 717892955}
-  - {fileID: 772033812}
   entrada: {fileID: 1883092844}
   isAlive: 1
   lives: 3
@@ -1245,7 +1242,6 @@ MonoBehaviour:
   - {fileID: 5472151963454554111, guid: a12fad397eb8eda49af303601c9d9789, type: 3}
   - {fileID: 7025802023323706228, guid: bad8ffda03f72014492276d0914c2f05, type: 3}
   - {fileID: 5644186941596334017, guid: 30242d86c6adebd47bc8271a9810b218, type: 3}
-  factory: {fileID: 119887044}
   factorySize: 0
   factoryIndex: 0
 --- !u!4 &517549246
@@ -1386,6 +1382,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6632e8fd12075bb42b9bfd8681dde05e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tacho: 0
 --- !u!114 &643455774
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1848,6 +1845,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6632e8fd12075bb42b9bfd8681dde05e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tacho: 0
 --- !u!114 &717892957
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2170,6 +2168,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6632e8fd12075bb42b9bfd8681dde05e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tacho: 0
 --- !u!114 &772033814
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5515,7 +5514,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5.042017
+  orthographic size: 5.217391
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -5624,6 +5623,97 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   free: 1
+--- !u!1 &2032210135
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2032210138}
+  - component: {fileID: 2032210137}
+  - component: {fileID: 2032210136}
+  m_Layer: 0
+  m_Name: Tacho
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2032210136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2032210135}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6632e8fd12075bb42b9bfd8681dde05e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tacho: 1
+--- !u!61 &2032210137
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2032210135}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 2.5, y: 1.5}
+  m_EdgeRadius: 0
+--- !u!4 &2032210138
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2032210135}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.16, y: 0.7, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2097113555
 GameObject:
   m_ObjectHideFlags: 0
@@ -5920,3 +6010,4 @@ SceneRoots:
   - {fileID: 1890240260}
   - {fileID: 517549246}
   - {fileID: 822309049}
+  - {fileID: 2032210138}
