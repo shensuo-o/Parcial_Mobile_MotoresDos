@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Advertisements;
 
-public class AdsManager : MonoBehaviour, IUnityAdsInitializationListener, IUnityAdsShowListener
+public class AdsManager : MonoBehaviour, IUnityAdsInitializationListener, IUnityAdsShowListener, IUnityAdsLoadListener
 {
     [SerializeField] private string _gameID = "5740305";
     private string _adID = "Interstitial_Android";
 
     private void Start()
     {
-        Advertisement.Initialize(_gameID, true, this);
+        Advertisement.Initialize(_gameID, false, this);
     }
 
     public void OnInitializationComplete()
@@ -20,12 +20,16 @@ public class AdsManager : MonoBehaviour, IUnityAdsInitializationListener, IUnity
 
     public void OnInitializationFailed(UnityAdsInitializationError error, string message)
     {
-        throw new System.NotImplementedException();
+        Debug.LogWarning(message);
     }
 
     public void ShowAdd()
     {
-        if (!Advertisement.isInitialized) return;
+        if (!Advertisement.isInitialized)
+        {
+            Debug.LogWarning("Ad no está listo.");
+            return;
+        }
         if (MenuManager.instance.HasFullLife()) return;
 
         Advertisement.Show(_adID, this);
@@ -33,17 +37,17 @@ public class AdsManager : MonoBehaviour, IUnityAdsInitializationListener, IUnity
 
     public void OnUnityAdsShowFailure(string placementId, UnityAdsShowError error, string message)
     {
-        
+        Debug.Log("Ad Errors");
     }
 
     public void OnUnityAdsShowStart(string placementId)
     {
-        Debug.Log("StartAd");
+        Debug.Log("Ad Start");
     }
 
     public void OnUnityAdsShowClick(string placementId)
     {
-        
+        Debug.Log("Ad Click");
     }
 
     public void OnUnityAdsShowComplete(string placementId, UnityAdsShowCompletionState showCompletionState)
@@ -60,5 +64,15 @@ public class AdsManager : MonoBehaviour, IUnityAdsInitializationListener, IUnity
 
         Advertisement.Load(_adID);
 
+    }
+
+    public void OnUnityAdsAdLoaded(string placementId)
+    {
+        Debug.Log($"Ad Loaded: {placementId}");
+    }
+
+    public void OnUnityAdsFailedToLoad(string placementId, UnityAdsLoadError error, string message)
+    {
+        Debug.LogError($"Failed to load ad {placementId}: {message}");
     }
 }

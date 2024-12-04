@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,7 +11,7 @@ public class ClientFactory : MonoBehaviour
 
     public Dictionary<Client, ObjectPool<Client>> clientPools = new Dictionary<Client, ObjectPool<Client>>();
 
-    void Start()
+    void Awake()
     {
         Instance = this;
         foreach (Client c in clientPrefabs)

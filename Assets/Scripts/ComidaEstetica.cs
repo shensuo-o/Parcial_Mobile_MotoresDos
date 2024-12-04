@@ -5,11 +5,15 @@ using UnityEngine;
 public class ComidaEstetica : MonoBehaviour
 {
     public SpriteRenderer spriteRenderer;
-    public Plato comidaSeleccionada;
 
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        spriteRenderer.sprite = comidaSeleccionada.spriteRenderer.sprite;
+    }
+
+    public void SetSprite(Sprite comidaSeleccionada)
+    {
+        
+        spriteRenderer.sprite = comidaSeleccionada;
     }
 }

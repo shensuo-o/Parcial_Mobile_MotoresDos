@@ -3,12 +3,12 @@ using UnityEngine;
 public class ComidaDia : Plato
 {
     public Sprite[] sprites;
-    public SpriteRenderer spriteRenderer;
 
     public override void Start()
     {
         this.GetComponent<Renderer>().sortingLayerName = "Default";
         this.GetComponent<Renderer>().sortingOrder = 4;
+        Initialize();
     }
 
     public void Initialize()
@@ -30,5 +30,10 @@ public class ComidaDia : Plato
         foodName = RemoteConfigTest.instance.foodName;
 
         spriteRenderer.sprite = sprites[RemoteConfigTest.instance.spriteNumber];
+    }
+
+    private void OnDestroy()
+    {
+        RemoteConfigTest.instance.OnConfigFetched -= InitializeVariables;
     }
 }

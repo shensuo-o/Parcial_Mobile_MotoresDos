@@ -6,7 +6,6 @@ using UnityEngine;
 public class PurchaseClient : MonoBehaviour
 {
     public Client[] AbailableClients;
-    public ClientFactory factory;
     public int factorySize = 0;
     public int factoryIndex = 0;
 
@@ -20,7 +19,7 @@ public class PurchaseClient : MonoBehaviour
             }
         }
 
-        factory.clientPrefabs = new Client[factorySize];
+        ClientFactory.Instance.clientPrefabs = new Client[factorySize];
 
         for (int i = 0; i < AbailableClients.Length; i++)
         {
@@ -30,7 +29,7 @@ public class PurchaseClient : MonoBehaviour
             {
                 Debug.Log("Added " + AbailableClients[i]);
 
-                factory.clientPrefabs[factoryIndex] = AbailableClients[i];
+                ClientFactory.Instance.clientPrefabs[factoryIndex] = AbailableClients[i];
                 factoryIndex++;
             }
         }

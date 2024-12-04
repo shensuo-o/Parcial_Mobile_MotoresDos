@@ -12,7 +12,6 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     public GameObject Pause;
     public Cocina cocina;
-    public List<Barra> barras;
     public Entrada entrada;
     public bool isAlive;
 
@@ -104,17 +103,18 @@ public class GameManager : MonoBehaviour
         cocina.GetOrder(plato);
     }
 
-    public void DeliverOrder(Client client, Plato plato)
+    public void DeliverOrder(Client client, Plato plato, Barra bar)
     {
         plato.MoveTo(client.hands);
         client.GetFood(plato);
         plato.GetComponent<Collider2D>().enabled = false;
+        bar.DeleteClient(client);
     }
 
     public void GetBarMoney(int d)
     {
         soundManager.PlaySFX(soundManager.colletPayment);
         money += d;
-        SaveScore(); // Save score whenever money is updated
+        SaveScore();
     }
 }

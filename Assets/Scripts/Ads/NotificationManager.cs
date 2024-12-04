@@ -28,7 +28,7 @@ public class NotificationManager : MonoBehaviour
             Text = "Te extrañamos :P",
             SmallIcon = "icon_small",
             LargeIcon = "icon_large",
-            FireTime = DateTime.Now.AddHours(1)
+            FireTime = DateTime.Now.AddMinutes(5)
         };
 
         AndroidNotificationCenter.SendNotification(notif, notifChannel.Id);

@@ -46,7 +46,7 @@ public class Barra : MonoBehaviour, IPointerClickHandler
 
     public void GetClientToPosition(Client client)
     {
-        if(!client.seated)
+        if (!client.seated)
         {
             foreach (Seat seat in seats)
             {
@@ -90,9 +90,20 @@ public class Barra : MonoBehaviour, IPointerClickHandler
 
     public Client WhoOrderedThis(Plato p)
     {
+        if (clients.Count == 0 || !p.enabled)
+        {
+            Debug.Log("No hay clientes");
+            return null;
+        }
+        
         foreach (Client client in clients)
         {
-            if(client.selectedFood.foodName == p.foodName)
+            if (client == null || p == null)
+            {
+                return null;
+            }
+
+            if (client.selectedFood.foodName == p.foodName)
             {
                 return client;
             }
@@ -111,10 +122,13 @@ public class Barra : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (MoneyOnTable())
+        if (eventData.pointerDrag == null)
         {
-            GetMoney();
-            ClearMoney();
+            if (MoneyOnTable())
+            {
+                GetMoney();
+                ClearMoney();
+            }
         }
     }
 }

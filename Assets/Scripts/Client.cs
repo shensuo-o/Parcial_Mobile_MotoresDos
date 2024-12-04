@@ -21,15 +21,10 @@ public class Client : MonoBehaviour
     public DragDrop dragdrop;
 
     public IEnumerator co;
-    SoundManager soundManager;
+    public SoundManager soundManager;
 
     public int clientTag;
-
-    public Transform spawner;
-    public GameObject comidaEstetica;
     public GameObject dialogo;
-    public ComidaEstetica aestheticFood;
-
 
     private void Awake()
     {
@@ -60,20 +55,13 @@ public class Client : MonoBehaviour
 
     public void GetFood(Plato plato)
     {
-        onHandFood = plato;
+        onHandFood = plato; 
         _fsm.ChangeState(FSM.ClientStates.Comiendo);
     }
 
     public void Seated()
     {
         _fsm.ChangeState(FSM.ClientStates.Pidiendo);
-        GameObject newdialogo = Instantiate(dialogo, spawner.position, spawner.rotation);
-
-        newdialogo.transform.SetParent(this.transform);
-        GameObject newFood = Instantiate(comidaEstetica, spawner.position, spawner.rotation);
-        newFood.transform.SetParent(this.transform);
-        aestheticFood.comidaSeleccionada = selectedFood;
-        soundManager.PlaySFX(soundManager.askFood);
     }
 
     public void GoToSeat(Seat seat, Barra barra = null)
@@ -123,6 +111,7 @@ public class Client : MonoBehaviour
     {
         yield return new WaitForSeconds(time);
         GameManager.instance.ClientGotOut();
+        Debug.Log("Me voy");
         Exit();
     }
 
@@ -145,6 +134,8 @@ public class Client : MonoBehaviour
         EndCoroutine();
         if(clientSeat != null) clientSeat.SetFree();
         if(assignedBar != null) assignedBar.DeleteClient(this);
+        if (onHandFood != null) FoodFactory.Instance.ReturnFood(onHandFood);
+        dialogo.SetActive(false);
         ClientFactory.Instance.ReturnClient(this);
     }
 
@@ -158,7 +149,7 @@ public class Client : MonoBehaviour
     private void Reset()
     {
         EndCoroutine();
-        dragdrop.enabled = true;
+        EnableDrag();
         seated = false;
         assignedBar = null;
         selectedFood = null;
@@ -169,10 +160,18 @@ public class Client : MonoBehaviour
         _timerFoodWait = Random.Range(10, 15);
         _timerConsume = Random.Range(3, 6);
         this.gameObject.GetComponent<Collider2D>().enabled = true;
+        dragdrop.canDrop = false;
+        int LayerObjects = LayerMask.NameToLayer("Objects");
+        gameObject.layer = LayerObjects;
+        dialogo.gameObject.SetActive(false);
     }
 
-    internal void DisableDrag()
+    public void DisableDrag()
     {
         dragdrop.enabled = false;
+    }
+    public void EnableDrag()
+    {
+        dragdrop.enabled = true;
     }
 }

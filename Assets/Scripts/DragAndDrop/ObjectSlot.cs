@@ -39,7 +39,7 @@ public class ObjectSlot : MonoBehaviour, IDropHandler
                 if (_bar.WhoOrderedThis(p) != null)
                 {
                     eventData.pointerDrag.GetComponent<DragDrop>().canDrop = true;
-                    GameManager.instance.DeliverOrder(_bar.WhoOrderedThis(p), p);
+                    GameManager.instance.DeliverOrder(_bar.WhoOrderedThis(p), p, _bar);
                 }
                 else
                 {

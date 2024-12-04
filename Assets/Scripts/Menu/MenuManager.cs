@@ -82,10 +82,12 @@ public class MenuManager : MonoBehaviour
         if (lives >= maxLives)
         {
             timerIsRunning = false;
+            timer = 0;
         }
         else
         {
             timerIsRunning = true;
+
         }
 
         UpdateUI("timer");

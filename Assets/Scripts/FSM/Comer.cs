@@ -18,6 +18,8 @@ public class Comer : IState
             _client.EndCoroutine(); // Stop any previous coroutine
         }
 
+        _client.dialogo.SetActive(false);
+
         Debug.Log("A COMERRR");
         _client.StartWaitEat();
     }
@@ -32,11 +34,8 @@ public class Comer : IState
         if(_client.selectedFood != null)
         {
             _client.assignedBar.AddMoneyToTable(_client.selectedFood.price);
-            FoodFactory.Instance.ReturnFood(_client.onHandFood);
         }
-
         _client.EndCoroutine();
-        
         _client.Exit();
     }
 }

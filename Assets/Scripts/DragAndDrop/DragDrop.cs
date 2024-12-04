@@ -5,9 +5,9 @@ using UnityEngine.EventSystems;
 
 public class DragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler, IPointerEnterHandler
 {
-    bool canDrag = false;
+    public bool canDrag = false;
     public bool canDrop = false;
-    Vector3 lastPos = Vector3.zero;
+    public Vector3 lastPos = Vector3.zero;
 
     public void OnBeginDrag(PointerEventData eventData)
     {
@@ -18,7 +18,8 @@ public class DragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDrag
 
     public void OnDrag(PointerEventData eventData)
     {
-        if (!canDrag) return;
+        Debug.Log(eventData.pointerDrag.gameObject);
+        //if (!canDrag) return;
         float zOnScreen = Camera.main.WorldToScreenPoint(transform.position).z;
         var position = Camera.main.ScreenToWorldPoint(new Vector3(eventData.position.x, eventData.position.y, zOnScreen));
         transform.position = position;

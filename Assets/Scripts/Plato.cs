@@ -11,8 +11,6 @@ public class Plato : MonoBehaviour
 
     public Vector3 lastPosition = Vector3.zero;
     public SpriteRenderer spriteRenderer;
-    
-
 
     public virtual void Start()
     {
