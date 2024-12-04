@@ -14,6 +14,9 @@ public class ButtonInfo : MonoBehaviour
 
     public void ByeButton()
     {
-        Destroy(this.gameObject, 1);
+        if (MenuManager.instance.savedMoney >= 15)
+        {
+            Destroy(this.gameObject, 1);
+        }
     }
 }

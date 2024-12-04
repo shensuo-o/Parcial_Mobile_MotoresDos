@@ -17,6 +17,10 @@ public class DestroyButtons : MonoBehaviour
             {
                 Buttons[i].SetActive(false);
             }
+            else if (Buttons[i].GetComponent<ButtonInfo>().ButtonTag == 0)
+            {
+                Buttons[i].SetActive(true);
+            }
         }
     }
 }
