@@ -1,4 +1,5 @@
 using System.Collections;
+using UnityEditor.PackageManager;
 using UnityEngine;
 
 public class Client : MonoBehaviour
@@ -23,6 +24,12 @@ public class Client : MonoBehaviour
     SoundManager soundManager;
 
     public int clientTag;
+
+    public Transform spawner;
+    public GameObject comidaEstetica;
+    public GameObject dialogo;
+    public ComidaEstetica aestheticFood;
+
 
     private void Awake()
     {
@@ -60,6 +67,12 @@ public class Client : MonoBehaviour
     public void Seated()
     {
         _fsm.ChangeState(FSM.ClientStates.Pidiendo);
+        GameObject newdialogo = Instantiate(dialogo, spawner.position, spawner.rotation);
+
+        newdialogo.transform.SetParent(this.transform);
+        GameObject newFood = Instantiate(comidaEstetica, spawner.position, spawner.rotation);
+        newFood.transform.SetParent(this.transform);
+        aestheticFood.comidaSeleccionada = selectedFood;
         soundManager.PlaySFX(soundManager.askFood);
     }
 

@@ -104,6 +104,7 @@ MonoBehaviour:
   timeToCook: 2
   price: 1
   lastPosition: {x: 0, y: 0, z: 0}
+  spriteRenderer: {fileID: 4398140382536524805}
 --- !u!61 &-8458967433316452209
 BoxCollider2D:
   m_ObjectHideFlags: 0

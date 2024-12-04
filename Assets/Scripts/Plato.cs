@@ -10,11 +10,15 @@ public class Plato : MonoBehaviour
     public int price;
 
     public Vector3 lastPosition = Vector3.zero;
+    public SpriteRenderer spriteRenderer;
+    
+
 
     public virtual void Start()
     {
         this.GetComponent<Renderer>().sortingLayerName = "Default";
         this.GetComponent<Renderer>().sortingOrder = 4;
+        spriteRenderer = this.GetComponent<SpriteRenderer>();
     }
 
     public void MoveTo(Seat seat)

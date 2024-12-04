@@ -45,6 +45,37 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   free: 1
+--- !u!1 &7107976875150566138
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3467410144787755771}
+  m_Layer: 0
+  m_Name: Spawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3467410144787755771
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7107976875150566138}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.92, y: 0.38, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5985845456626760993}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8967380805175654933
 GameObject:
   m_ObjectHideFlags: 0
@@ -75,11 +106,12 @@ Transform:
   m_GameObject: {fileID: 8967380805175654933}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.0495887, y: -3.010696, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 492222718269950768}
+  - {fileID: 3467410144787755771}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &377607377601028848
@@ -219,8 +251,11 @@ MonoBehaviour:
   hands: {fileID: 0}
   seated: 0
   dragdrop: {fileID: 0}
-  isPurchased: 0
   clientTag: 4
+  spawner: {fileID: 3467410144787755771}
+  comidaEstetica: {fileID: 195129428767627368, guid: 4510ff274b47d6f479d560eff702ee40, type: 3}
+  dialogo: {fileID: 2849291065806034119, guid: 64b908c4553928240b787d4d25278758, type: 3}
+  aestheticFood: {fileID: 3957807251156317955, guid: 4510ff274b47d6f479d560eff702ee40, type: 3}
 --- !u!114 &2659494787857318800
 MonoBehaviour:
   m_ObjectHideFlags: 0
