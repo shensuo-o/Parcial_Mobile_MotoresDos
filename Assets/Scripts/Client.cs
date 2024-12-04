@@ -121,6 +121,7 @@ public class Client : MonoBehaviour
     {
         yield return new WaitForSeconds(time);
         Debug.Log("Ya comí");
+        soundManager.PlaySFX(soundManager.pays);
         _fsm.ExitState();
     }
 
@@ -130,7 +131,6 @@ public class Client : MonoBehaviour
         if(clientSeat != null) clientSeat.SetFree();
         if(assignedBar != null) assignedBar.DeleteClient(this);
         ClientFactory.Instance.ReturnClient(this);
-        soundManager.PlaySFX(soundManager.pays);
     }
 
     public static void TurnOnOff(Client c, bool active = true)

@@ -75,6 +75,7 @@ public class GameManager : MonoBehaviour
 
     public void ClientGotOut()
     {
+        soundManager.PlaySFX(soundManager.angry);
         lives--;
         Status();
     }
@@ -86,6 +87,7 @@ public class GameManager : MonoBehaviour
             isAlive = false;
             canSpawn = false;
             SaveScore();
+            soundManager.PlaySFX(soundManager.lose);
             Pause.GetComponent<PauseMenu>().EndPanel();
         }
     }

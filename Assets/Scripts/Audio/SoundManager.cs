@@ -14,6 +14,7 @@ public class SoundManager : MonoBehaviour
     public AudioClip askFood;
     public AudioClip win;
     public AudioClip lose;
+    public AudioClip angry;
 
     public void PlaySFX(AudioClip clip)
     {
