@@ -22,6 +22,8 @@ public class Client : MonoBehaviour
     public IEnumerator co;
     SoundManager soundManager;
 
+    public int clientTag;
+
     private void Awake()
     {
         dragdrop = GetComponent<DragDrop>();

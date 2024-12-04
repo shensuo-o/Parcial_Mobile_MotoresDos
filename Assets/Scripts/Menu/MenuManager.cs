@@ -204,6 +204,22 @@ public class MenuManager : MonoBehaviour
         PlayerPrefs.SetInt("saveScoreGame", 0);
         PlayerPrefs.SetString("saveTime", DateTime.Now.ToString());
 
+        PlayerPrefs.SetInt("UsedButton0", 0);
+        PlayerPrefs.SetInt("UsedButton1", 0);
+        PlayerPrefs.SetInt("UsedButton2", 0);
+        PlayerPrefs.SetInt("UsedButton3", 0);
+        PlayerPrefs.SetInt("UsedButton4", 0);
+        PlayerPrefs.SetInt("UsedButton5", 0);
+        PlayerPrefs.SetInt("UsedButton6", 0);
+
+        PlayerPrefs.SetInt("ClientAbailable0", 0);
+        PlayerPrefs.SetInt("ClientAbailable1", 0);
+        PlayerPrefs.SetInt("ClientAbailable2", 0);
+        PlayerPrefs.SetInt("ClientAbailable3", 0);
+        PlayerPrefs.SetInt("ClientAbailable4", 0);
+        PlayerPrefs.SetInt("ClientAbailable5", 0);
+        PlayerPrefs.SetInt("ClientAbailable6", 0);
+
         lives = maxLives;
         savedScore = 0;
         savedMoney = 0;
@@ -247,6 +263,16 @@ public class MenuManager : MonoBehaviour
         else
         {
             Instantiate(failedBuy, failedBuyLock.transform);
+        }
+    }
+
+    public void BuyClient(int clientTag)
+    {
+        if (savedMoney >= 15)
+        {
+            PlayerPrefs.SetInt("ClientAbailable" + clientTag, 1);
+            savedMoney -= 15;
+            UpdateUI("money");
         }
     }
 

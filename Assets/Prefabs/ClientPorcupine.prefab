@@ -147,10 +147,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selectedFood: {fileID: 0}
+  onHandFood: {fileID: 0}
   assignedBar: {fileID: 0}
   clientSeat: {fileID: 0}
   hands: {fileID: 0}
   seated: 0
+  dragdrop: {fileID: 0}
+  isPurchased: 0
+  clientTag: 2
 --- !u!95 &7061115882578657555
 Animator:
   serializedVersion: 5
@@ -184,6 +188,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc60f7f5424a7bb4bbf8fc07435a34b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canDrop: 0
 --- !u!1 &8110092542881407151
 GameObject:
   m_ObjectHideFlags: 0

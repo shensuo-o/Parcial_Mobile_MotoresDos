@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class ButtonInfo : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public int ButtonTag;
+    public int ButtonNumber;
+    
+    public void setPP()
     {
-        
+        PlayerPrefs.SetInt("UsedButton" + ButtonNumber, 1);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void ByeButton()
     {
-        
+        Destroy(this.gameObject, 1);
     }
 }

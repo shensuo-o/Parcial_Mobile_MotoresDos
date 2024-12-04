@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class GoAway : MonoBehaviour
 {
+    public int time;
     void Start()
     {
-        Destroy(this.gameObject, 3);
+        Destroy(this.gameObject, time);
     }
 }

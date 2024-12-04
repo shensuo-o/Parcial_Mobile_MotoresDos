@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 11216557}
   - component: {fileID: 11216556}
   - component: {fileID: 11216558}
+  - component: {fileID: 11216559}
   m_Layer: 0
   m_Name: MenuManager
   m_TagString: Untagged
@@ -282,6 +283,26 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &11216559
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 11216555}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be4f3b2f614f304469fe378d6e7ce155, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Buttons:
+  - {fileID: 1890863169}
+  - {fileID: 1988777947}
+  - {fileID: 798251568}
+  - {fileID: 1995117767}
+  - {fileID: 968448145}
+  - {fileID: 1237797427}
+  - {fileID: 193367732}
 --- !u!1 &38098021
 GameObject:
   m_ObjectHideFlags: 0
@@ -1154,7 +1175,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 150
+  m_text: 20
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
@@ -1452,6 +1473,7 @@ GameObject:
   - component: {fileID: 193367736}
   - component: {fileID: 193367735}
   - component: {fileID: 193367734}
+  - component: {fileID: 193367737}
   m_Layer: 5
   m_Name: Buy
   m_TagString: Untagged
@@ -1522,7 +1544,43 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 193367735}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 11216556}
+        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
+        m_MethodName: BuyClient
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 6
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 193367737}
+        m_TargetAssemblyTypeName: ButtonInfo, Assembly-CSharp
+        m_MethodName: setPP
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 193367737}
+        m_TargetAssemblyTypeName: ButtonInfo, Assembly-CSharp
+        m_MethodName: ByeButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &193367735
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1561,6 +1619,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 193367732}
   m_CullTransparentMesh: 1
+--- !u!114 &193367737
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 193367732}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc695a38d9ad2ff4da7f32f8cfa8cf37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ButtonTag: 0
+  ButtonNumber: 6
 --- !u!1 &208729843
 GameObject:
   m_ObjectHideFlags: 0
@@ -3104,7 +3176,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 150
+  m_text: 15
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
@@ -3457,7 +3529,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 19a67b635d3e52a47a77ff146670eaf0, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.7
+  m_Volume: 0.3
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -4063,7 +4135,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 150
+  m_text: 15
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
@@ -5643,6 +5715,7 @@ GameObject:
   - component: {fileID: 798251572}
   - component: {fileID: 798251571}
   - component: {fileID: 798251570}
+  - component: {fileID: 798251573}
   m_Layer: 5
   m_Name: Buy
   m_TagString: Untagged
@@ -5713,7 +5786,43 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 798251571}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 11216556}
+        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
+        m_MethodName: BuyClient
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 798251573}
+        m_TargetAssemblyTypeName: ButtonInfo, Assembly-CSharp
+        m_MethodName: setPP
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 798251573}
+        m_TargetAssemblyTypeName: ButtonInfo, Assembly-CSharp
+        m_MethodName: ByeButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &798251571
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5752,6 +5861,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 798251568}
   m_CullTransparentMesh: 1
+--- !u!114 &798251573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 798251568}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc695a38d9ad2ff4da7f32f8cfa8cf37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ButtonTag: 0
+  ButtonNumber: 2
 --- !u!1 &805463769
 GameObject:
   m_ObjectHideFlags: 0
@@ -6378,7 +6501,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 150
+  m_text: 15
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
@@ -6791,7 +6914,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 150
+  m_text: 15
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
@@ -7034,6 +7157,7 @@ GameObject:
   - component: {fileID: 968448149}
   - component: {fileID: 968448148}
   - component: {fileID: 968448147}
+  - component: {fileID: 968448150}
   m_Layer: 5
   m_Name: Buy
   m_TagString: Untagged
@@ -7104,7 +7228,43 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 968448148}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 11216556}
+        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
+        m_MethodName: BuyClient
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 4
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 968448150}
+        m_TargetAssemblyTypeName: ButtonInfo, Assembly-CSharp
+        m_MethodName: setPP
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 968448150}
+        m_TargetAssemblyTypeName: ButtonInfo, Assembly-CSharp
+        m_MethodName: ByeButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &968448148
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7143,6 +7303,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 968448145}
   m_CullTransparentMesh: 1
+--- !u!114 &968448150
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 968448145}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc695a38d9ad2ff4da7f32f8cfa8cf37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ButtonTag: 0
+  ButtonNumber: 4
 --- !u!1 &999250258
 GameObject:
   m_ObjectHideFlags: 0
@@ -7200,7 +7374,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 150
+  m_text: 15
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
@@ -7517,7 +7691,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 150
+  m_text: 20
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
@@ -7884,7 +8058,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 150
+  m_text: 15
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
@@ -8329,6 +8503,7 @@ GameObject:
   - component: {fileID: 1237797431}
   - component: {fileID: 1237797430}
   - component: {fileID: 1237797429}
+  - component: {fileID: 1237797432}
   m_Layer: 5
   m_Name: Buy
   m_TagString: Untagged
@@ -8399,7 +8574,43 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1237797430}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 11216556}
+        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
+        m_MethodName: BuyClient
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 5
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1237797432}
+        m_TargetAssemblyTypeName: ButtonInfo, Assembly-CSharp
+        m_MethodName: setPP
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1237797432}
+        m_TargetAssemblyTypeName: ButtonInfo, Assembly-CSharp
+        m_MethodName: ByeButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1237797430
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8438,6 +8649,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1237797427}
   m_CullTransparentMesh: 1
+--- !u!114 &1237797432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1237797427}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc695a38d9ad2ff4da7f32f8cfa8cf37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ButtonTag: 0
+  ButtonNumber: 5
 --- !u!1 &1240378533
 GameObject:
   m_ObjectHideFlags: 0
@@ -9392,7 +9617,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 150
+  m_text: 20
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
@@ -10756,7 +10981,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 150
+  m_text: 20
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
@@ -12806,6 +13031,7 @@ GameObject:
   - component: {fileID: 1890863173}
   - component: {fileID: 1890863172}
   - component: {fileID: 1890863171}
+  - component: {fileID: 1890863175}
   m_Layer: 5
   m_Name: Buy
   m_TagString: Untagged
@@ -12876,7 +13102,43 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1890863172}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 11216556}
+        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
+        m_MethodName: BuyClient
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1890863175}
+        m_TargetAssemblyTypeName: ButtonInfo, Assembly-CSharp
+        m_MethodName: setPP
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1890863175}
+        m_TargetAssemblyTypeName: ButtonInfo, Assembly-CSharp
+        m_MethodName: ByeButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1890863172
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12915,6 +13177,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1890863169}
   m_CullTransparentMesh: 1
+--- !u!114 &1890863175
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1890863169}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc695a38d9ad2ff4da7f32f8cfa8cf37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ButtonTag: 0
+  ButtonNumber: 0
 --- !u!1 &1922759075
 GameObject:
   m_ObjectHideFlags: 0
@@ -13106,7 +13382,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 150
+  m_text: 20
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
@@ -13569,7 +13845,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 150
+  m_text: 15
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
@@ -13658,6 +13934,7 @@ GameObject:
   - component: {fileID: 1988777951}
   - component: {fileID: 1988777950}
   - component: {fileID: 1988777949}
+  - component: {fileID: 1988777952}
   m_Layer: 5
   m_Name: Buy
   m_TagString: Untagged
@@ -13728,7 +14005,43 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1988777950}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 11216556}
+        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
+        m_MethodName: BuyClient
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1988777952}
+        m_TargetAssemblyTypeName: ButtonInfo, Assembly-CSharp
+        m_MethodName: setPP
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1988777952}
+        m_TargetAssemblyTypeName: ButtonInfo, Assembly-CSharp
+        m_MethodName: ByeButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1988777950
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13767,6 +14080,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1988777947}
   m_CullTransparentMesh: 1
+--- !u!114 &1988777952
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1988777947}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc695a38d9ad2ff4da7f32f8cfa8cf37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ButtonTag: 0
+  ButtonNumber: 1
 --- !u!1 &1995117767
 GameObject:
   m_ObjectHideFlags: 0
@@ -13779,6 +14106,7 @@ GameObject:
   - component: {fileID: 1995117771}
   - component: {fileID: 1995117770}
   - component: {fileID: 1995117769}
+  - component: {fileID: 1995117772}
   m_Layer: 5
   m_Name: Buy
   m_TagString: Untagged
@@ -13849,7 +14177,43 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1995117770}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 11216556}
+        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
+        m_MethodName: BuyClient
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 3
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1995117772}
+        m_TargetAssemblyTypeName: ButtonInfo, Assembly-CSharp
+        m_MethodName: setPP
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1995117772}
+        m_TargetAssemblyTypeName: ButtonInfo, Assembly-CSharp
+        m_MethodName: ByeButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1995117770
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13888,6 +14252,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1995117767}
   m_CullTransparentMesh: 1
+--- !u!114 &1995117772
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1995117767}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc695a38d9ad2ff4da7f32f8cfa8cf37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ButtonTag: 0
+  ButtonNumber: 3
 --- !u!1 &1997808700
 GameObject:
   m_ObjectHideFlags: 0
@@ -14143,6 +14521,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3e78b057150aec4fa749d4db3670802, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  musicSource: {fileID: 0}
+  sfxSource: {fileID: 0}
+  pays: {fileID: 0}
+  colletPayment: {fileID: 0}
+  enter: {fileID: 0}
+  foodReady: {fileID: 0}
+  askFood: {fileID: 0}
+  win: {fileID: 0}
+  lose: {fileID: 0}
+  angry: {fileID: 0}
 --- !u!1 &2070472794
 GameObject:
   m_ObjectHideFlags: 0

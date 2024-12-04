@@ -219,6 +219,8 @@ MonoBehaviour:
   hands: {fileID: 0}
   seated: 0
   dragdrop: {fileID: 0}
+  isPurchased: 0
+  clientTag: 6
 --- !u!114 &2212663541515246370
 MonoBehaviour:
   m_ObjectHideFlags: 0
