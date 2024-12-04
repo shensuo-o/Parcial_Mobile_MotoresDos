@@ -17,7 +17,6 @@ public class Barra : MonoBehaviour, IPointerClickHandler
     public Material[] colors;
 
     public Renderer Renderer;
-
     private void Start()
     {
         coin.gameObject.SetActive(false);

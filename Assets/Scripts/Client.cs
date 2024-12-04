@@ -20,11 +20,13 @@ public class Client : MonoBehaviour
     public DragDrop dragdrop;
 
     public IEnumerator co;
+    SoundManager soundManager;
 
     private void Awake()
     {
         dragdrop = GetComponent<DragDrop>();
         hands = GetComponentInChildren<Seat>();
+        soundManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<SoundManager>();
         _fsm = new FSM();
     }
 
@@ -39,6 +41,7 @@ public class Client : MonoBehaviour
         _fsm.CreateState(FSM.ClientStates.Pidiendo, new Pedir(_fsm, this));
         _fsm.CreateState(FSM.ClientStates.Comiendo, new Comer(_fsm, this));
         _fsm.ChangeState(FSM.ClientStates.Spawn);
+        soundManager.PlaySFX(soundManager.enter);
     }
 
     protected void Update()
@@ -55,6 +58,7 @@ public class Client : MonoBehaviour
     public void Seated()
     {
         _fsm.ChangeState(FSM.ClientStates.Pidiendo);
+        soundManager.PlaySFX(soundManager.askFood);
     }
 
     public void GoToSeat(Seat seat, Barra barra = null)
@@ -126,6 +130,7 @@ public class Client : MonoBehaviour
         if(clientSeat != null) clientSeat.SetFree();
         if(assignedBar != null) assignedBar.DeleteClient(this);
         ClientFactory.Instance.ReturnClient(this);
+        soundManager.PlaySFX(soundManager.pays);
     }
 
     public static void TurnOnOff(Client c, bool active = true)

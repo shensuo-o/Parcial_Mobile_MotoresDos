@@ -7,6 +7,7 @@ public class Spawn : IState
     private FSM _fsm;
     private Client _client;
 
+
     public Spawn(FSM fsm, Client client)
     {
         _fsm = fsm;
@@ -21,6 +22,7 @@ public class Spawn : IState
             _client.EndCoroutine(); // Stop any previous coroutine
         }
         Debug.Log("Active? " + _client.gameObject.activeInHierarchy);
+
         Debug.Log("Empiezo a esperar");
         _client.StartWaitSeat();
         Debug.Log(_client.co);

@@ -21,9 +21,12 @@ public class GameManager : MonoBehaviour
     private int spawnRate = 0;
     public bool canSpawn = true;
 
+    SoundManager soundManager;
+
     private void Start()
     {
         instance = this;
+        soundManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<SoundManager>();
 
         if (RemoteConfigTest.instance.isConfigFetched)
         {
@@ -108,6 +111,7 @@ public class GameManager : MonoBehaviour
 
     public void GetBarMoney(int d)
     {
+        soundManager.PlaySFX(soundManager.colletPayment);
         money += d;
         SaveScore(); // Save score whenever money is updated
     }

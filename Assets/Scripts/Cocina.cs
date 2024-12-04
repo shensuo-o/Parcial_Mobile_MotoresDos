@@ -7,9 +7,11 @@ public class Cocina : MonoBehaviour
     public Seat[] placesToPlaceOrders;
     public List<Plato> finishedFoods;
 
+    SoundManager soundManager;
     private void Start()
     {
         placesToPlaceOrders = GetComponentsInChildren<Seat>();
+        soundManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<SoundManager>();
     }
 
     private void Update()
@@ -33,6 +35,7 @@ public class Cocina : MonoBehaviour
         Debug.Log("Cocinando: " + plato.foodName);
         yield return new WaitForSeconds(plato.timeToCook);
         Debug.Log("Listo: " + plato.foodName);
+        soundManager.PlaySFX(soundManager.foodReady);
         finishedFoods.Add(plato);
     }
 
