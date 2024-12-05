@@ -1,12 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Unity.Notifications.Android;
+//using Unity.Notifications.Android;
 using System;
 
 public class NotificationManager : MonoBehaviour
 {
-    void Start()
+    /*void Start()
     {
         AndroidNotificationCenter.CancelAllDisplayedNotifications();
         AndroidNotificationCenter.CancelAllScheduledNotifications();
@@ -32,5 +32,5 @@ public class NotificationManager : MonoBehaviour
         };
 
         AndroidNotificationCenter.SendNotification(notif, notifChannel.Id);
-    }
+    }*/
 }
