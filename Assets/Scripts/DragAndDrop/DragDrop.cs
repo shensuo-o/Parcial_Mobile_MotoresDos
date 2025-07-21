@@ -18,7 +18,7 @@ public class DragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDrag
 
     public void OnDrag(PointerEventData eventData)
     {
-        Debug.Log(eventData.pointerDrag.gameObject);
+        //Debug.Log(eventData.pointerDrag.gameObject);
         //if (!canDrag) return;
         float zOnScreen = Camera.main.WorldToScreenPoint(transform.position).z;
         var position = Camera.main.ScreenToWorldPoint(new Vector3(eventData.position.x, eventData.position.y, zOnScreen));

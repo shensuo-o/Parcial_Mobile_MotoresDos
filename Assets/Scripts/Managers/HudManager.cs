@@ -1,10 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using TMPro;
 using System;
-using System.Net;
 
 public class HudManager : MonoBehaviour
 {

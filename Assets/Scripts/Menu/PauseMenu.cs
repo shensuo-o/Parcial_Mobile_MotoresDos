@@ -32,11 +32,11 @@ public class PauseMenu : MonoBehaviour
         pausePanel.SetActive(!gamePaused);
         gamePaused = !gamePaused;
     }
-    public void LoadlMenu()
+    public void LoadMenu()
     {
         Time.timeScale = 1;
         GameManager.instance.SaveScore();
-        SceneManager.LoadScene("Menu");
+        LevelManager.instance.LoadScene();
     }
 
     public void ExitApp()

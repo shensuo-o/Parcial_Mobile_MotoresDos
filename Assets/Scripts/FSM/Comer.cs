@@ -13,7 +13,7 @@ public class Comer : IState
 
     public void OnEnter()
     {
-        if (_client.co != null)
+        if (_client.Co != null)
         {
             _client.EndCoroutine(); // Stop any previous coroutine
         }

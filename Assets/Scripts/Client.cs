@@ -7,19 +7,19 @@ public class Client : MonoBehaviour
     private float _timerFoodWait;
     private float _timerConsume;
 
-    public Plato selectedFood = null;
-    public Plato onHandFood = null;
-    public Barra assignedBar = null;
-    public Seat clientSeat = null;
-    public Seat hands = null;
+    public Plato selectedFood;
+    public Plato onHandFood;
+    public Barra assignedBar;
+    public Seat clientSeat;
+    public Seat hands;
 
-    public bool seated = false;
+    public bool seated;
 
     private FSM _fsm;
 
     public DragDrop dragdrop;
 
-    public IEnumerator co;
+    public IEnumerator Co;
     public SoundManager soundManager;
 
     public int clientTag;
@@ -58,14 +58,14 @@ public class Client : MonoBehaviour
         _fsm.ChangeState(FSM.ClientStates.Comiendo);
     }
 
-    public void Seated()
+    private void Seated()
     {
         _fsm.ChangeState(FSM.ClientStates.Pidiendo);
     }
 
     public void GoToSeat(Seat seat, Barra barra = null)
     {
-        if (barra != null)
+        if (barra)
         {
             Seated();
         }
@@ -75,6 +75,7 @@ public class Client : MonoBehaviour
         seat.SetUsed();
     }
 
+    // ReSharper disable Unity.PerformanceAnalysis
     public void StartWaitSeat()
     {
         if (!gameObject.activeInHierarchy)
@@ -82,8 +83,8 @@ public class Client : MonoBehaviour
             gameObject.SetActive(true);
         }
 
-        co = Wait(_timerEntrance);
-        StartCoroutine(co);
+        Co = Wait(_timerEntrance);
+        StartCoroutine(Co);
     }
     
     public void StartWaitFood()
@@ -93,19 +94,20 @@ public class Client : MonoBehaviour
             gameObject.SetActive(true);
         }
 
-        co = Wait(_timerFoodWait);
-        StartCoroutine(co);
+        Co = Wait(_timerFoodWait);
+        StartCoroutine(Co);
     }
 
     public void EndCoroutine()
     {
-        if (co != null)
+        if (Co != null)
         {
-            StopCoroutine(co);
-            co = null;
+            StopCoroutine(Co);
+            Co = null;
         }
     }
 
+    // ReSharper disable Unity.PerformanceAnalysis
     IEnumerator Wait(float time)
     {
         yield return new WaitForSeconds(time);
@@ -114,30 +116,33 @@ public class Client : MonoBehaviour
         Exit();
     }
 
+    // ReSharper disable Unity.PerformanceAnalysis
     public void StartWaitEat()
     {
-        co = WaitEat(_timerConsume);
-        StartCoroutine(co);
+        Co = WaitEat(_timerConsume);
+        StartCoroutine(Co);
     }
 
     IEnumerator WaitEat(float time)
     {
         yield return new WaitForSeconds(time);
-        Debug.Log("Ya comí");
+        Debug.Log("Ya comÃ­");
         soundManager.PlaySFX(soundManager.pays);
         _fsm.ExitState();
     }
 
+    // ReSharper disable Unity.PerformanceAnalysis
     public void Exit()
     {
         EndCoroutine();
-        if(clientSeat != null) clientSeat.SetFree();
-        if(assignedBar != null) assignedBar.DeleteClient(this);
-        if (onHandFood != null) FoodFactory.Instance.ReturnFood(onHandFood);
+        if(clientSeat) clientSeat.SetFree();
+        if(assignedBar) assignedBar.DeleteClient(this);
+        if (onHandFood) FoodFactory.Instance.ReturnFood(onHandFood);
         dialogo.SetActive(false);
         ClientFactory.Instance.ReturnClient(this);
     }
 
+    // ReSharper disable Unity.PerformanceAnalysis
     public static void TurnOnOff(Client c, bool active = true)
     {
         if (!active) c.EndCoroutine();
@@ -160,8 +165,8 @@ public class Client : MonoBehaviour
         _timerConsume = Random.Range(3, 6);
         this.gameObject.GetComponent<Collider2D>().enabled = true;
         dragdrop.canDrop = false;
-        int LayerObjects = LayerMask.NameToLayer("Objects");
-        gameObject.layer = LayerObjects;
+        int layerObjects = LayerMask.NameToLayer("Objects");
+        gameObject.layer = layerObjects;
         dialogo.gameObject.SetActive(false);
     }
 
@@ -169,7 +174,8 @@ public class Client : MonoBehaviour
     {
         dragdrop.enabled = false;
     }
-    public void EnableDrag()
+
+    private void EnableDrag()
     {
         dragdrop.enabled = true;
     }

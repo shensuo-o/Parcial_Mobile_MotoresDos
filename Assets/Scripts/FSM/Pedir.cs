@@ -22,7 +22,7 @@ public class Pedir : IState
         
 
         _client.soundManager.PlaySFX(_client.soundManager.askFood);
-        if (_client.co != null)
+        if (_client.Co != null)
         {
             _client.EndCoroutine(); // Stop any previous coroutine
         }

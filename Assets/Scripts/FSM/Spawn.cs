@@ -17,7 +17,7 @@ public class Spawn : IState
 
     public void OnEnter()
     {
-        if (_client.co != null)
+        if (_client.Co != null)
         {
             _client.EndCoroutine(); // Stop any previous coroutine
         }
@@ -25,7 +25,7 @@ public class Spawn : IState
 
         Debug.Log("Empiezo a esperar");
         _client.StartWaitSeat();
-        Debug.Log(_client.co);
+        Debug.Log(_client.Co);
     }
 
     public void OnUpdate()

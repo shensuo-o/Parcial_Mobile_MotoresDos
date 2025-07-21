@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Managers.Menu;
 using UnityEngine;
 using UnityEngine.Advertisements;
 
@@ -27,7 +28,7 @@ public class AdsManager : MonoBehaviour, IUnityAdsInitializationListener, IUnity
     {
         if (!Advertisement.isInitialized)
         {
-            Debug.LogWarning("Ad no está listo.");
+            Debug.LogWarning("Ad no estï¿½ listo.");
             return;
         }
         if (MenuManager.instance.HasFullLife()) return;
@@ -55,7 +56,7 @@ public class AdsManager : MonoBehaviour, IUnityAdsInitializationListener, IUnity
         if(showCompletionState == UnityAdsShowCompletionState.COMPLETED)
         {
             MenuManager.instance.AddLife();
-            Debug.Log("Añado stamina");
+            Debug.Log("Aï¿½ado stamina");
         }
         else
         {

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Managers.Menu;
 using UnityEngine;
 
 public class ButtonInfo : MonoBehaviour
