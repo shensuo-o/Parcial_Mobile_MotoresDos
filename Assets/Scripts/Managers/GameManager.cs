@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Audio;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -74,7 +75,7 @@ public class GameManager : MonoBehaviour
 
     public void ClientGotOut()
     {
-        soundManager.PlaySFX(soundManager.angry);
+        soundManager.PlaySfx(soundManager.angry);
         lives--;
         Status();
     }
@@ -86,7 +87,7 @@ public class GameManager : MonoBehaviour
             isAlive = false;
             canSpawn = false;
             SaveScore();
-            soundManager.PlaySFX(soundManager.lose);
+            soundManager.PlaySfx(soundManager.lose);
             Pause.GetComponent<PauseMenu>().EndPanel();
         }
     }
@@ -113,7 +114,7 @@ public class GameManager : MonoBehaviour
 
     public void GetBarMoney(int d)
     {
-        soundManager.PlaySFX(soundManager.colletPayment);
+        soundManager.PlaySfx(soundManager.collectPayment);
         money += d;
         SaveScore();
     }

@@ -21,7 +21,7 @@ public class Pedir : IState
         //activar dialogo y asignar sprite
         
 
-        _client.soundManager.PlaySFX(_client.soundManager.askFood);
+        _client.soundManager.PlaySfx(_client.soundManager.askFood);
         if (_client.Co != null)
         {
             _client.EndCoroutine(); // Stop any previous coroutine

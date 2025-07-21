@@ -1,23 +1,24 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class SoundManager : MonoBehaviour
+namespace Audio
 {
-    [SerializeField] AudioSource musicSource;
-    [SerializeField] AudioSource sfxSource;
-
-    public AudioClip pays;
-    public AudioClip colletPayment;
-    public AudioClip enter;
-    public AudioClip foodReady;
-    public AudioClip askFood;
-    public AudioClip win;
-    public AudioClip lose;
-    public AudioClip angry;
-
-    public void PlaySFX(AudioClip clip)
+    public class SoundManager : MonoBehaviour
     {
-        sfxSource.PlayOneShot(clip);
+        [SerializeField] AudioSource musicSource;
+        [SerializeField] AudioSource sfxSource;
+
+        public AudioClip pays;
+        public AudioClip collectPayment;
+        public AudioClip enter;
+        public AudioClip foodReady;
+        public AudioClip askFood;
+        public AudioClip win;
+        public AudioClip lose;
+        public AudioClip angry;
+
+        public void PlaySfx(AudioClip clip)
+        {
+            sfxSource.PlayOneShot(clip);
+        }
     }
 }

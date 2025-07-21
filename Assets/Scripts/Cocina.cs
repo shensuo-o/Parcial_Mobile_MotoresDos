@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Audio;
 using UnityEngine;
 
 public class Cocina : MonoBehaviour
@@ -35,7 +36,7 @@ public class Cocina : MonoBehaviour
         Debug.Log("Cocinando: " + plato.foodName);
         yield return new WaitForSeconds(plato.timeToCook);
         Debug.Log("Listo: " + plato.foodName);
-        soundManager.PlaySFX(soundManager.foodReady);
+        soundManager.PlaySfx(soundManager.foodReady);
         finishedFoods.Add(plato);
     }
 

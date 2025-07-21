@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using Managers.Level;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -6,7 +7,8 @@ using UnityEngine.UI;
 public class LevelManager : MonoBehaviour
 {
     public static LevelManager instance;
-
+    
+    [SerializeField] private HintManager hintManager;
     [SerializeField] private GameObject loaderCanvas;
     [SerializeField] private Image progressBar;
     private float _progress;
@@ -30,6 +32,7 @@ public class LevelManager : MonoBehaviour
         _progress = 0;
         
         loaderCanvas.SetActive(true);
+        hintManager.RandomHint();
         var scene = SceneManager.LoadSceneAsync(sceneName);
         scene!.allowSceneActivation = false;
         

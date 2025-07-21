@@ -1,4 +1,5 @@
 using System.Collections;
+using Audio;
 using UnityEngine;
 
 public class Client : MonoBehaviour
@@ -44,7 +45,7 @@ public class Client : MonoBehaviour
         _fsm.CreateState(FSM.ClientStates.Pidiendo, new Pedir(_fsm, this));
         _fsm.CreateState(FSM.ClientStates.Comiendo, new Comer(_fsm, this));
         _fsm.ChangeState(FSM.ClientStates.Spawn);
-        soundManager.PlaySFX(soundManager.enter);
+        soundManager.PlaySfx(soundManager.enter);
     }
 
     protected void Update()
@@ -127,7 +128,7 @@ public class Client : MonoBehaviour
     {
         yield return new WaitForSeconds(time);
         Debug.Log("Ya comí");
-        soundManager.PlaySFX(soundManager.pays);
+        soundManager.PlaySfx(soundManager.pays);
         _fsm.ExitState();
     }
 

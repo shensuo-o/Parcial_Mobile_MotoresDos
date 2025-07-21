@@ -15092,7 +15092,7 @@ MonoBehaviour:
   musicSource: {fileID: 0}
   sfxSource: {fileID: 0}
   pays: {fileID: 0}
-  colletPayment: {fileID: 0}
+  collectPayment: {fileID: 0}
   enter: {fileID: 0}
   foodReady: {fileID: 0}
   askFood: {fileID: 0}
@@ -16405,10 +16405,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 6013104931816946308, guid: b796e7ef9db164d49856486e2db9b4ca, type: 3}
-      propertyPath: m_SortingOrder
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 7122621695180906487, guid: b796e7ef9db164d49856486e2db9b4ca, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4.000967
