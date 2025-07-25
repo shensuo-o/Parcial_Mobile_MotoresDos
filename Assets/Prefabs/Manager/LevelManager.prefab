@@ -246,8 +246,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: This is the key to solving the game...
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 423e4e6c0b880f9439be4d3a3133f9cb, type: 2}
-  m_sharedMaterial: {fileID: -3776927914096385982, guid: 423e4e6c0b880f9439be4d3a3133f9cb, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 9d8809d2b55e7464ba088cbe78bb8103, type: 2}
+  m_sharedMaterial: {fileID: -8979850738485865227, guid: 9d8809d2b55e7464ba088cbe78bb8103, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -271,8 +271,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 35.6
-  m_fontSizeBase: 35.6
+  m_fontSize: 18
+  m_fontSizeBase: 18
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -476,8 +476,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Loading...
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 423e4e6c0b880f9439be4d3a3133f9cb, type: 2}
-  m_sharedMaterial: {fileID: -3776927914096385982, guid: 423e4e6c0b880f9439be4d3a3133f9cb, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 9d8809d2b55e7464ba088cbe78bb8103, type: 2}
+  m_sharedMaterial: {fileID: -8979850738485865227, guid: 9d8809d2b55e7464ba088cbe78bb8103, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -501,8 +501,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 120
-  m_fontSizeBase: 120
+  m_fontSize: 70
+  m_fontSizeBase: 70
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
