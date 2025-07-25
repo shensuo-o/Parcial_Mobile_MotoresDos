@@ -1,20 +1,23 @@
-using UnityEngine;
-using TMPro;
 using System;
+using TMPro;
+using UnityEngine;
 
-public class HudManager : MonoBehaviour
+namespace Managers
 {
-    public TextMeshProUGUI timerText;
-    public float timer;
-    public TextMeshProUGUI moneyText;
-    public int currentMoney = 0;
-
-    void Update()
+    public class HudManager : MonoBehaviour
     {
-        currentMoney = GameManager.instance.money;
-        timer += Time.deltaTime;
+        public TextMeshProUGUI timerText;
+        public float timer;
+        public TextMeshProUGUI moneyText;
+        public int currentMoney;
 
-        moneyText.text = "Money collected: " + currentMoney.ToString();
-        timerText.text = "Time : " + TimeSpan.FromSeconds(timer).ToString("mm\\:ss");
+        void Update()
+        {
+            currentMoney = GameManager.instance.money;
+            timer += Time.deltaTime;
+
+            moneyText.text = "Money \n" + currentMoney;
+            timerText.text = "Time : " + TimeSpan.FromSeconds(timer).ToString("mm\\:ss");
+        }
     }
 }

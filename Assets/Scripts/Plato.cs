@@ -3,7 +3,7 @@ using UnityEngine;
 public class Plato : MonoBehaviour
 {
     public string foodName = "";
-    public Seat place = null;
+    public Seat place;
 
     public float timeToCook;
 
@@ -14,14 +14,14 @@ public class Plato : MonoBehaviour
 
     public virtual void Start()
     {
-        this.GetComponent<Renderer>().sortingLayerName = "Default";
-        this.GetComponent<Renderer>().sortingOrder = 4;
-        spriteRenderer = this.GetComponent<SpriteRenderer>();
+        GetComponent<Renderer>().sortingLayerName = "Default";
+        GetComponent<Renderer>().sortingOrder = 4;
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     public void MoveTo(Seat seat)
     {
-        if(place != null) place.SetFree();
+        if(place) place.SetFree();
 
         place = seat;
         transform.position = place.transform.position;
@@ -29,6 +29,7 @@ public class Plato : MonoBehaviour
         place.SetUsed();
     }
 
+    // ReSharper disable Unity.PerformanceAnalysis
     public static void TurnOnOff(Plato f, bool active = true)
     {
         if (active) f.Reset();
@@ -37,7 +38,7 @@ public class Plato : MonoBehaviour
 
     public void Reset()
     {
-        this.GetComponent<Collider2D>().enabled = true;
+        GetComponent<Collider2D>().enabled = true;
         lastPosition = Vector3.zero;
         place = null;
     }

@@ -1,27 +1,24 @@
-using System.Collections;
-using System.Collections.Generic;
+using Managers;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class ObjectSlot : MonoBehaviour, IDropHandler
+namespace DragAndDrop
 {
-    private Barra _bar;
-
-    public bool tacho = false;
-
-    private void Awake()
+    public class ObjectSlot : MonoBehaviour, IDropHandler
     {
-        _bar = GetComponent<Barra>();
-    }
+        private Barra _bar;
 
-    public void OnDrop(PointerEventData eventData)
-    {
-        Debug.Log("Drop " + this.name);
-        if (eventData.pointerDrag != null)
+        private void Awake()
         {
-            if (!tacho)
+            _bar = GetComponent<Barra>();
+        }
+
+        public void OnDrop(PointerEventData eventData)
+        {
+            Debug.Log("Drop " + name);
+            if (eventData.pointerDrag)
             {
-                if (eventData.pointerDrag.GetComponent<Client>() != null)
+                if (eventData.pointerDrag.GetComponent<Client>())
                 {
                     var c = eventData.pointerDrag.GetComponent<Client>();
                     if (_bar.SpaceAvailable())
@@ -36,11 +33,11 @@ public class ObjectSlot : MonoBehaviour, IDropHandler
                     }
                 }
 
-                if (eventData.pointerDrag.GetComponent<Plato>() != null)
+                if (eventData.pointerDrag.GetComponent<Plato>())
                 {
                     var p = eventData.pointerDrag.GetComponent<Plato>();
                     Debug.Log("Yo ordene " + p.foodName);
-                    if (_bar.WhoOrderedThis(p) != null)
+                    if (_bar.WhoOrderedThis(p))
                     {
                         eventData.pointerDrag.GetComponent<DragDrop>().canDrop = true;
                         GameManager.instance.DeliverOrder(_bar.WhoOrderedThis(p), p, _bar);
@@ -51,15 +48,6 @@ public class ObjectSlot : MonoBehaviour, IDropHandler
                     }
                 }
             }
-            else
-            {
-                if (eventData.pointerDrag.GetComponent<Plato>() != null)
-                {
-                    var p = eventData.pointerDrag.GetComponent<Plato>();
-                    FoodFactory.Instance.ReturnFood(p);
-                }
-            }
-            
         }
     }
 }

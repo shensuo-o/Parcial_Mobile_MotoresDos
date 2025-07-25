@@ -1,6 +1,6 @@
-using System;
-using System.Collections;
+
 using System.Collections.Generic;
+using Managers;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -16,18 +16,18 @@ public class Barra : MonoBehaviour, IPointerClickHandler
 
     public Material[] colors;
 
-    public Renderer Renderer;
+    public new Renderer renderer;
     private void Start()
     {
         coin.gameObject.SetActive(false);
         seats = GetComponentsInChildren<Seat>();
-        Renderer = GetComponent<Renderer>();
+        renderer = GetComponent<Renderer>();
 
         for (int i = 0; i < colors.Length; i++)
         {
             if (PlayerPrefs.GetInt("BarColor") == i)
             {
-                Renderer.material = colors[i];
+                renderer.material = colors[i];
             }
         }
     }
@@ -61,17 +61,17 @@ public class Barra : MonoBehaviour, IPointerClickHandler
         }
     }
 
-    public bool MoneyOnTable()
+    private bool MoneyOnTable()
     {
-        return cuenta > 0 ? true : false;
+        return cuenta > 0;
     }
 
-    public void GetMoney()
+    private void GetMoney()
     {
         GameManager.instance.GetBarMoney(cuenta);
     }
 
-    public void ClearMoney()
+    private void ClearMoney()
     {
         cuenta = 0;
         ActivateCoin(false);
@@ -83,7 +83,7 @@ public class Barra : MonoBehaviour, IPointerClickHandler
         ActivateCoin(true);
     }
 
-    public void ActivateCoin(bool v)
+    private void ActivateCoin(bool v)
     {
         coin.gameObject.SetActive(v);
     }
@@ -98,7 +98,7 @@ public class Barra : MonoBehaviour, IPointerClickHandler
         
         foreach (Client client in clients)
         {
-            if (client == null || p == null)
+            if (!client || !p)
             {
                 return null;
             }
@@ -108,7 +108,7 @@ public class Barra : MonoBehaviour, IPointerClickHandler
                 return client;
             }
         }
-        Debug.Log("Nadie pidió esto!");
+        Debug.Log("Nadie pidiÃ³ esto!");
         return null;
     }
 
@@ -122,7 +122,7 @@ public class Barra : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (eventData.pointerDrag == null)
+        if (!eventData.pointerDrag)
         {
             if (MoneyOnTable())
             {

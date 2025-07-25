@@ -1,5 +1,7 @@
 using System.Collections;
 using Audio;
+using DragAndDrop;
+using Managers;
 using UnityEngine;
 
 public class Client : MonoBehaviour
@@ -36,8 +38,8 @@ public class Client : MonoBehaviour
 
     void Start()
     {
-        this.GetComponent<Renderer>().sortingLayerName = "Default";
-        this.GetComponent<Renderer>().sortingOrder = 3;
+        GetComponent<Renderer>().sortingLayerName = "Default";
+        GetComponent<Renderer>().sortingOrder = 3;
         _timerEntrance = Random.Range(10, 15);
         _timerFoodWait = Random.Range(10, 15);
         _timerConsume = Random.Range(3, 6);
