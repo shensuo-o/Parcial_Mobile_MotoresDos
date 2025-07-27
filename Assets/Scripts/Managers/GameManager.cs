@@ -17,7 +17,12 @@ namespace Managers
         public Cocina cocina;
         public Entrada entrada;
         public bool isAlive;
+        
+        public int delayDifficulty;
+        private int _maxDelayDifficulty = 6;
 
+        private int _attendedClients;
+        
         public int lives = 3;
 
         private int _spawnRate;
@@ -94,6 +99,16 @@ namespace Managers
             }
         }
 
+        public void TryIncreaseDifficulty()
+        {
+            _attendedClients++;
+            if (_attendedClients % 5 != 0)
+                return;
+            
+            if(delayDifficulty < _maxDelayDifficulty)
+                delayDifficulty++;
+        }
+        
         public void SaveScore()
         {
             PlayerPrefs.SetInt("saveScoreGame", money);

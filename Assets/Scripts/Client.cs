@@ -86,7 +86,7 @@ public class Client : MonoBehaviour
             gameObject.SetActive(true);
         }
 
-        Co = Wait(_timerEntrance);
+        Co = Wait(_timerEntrance - GameManager.instance.delayDifficulty);
         StartCoroutine(Co);
     }
     
@@ -142,6 +142,7 @@ public class Client : MonoBehaviour
         if(assignedBar) assignedBar.DeleteClient(this);
         if (onHandFood) FoodFactory.Instance.ReturnFood(onHandFood);
         dialogo.SetActive(false);
+        GameManager.instance.TryIncreaseDifficulty();
         ClientFactory.Instance.ReturnClient(this);
     }
 

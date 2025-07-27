@@ -1,36 +1,36 @@
-using JetBrains.Annotations;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class PurchaseClient : MonoBehaviour
+namespace Menu
 {
-    public Client[] AbailableClients;
-    public int factorySize = 0;
-    public int factoryIndex = 0;
-
-    void Start()
+    public class PurchaseClient : MonoBehaviour
     {
-        for (int i = 0; i < AbailableClients.Length; i++)
+        public Client[] availableClients;
+        private int _factorySize;
+        private int _factoryIndex;
+
+        void Start()
         {
-            if (PlayerPrefs.GetInt("ClientAbailable" + AbailableClients[i].clientTag) == 1)
+            foreach (var t in availableClients)
             {
-                factorySize++;
+                if (PlayerPrefs.GetInt("ClientAbailable" + t.clientTag) == 1)
+                {
+                    _factorySize++;
+                }
             }
-        }
 
-        ClientFactory.Instance.clientPrefabs = new Client[factorySize];
+            ClientFactory.Instance.clientPrefabs = new Client[_factorySize];
 
-        for (int i = 0; i < AbailableClients.Length; i++)
-        {
-            Debug.Log(PlayerPrefs.GetInt("ClientAbailable" + AbailableClients[i].clientTag));
-
-            if (PlayerPrefs.GetInt("ClientAbailable" + AbailableClients[i].clientTag) == 1)
+            foreach (var t in availableClients)
             {
-                Debug.Log("Added " + AbailableClients[i]);
+                Debug.Log(PlayerPrefs.GetInt("ClientAbailable" + t.clientTag));
 
-                ClientFactory.Instance.clientPrefabs[factoryIndex] = AbailableClients[i];
-                factoryIndex++;
+                if (PlayerPrefs.GetInt("ClientAbailable" + t.clientTag) == 1)
+                {
+                    Debug.Log("Added " + t);
+
+                    ClientFactory.Instance.clientPrefabs[_factoryIndex] = t;
+                    _factoryIndex++;
+                }
             }
         }
     }

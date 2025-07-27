@@ -157,7 +157,7 @@ MonoBehaviour:
   maxMoney: 0
   points: 0
   maxPoints: 0
-  pause: {fileID: 0}
+  pause: {fileID: 1108850834}
   cocina: {fileID: 808991436}
   entrada: {fileID: 1883092844}
   isAlive: 1
@@ -1234,16 +1234,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df0371e793c2c1a46b3f4ea27182885d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AbailableClients:
-  - {fileID: 6233720334130026496, guid: 3a27f3a037557d545aaf12a7162299dc, type: 3}
-  - {fileID: 1812532983941651860, guid: 27030fdc97f83aa4aa9328c519715452, type: 3}
-  - {fileID: 315422695950949777, guid: b5758e17390839e459f23810abd0e2dd, type: 3}
-  - {fileID: 6081956035689941829, guid: 23f64e3e94c05ec4f9aaee3d9b89e59f, type: 3}
-  - {fileID: 5472151963454554111, guid: a12fad397eb8eda49af303601c9d9789, type: 3}
-  - {fileID: 7025802023323706228, guid: bad8ffda03f72014492276d0914c2f05, type: 3}
-  - {fileID: 5644186941596334017, guid: 30242d86c6adebd47bc8271a9810b218, type: 3}
-  factorySize: 0
-  factoryIndex: 0
+  availableClients: []
 --- !u!4 &517549246
 Transform:
   m_ObjectHideFlags: 0
@@ -5210,7 +5201,7 @@ Transform:
   m_GameObject: {fileID: 1883092841}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.39, y: -4.672017, z: 0}
+  m_LocalPosition: {x: 1.39, y: -4.738108, z: 0}
   m_LocalScale: {x: 3.4172695, y: 9.998572, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5511,7 +5502,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5.042017
+  orthographic size: 5.108108
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2

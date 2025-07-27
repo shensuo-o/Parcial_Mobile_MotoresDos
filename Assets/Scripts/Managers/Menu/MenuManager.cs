@@ -17,6 +17,7 @@ namespace Managers.Menu
         public GameObject instructionsPanel;
         public GameObject shopPanel;
         public GameObject settingsPanel;
+        public GameObject lvlSelectPanel;
 
         // UI Elements
         [Header("UI Elements")]
@@ -64,7 +65,7 @@ namespace Managers.Menu
         {
             LoadPlayerData();
             UpdateUI("all");
-            PlayerPrefs.SetInt("ClientAvailable0", 1);
+            PlayerPrefs.SetInt("ClientAbailable0", 1);
             PlayerPrefs.SetInt("UsedButton0", 1);
         }
 
@@ -288,6 +289,11 @@ namespace Managers.Menu
         {
             SetActivePanel(instructionsPanel);
         }
+        
+        public void PanelLevelSelect()
+        {
+            SetActivePanel(lvlSelectPanel);
+        }
 
         public void PanelShop()
         {
@@ -317,6 +323,7 @@ namespace Managers.Menu
             instructionsPanel.SetActive(false);
             shopPanel.SetActive(false);
             settingsPanel.SetActive(false);
+            lvlSelectPanel.SetActive(false);
 
             panelToActivate.SetActive(true);
         }
