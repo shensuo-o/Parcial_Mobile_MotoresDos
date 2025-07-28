@@ -1,23 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Seat : MonoBehaviour
 {
-    public bool free = true;
+    private bool _free = true;
 
-    public bool isFree()
+    public bool IsFree()
     {
-        return free;
+        return _free;
     }
 
     public void SetUsed()
     {
-        free = false;
+        _free = false;
     }
 
     public void SetFree()
     {
-        free = true;
+        _free = true;
     }
 }

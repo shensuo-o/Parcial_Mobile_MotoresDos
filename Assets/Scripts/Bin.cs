@@ -19,6 +19,7 @@ public class Bin : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointerEx
         if (eventData.pointerDrag && eventData.pointerDrag.GetComponent<Plato>())
         {
             var p = eventData.pointerDrag.GetComponent<Plato>();
+            p.place.SetFree();
             FoodFactory.Instance.ReturnFood(p);
             Debug.Log("Comida tirada!");
             

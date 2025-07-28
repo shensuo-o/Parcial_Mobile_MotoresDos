@@ -44,7 +44,7 @@ public class Cocina : MonoBehaviour
     {
         foreach (Seat place in placesToPlaceOrders)
         {
-            if (place.isFree())
+            if (place.IsFree())
             {
                 Plato platoListo = finishedFoods[0];
                 Plato nuevoPlato = FoodFactory.Instance.GetFood(platoListo);
@@ -59,7 +59,7 @@ public class Cocina : MonoBehaviour
     {
         foreach (Seat place in placesToPlaceOrders)
         {
-            if (place.isFree())
+            if (place.IsFree())
             {
                 return true;
             }

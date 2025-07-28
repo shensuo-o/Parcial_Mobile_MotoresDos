@@ -1,4 +1,3 @@
-
 using System.Collections.Generic;
 using Managers;
 using UnityEngine;
@@ -36,7 +35,7 @@ public class Barra : MonoBehaviour, IPointerClickHandler
     {
         foreach (Seat seat in seats)
         {
-            if (seat.isFree())
+            if (seat.IsFree())
             {
                 return true;
             }
@@ -50,11 +49,17 @@ public class Barra : MonoBehaviour, IPointerClickHandler
         {
             foreach (Seat seat in seats)
             {
-                if (seat.isFree())
+                if (seat.IsFree())
                 {
+                    seat.SetUsed();
                     client.GoToSeat(seat, this);
                     client.DisableDrag();
+                    
+                    if (clients.Contains(client))
+                        clients.Remove(client);
+
                     clients.Add(client);
+                    client.seated = true;
                     break;
                 }
             }
@@ -132,4 +137,3 @@ public class Barra : MonoBehaviour, IPointerClickHandler
         }
     }
 }
-

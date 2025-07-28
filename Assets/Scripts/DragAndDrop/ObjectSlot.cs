@@ -24,7 +24,14 @@ namespace DragAndDrop
                     if (_bar.SpaceAvailable())
                     {
                         eventData.pointerDrag.GetComponent<DragDrop>().canDrop = true;
-                        c.clientSeat.SetFree();
+                        
+                        if (c.clientSeat)
+                        {
+                            c.clientSeat.SetFree();
+                            c.clientSeat = null;
+                            c.seated = false;
+                        }
+
                         _bar.GetClientToPosition(c);
                     }
                     else

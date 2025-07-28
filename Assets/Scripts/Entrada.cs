@@ -2,22 +2,22 @@ using UnityEngine;
 
 public class Entrada : MonoBehaviour
 {
-    private Seat[] placesToStand;
+    private Seat[] _placesToStand;
 
     private void Start()
     {
-        placesToStand = GetComponentsInChildren<Seat>();
-        foreach (var place in placesToStand)
+        _placesToStand = GetComponentsInChildren<Seat>();
+        foreach (var place in _placesToStand)
         {
-            place.free = true;
+            place.IsFree();
         }
     }
 
     public void SpawnClient(Client client)
     {
-        foreach (var place in placesToStand)
+        foreach (var place in _placesToStand)
         {
-            if (place.isFree())
+            if (place.IsFree())
             {
                 client.GoToSeat(place);
                 break;
@@ -27,9 +27,9 @@ public class Entrada : MonoBehaviour
 
     public bool PlaceAvailable()
     {
-        foreach (Seat seat in placesToStand)
+        foreach (Seat seat in _placesToStand)
         {
-            if (seat.isFree())
+            if (seat.IsFree())
             {
                 return true;
             }

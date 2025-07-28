@@ -159,15 +159,23 @@ public class Client : MonoBehaviour
         EndCoroutine();
         EnableDrag();
         seated = false;
+        
+        if (clientSeat)
+        {
+            clientSeat.SetFree();
+            clientSeat = null;
+        }
+
         assignedBar = null;
         selectedFood = null;
         onHandFood = null;
-        clientSeat = null;
         hands.SetFree();
+
         _timerEntrance = Random.Range(10, 15);
         _timerFoodWait = Random.Range(10, 15);
         _timerConsume = Random.Range(3, 6);
-        this.gameObject.GetComponent<Collider2D>().enabled = true;
+
+        gameObject.GetComponent<Collider2D>().enabled = true;
         dragdrop.canDrop = false;
         int layerObjects = LayerMask.NameToLayer("Objects");
         gameObject.layer = layerObjects;
