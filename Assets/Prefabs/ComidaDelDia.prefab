@@ -104,13 +104,13 @@ MonoBehaviour:
   timeToCook: 0
   price: 0
   lastPosition: {x: 0, y: 0, z: 0}
-  sprites:
-  - {fileID: -2107197495, guid: 48c8d3c456409624d905aa294419914a, type: 3}
-  - {fileID: -356157484, guid: 48c8d3c456409624d905aa294419914a, type: 3}
-  - {fileID: -878291402, guid: 48c8d3c456409624d905aa294419914a, type: 3}
-  - {fileID: -1813356603, guid: 48c8d3c456409624d905aa294419914a, type: 3}
-  - {fileID: 195682093, guid: 48c8d3c456409624d905aa294419914a, type: 3}
   spriteRenderer: {fileID: 6440808839746156507}
+  sprites:
+  - {fileID: 1858037847, guid: a836e44075313bf4ca1d2c93670d5726, type: 3}
+  - {fileID: 1970432299, guid: a836e44075313bf4ca1d2c93670d5726, type: 3}
+  - {fileID: -1974327678, guid: a836e44075313bf4ca1d2c93670d5726, type: 3}
+  - {fileID: -2066107767, guid: a836e44075313bf4ca1d2c93670d5726, type: 3}
+  - {fileID: 1148542678, guid: a836e44075313bf4ca1d2c93670d5726, type: 3}
 --- !u!61 &8475465696329365718
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -168,4 +168,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc60f7f5424a7bb4bbf8fc07435a34b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canDrag: 0
   canDrop: 0
+  lastPos: {x: 0, y: 0, z: 0}
