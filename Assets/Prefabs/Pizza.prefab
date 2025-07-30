@@ -102,7 +102,11 @@ MonoBehaviour:
   foodName: Pizza
   place: {fileID: 0}
   timeToCook: 2
-  price: 1
+  timeToFreeze: 5
+  isFrozen: 0
+  defaultSprite: {fileID: -1885454651, guid: a836e44075313bf4ca1d2c93670d5726, type: 3}
+  frozenSprite: {fileID: 1462043608, guid: a836e44075313bf4ca1d2c93670d5726, type: 3}
+  price: 3
   lastPosition: {x: 0, y: 0, z: 0}
   spriteRenderer: {fileID: 6995570732385648741}
 --- !u!61 &-3034679987265630978

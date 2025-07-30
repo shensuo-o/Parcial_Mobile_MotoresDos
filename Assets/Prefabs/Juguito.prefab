@@ -102,6 +102,10 @@ MonoBehaviour:
   foodName: Juguito
   place: {fileID: 0}
   timeToCook: 2
+  timeToFreeze: 5
+  isFrozen: 0
+  defaultSprite: {fileID: 1969807474, guid: a836e44075313bf4ca1d2c93670d5726, type: 3}
+  frozenSprite: {fileID: -2101863888, guid: a836e44075313bf4ca1d2c93670d5726, type: 3}
   price: 1
   lastPosition: {x: 0, y: 0, z: 0}
   spriteRenderer: {fileID: 6560600366558868034}

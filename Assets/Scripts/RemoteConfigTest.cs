@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Unity.Services.RemoteConfig;
 using Unity.Services.Core;
@@ -9,16 +7,19 @@ using System;
 
 public class RemoteConfigTest : MonoBehaviour
 {
-    public struct userAttributes { }
-    public struct appAttributes { }
+    public static RemoteConfigTest instance;
+
+    private struct UserAttributes { }
+
+    private struct AppAttributes { }
 
     public int spawnRate;
     public float cookTime;
+    public float freezeTime;
     public string foodName;
     public int foodPrice;
     public int spriteNumber;
-    public static RemoteConfigTest instance;
-    public bool isConfigFetched = false;
+    public bool isConfigFetched;
 
     public event Action OnConfigFetched;
 
@@ -37,13 +38,9 @@ public class RemoteConfigTest : MonoBehaviour
         {
            await InitializeRemoteConfig();
         }
-        else 
-        {
-            
-        }
 
         RemoteConfigService.Instance.FetchCompleted += Fetch;
-        RemoteConfigService.Instance.FetchConfigs(new userAttributes(), new appAttributes());
+        RemoteConfigService.Instance.FetchConfigs(new UserAttributes(), new AppAttributes());
     }
 
     async Task InitializeRemoteConfig()
@@ -62,6 +59,7 @@ public class RemoteConfigTest : MonoBehaviour
         foodName = RemoteConfigService.Instance.appConfig.config.Value<string>("FofD_name");
         foodPrice = RemoteConfigService.Instance.appConfig.config.Value<int>("Price_FofD");
         cookTime = RemoteConfigService.Instance.appConfig.config.Value<float>("CookTime_FofD");
+        freezeTime = RemoteConfigService.Instance.appConfig.config.Value<float>("FreezeTime_FofD");
         spriteNumber = RemoteConfigService.Instance.appConfig.config.Value<int>("SpriteNumber_FofD");
 
         isConfigFetched = true;

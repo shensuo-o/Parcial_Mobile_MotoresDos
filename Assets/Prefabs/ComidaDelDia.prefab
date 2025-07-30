@@ -102,15 +102,25 @@ MonoBehaviour:
   foodName: 
   place: {fileID: 0}
   timeToCook: 0
+  timeToFreeze: 0
+  isFrozen: 0
+  frozenSprite: {fileID: 0}
+  defaultSprite: {fileID: 0}
   price: 0
   lastPosition: {x: 0, y: 0, z: 0}
   spriteRenderer: {fileID: 6440808839746156507}
-  sprites:
-  - {fileID: 1858037847, guid: a836e44075313bf4ca1d2c93670d5726, type: 3}
-  - {fileID: 1970432299, guid: a836e44075313bf4ca1d2c93670d5726, type: 3}
-  - {fileID: -1974327678, guid: a836e44075313bf4ca1d2c93670d5726, type: 3}
+  defaultSprites:
   - {fileID: -2066107767, guid: a836e44075313bf4ca1d2c93670d5726, type: 3}
   - {fileID: 1148542678, guid: a836e44075313bf4ca1d2c93670d5726, type: 3}
+  - {fileID: -1974327678, guid: a836e44075313bf4ca1d2c93670d5726, type: 3}
+  - {fileID: 1858037847, guid: a836e44075313bf4ca1d2c93670d5726, type: 3}
+  - {fileID: 1970432299, guid: a836e44075313bf4ca1d2c93670d5726, type: 3}
+  frozenSprites:
+  - {fileID: 325163653, guid: a836e44075313bf4ca1d2c93670d5726, type: 3}
+  - {fileID: -2114487618, guid: a836e44075313bf4ca1d2c93670d5726, type: 3}
+  - {fileID: 1836168577, guid: a836e44075313bf4ca1d2c93670d5726, type: 3}
+  - {fileID: 1352464557, guid: a836e44075313bf4ca1d2c93670d5726, type: 3}
+  - {fileID: 1206114438, guid: a836e44075313bf4ca1d2c93670d5726, type: 3}
 --- !u!61 &8475465696329365718
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -2,20 +2,20 @@ using UnityEngine;
 
 public class Seat : MonoBehaviour
 {
-    private bool _free = true;
+    [SerializeField] private bool free = true;
 
     public bool IsFree()
     {
-        return _free;
+        return free;
     }
 
     public void SetUsed()
     {
-        _free = false;
+        free = false;
     }
 
     public void SetFree()
     {
-        _free = true;
+        free = true;
     }
 }

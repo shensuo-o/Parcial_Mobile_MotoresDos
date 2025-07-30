@@ -1,5 +1,7 @@
 using System.Collections;
 using Audio;
+using Clients;
+using Gameplay;
 using Menu;
 using UnityEngine;
 
@@ -19,7 +21,7 @@ namespace Managers
         public bool isAlive;
         
         public int delayDifficulty;
-        private int _maxDelayDifficulty = 6;
+        private readonly int _maxDelayDifficulty = 30;
 
         private int _attendedClients;
         

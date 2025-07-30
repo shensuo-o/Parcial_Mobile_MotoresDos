@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using Audio;
+using Gameplay;
+using ObjectPool;
 using UnityEngine;
 
 public class Cocina : MonoBehaviour
@@ -8,11 +10,11 @@ public class Cocina : MonoBehaviour
     public Seat[] placesToPlaceOrders;
     public List<Plato> finishedFoods;
 
-    SoundManager soundManager;
+    SoundManager _soundManager;
     private void Start()
     {
         placesToPlaceOrders = GetComponentsInChildren<Seat>();
-        soundManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<SoundManager>();
+        _soundManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<SoundManager>();
     }
 
     private void Update()
@@ -36,7 +38,7 @@ public class Cocina : MonoBehaviour
         Debug.Log("Cocinando: " + plato.foodName);
         yield return new WaitForSeconds(plato.timeToCook);
         Debug.Log("Listo: " + plato.foodName);
-        soundManager.PlaySfx(soundManager.foodReady);
+        _soundManager.PlaySfx(_soundManager.foodReady);
         finishedFoods.Add(plato);
     }
 
@@ -47,7 +49,7 @@ public class Cocina : MonoBehaviour
             if (place.IsFree())
             {
                 Plato platoListo = finishedFoods[0];
-                Plato nuevoPlato = FoodFactory.Instance.GetFood(platoListo);
+                Plato nuevoPlato = FoodFactory.instance.GetFood(platoListo);
                 nuevoPlato.MoveTo(place);
                 finishedFoods.Remove(platoListo);
                 break;

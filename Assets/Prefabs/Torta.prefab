@@ -102,7 +102,11 @@ MonoBehaviour:
   foodName: Torta
   place: {fileID: 0}
   timeToCook: 2
-  price: 1
+  timeToFreeze: 5
+  isFrozen: 0
+  defaultSprite: {fileID: 611980058, guid: a836e44075313bf4ca1d2c93670d5726, type: 3}
+  frozenSprite: {fileID: 412858147, guid: a836e44075313bf4ca1d2c93670d5726, type: 3}
+  price: 2
   lastPosition: {x: 0, y: 0, z: 0}
   spriteRenderer: {fileID: 8361733208388050851}
 --- !u!61 &-5912899107043606676

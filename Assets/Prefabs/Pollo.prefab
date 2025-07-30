@@ -102,7 +102,11 @@ MonoBehaviour:
   foodName: Pollo
   place: {fileID: 0}
   timeToCook: 2
-  price: 1
+  timeToFreeze: 5
+  isFrozen: 0
+  defaultSprite: {fileID: -252805856, guid: a836e44075313bf4ca1d2c93670d5726, type: 3}
+  frozenSprite: {fileID: -1148359102, guid: a836e44075313bf4ca1d2c93670d5726, type: 3}
+  price: 5
   lastPosition: {x: 0, y: 0, z: 0}
   spriteRenderer: {fileID: 4446024391616669901}
 --- !u!61 &-8302786847732096379

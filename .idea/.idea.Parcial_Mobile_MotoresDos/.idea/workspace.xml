@@ -5,17 +5,54 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7b51b2a5-954b-47c0-b0c8-42b58e825f80" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.Parcial_Mobile_MotoresDos/.idea/projectSettingsUpdater.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.Parcial_Mobile_MotoresDos/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Parcial_Mobile_MotoresDos/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Parcial_Mobile_MotoresDos/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Art/Comida.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Art/Comida/Comidas.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Art/Comida/Comidas.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Art/Sprites/Misc.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/ComidaDelDia.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/ComidaDelDia.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Cubanito.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Cubanito.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Dona.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Dona.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Helado.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Helado.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Juguito.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Juguito.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Pizza.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Pizza.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Pollo.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Pollo.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Tarta.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Tarta.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Torta.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Torta.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/LevelInfinite.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/LevelInfinite.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Barra.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Barra.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Bin.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Bin.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Client.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Client.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Cocina.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Cocina.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Barra.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Barra.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Bin.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Bin.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Client.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Client.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Cocina.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Cocina.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ComidaDia.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/ComidaDia.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ComidaEstetica.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/ComidaEstetica.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/DragAndDrop/ObjectSlot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/DragAndDrop/ObjectSlot.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Entrada.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Entrada.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Seat.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Seat.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Entrada.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Entrada.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/FSM.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/FSM/Comer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/FSM/Comer.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/FSM/FSM.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/FSM/FSM.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/FSM/IState.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/FSM/IState.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/FSM/Pedir.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/FSM/Pedir.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/FSM/Spawn.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/FSM/Spawn.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Managers/GameManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/GameManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Menu/PurchaseClient.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Menu/PurchaseClient.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ObjectPool/ClientFactory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/ObjectPool/ClientFactory.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ObjectPool/FoodFactory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/ObjectPool/FoodFactory.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Plato.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Plato.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/RemoteConfigTest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/RemoteConfigTest.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Seat.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Seat.cs.meta" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,6 +88,7 @@
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;ml.llm.AIAssistantPromptsLibrary&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
@@ -118,7 +156,9 @@
       <workItem from="1753128127770" duration="44000" />
       <workItem from="1753128184708" duration="3579000" />
       <workItem from="1753470039504" duration="3106000" />
-      <workItem from="1753727559214" duration="2820000" />
+      <workItem from="1753727559214" duration="3454000" />
+      <workItem from="1753822904358" duration="5556000" />
+      <workItem from="1753832718511" duration="3347000" />
     </task>
     <servers />
   </component>
@@ -152,5 +192,9 @@
         </breakpoint>
       </breakpoints>
     </breakpoint-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

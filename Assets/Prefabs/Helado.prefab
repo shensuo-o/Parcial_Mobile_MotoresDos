@@ -102,7 +102,11 @@ MonoBehaviour:
   foodName: Helado
   place: {fileID: 0}
   timeToCook: 2
-  price: 1
+  timeToFreeze: 5
+  isFrozen: 0
+  defaultSprite: {fileID: -1371774255, guid: a836e44075313bf4ca1d2c93670d5726, type: 3}
+  frozenSprite: {fileID: -427939493, guid: a836e44075313bf4ca1d2c93670d5726, type: 3}
+  price: 2
   lastPosition: {x: 0, y: 0, z: 0}
   spriteRenderer: {fileID: 5514122024449564167}
 --- !u!61 &-1025979208889903184

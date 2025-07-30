@@ -102,7 +102,11 @@ MonoBehaviour:
   foodName: Tarta
   place: {fileID: 0}
   timeToCook: 2
-  price: 1
+  timeToFreeze: 5
+  isFrozen: 0
+  defaultSprite: {fileID: -1231666890, guid: a836e44075313bf4ca1d2c93670d5726, type: 3}
+  frozenSprite: {fileID: 1803147336, guid: a836e44075313bf4ca1d2c93670d5726, type: 3}
+  price: 3
   lastPosition: {x: 0, y: 0, z: 0}
   spriteRenderer: {fileID: 9025978389749257271}
 --- !u!61 &-7332404869469227594
