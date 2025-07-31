@@ -25,6 +25,7 @@ public class ShakeSystem : MonoBehaviour , IPointerDownHandler, IPointerUpHandle
     public bool isTouching = false; // Bandera para saber si el dedo sigue presionado
     private Vector2 touchStartPos; // Posición inicial del toque
     public float minSwipeDistance = 150f;
+    public float failSwipeDistance = 80f;
 
     private void Awake()
     {
@@ -53,7 +54,7 @@ public class ShakeSystem : MonoBehaviour , IPointerDownHandler, IPointerUpHandle
             if (!isShaking)
                 SetShake();
         }
-        else if (acceleration * orientationModifier > 1.0f &&isShaking && !isTouching)
+        else if (acceleration * orientationModifier > 0.8f &&isShaking && !isTouching)
         {
             SetOpen();
         }
@@ -137,16 +138,16 @@ public class ShakeSystem : MonoBehaviour , IPointerDownHandler, IPointerUpHandle
             {
                 // Para asegurarnos de que no sea un swipe diagonal demasiado pronunciado hacia los lados
                 // Puedes ajustar este umbral según tus necesidades.
-                if (Mathf.Abs(swipeVector.x) < swipeVector.y * 0.8f) // Si el movimiento horizontal es menos de la mitad del vertical
-                {
+                //if (Mathf.Abs(swipeVector.x) < swipeVector.y * 0.8f) // Si el movimiento horizontal es menos de la mitad del vertical
+                //{
                     SetOpen();
                     _isOpen = true;
-                }
-                else
-                {
-                    if (!_isReseting)
-                        StartCoroutine(ResetRoutine(0.2f));
-                }
+                //}
+                //else
+                //{
+                //    if (!_isReseting)
+                //        StartCoroutine(ResetRoutine(0.2f));
+                //}
             }
             else
             {
@@ -157,7 +158,7 @@ public class ShakeSystem : MonoBehaviour , IPointerDownHandler, IPointerUpHandle
     }
     public void SetShake()
     {
-        pro2.text = Input.acceleration.x.ToString();
+        //pro2.text = Input.acceleration.x.ToString();
         isShaking = true;
         OnShakeDetected.Invoke();
 
@@ -182,7 +183,8 @@ public class ShakeSystem : MonoBehaviour , IPointerDownHandler, IPointerUpHandle
     public void OnDrag(PointerEventData eventData)
     {
         Vector2 touchEndPos = eventData.position;
-        if( touchEndPos.y+150f<touchStartPos.y)
+        pro2.text = (touchStartPos.y - touchEndPos.y).ToString();
+        if ( touchEndPos.y+failSwipeDistance<touchStartPos.y)
         {
             isTouching = false;
             if (!_isReseting)
