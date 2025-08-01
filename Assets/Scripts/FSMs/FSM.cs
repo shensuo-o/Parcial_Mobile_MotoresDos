@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace FSMs
 {
@@ -35,7 +34,6 @@ namespace FSMs
             {
                 if (_currentState != null)
                 {
-                    Debug.Log("entre");
                     _currentState.OnExit();
                     _currentState = _states[state];
                     _currentState.OnEnter();
@@ -50,10 +48,7 @@ namespace FSMs
 
         public void ArtificialUpdate()
         {
-            if (_currentState != null)
-            {
-                _currentState.OnUpdate();
-            }
+            _currentState?.OnUpdate();
         }
     }
 }

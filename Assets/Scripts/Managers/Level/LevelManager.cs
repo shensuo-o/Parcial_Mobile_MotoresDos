@@ -58,5 +58,10 @@ namespace Managers.Level
         {
             progressBar.fillAmount = Mathf.MoveTowards(progressBar.fillAmount, _progress, 3 * Time.deltaTime);
         }
+
+        public void LoadMenuScene()
+        {
+            instance.LoadScene();
+        }
     }
 }

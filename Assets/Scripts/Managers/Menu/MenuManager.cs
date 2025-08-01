@@ -1,8 +1,11 @@
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using Managers.Level;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
+
 namespace Managers.Menu
 {
     public class MenuManager : MonoBehaviour
@@ -11,43 +14,50 @@ namespace Managers.Menu
         private static AudioSource _audioSrc;
 
         // Panels
-        [Header("Panels")]
-        public GameObject mainPanel;
+        [Header("Panels")] public GameObject mainPanel;
         public GameObject instructionsPanel;
         public GameObject shopPanel;
         public GameObject settingsPanel;
         public GameObject lvlSelectPanel;
+        public GameObject confirmationPanel;
+
         // UI Elements
-        [Header("UI Elements")]
-        public TextMeshProUGUI timerText;
+        [Header("UI Elements")] public TextMeshProUGUI timerText;
         public TextMeshProUGUI livesText;
         public TextMeshProUGUI scoreText;
         public TextMeshProUGUI moneyText;
-        // Buttons
-
-        
 
         // Gameplay Variables
-        [Header("Gameplay Variables")]
-        public float timer;
+        [Header("Gameplay Variables")] public float timer;
         public float liveGetTime = 3f;
         public int lives;
         public int maxLives = 5;
         public int savedScore;
         public int savedMoney;
         private int _newMoney;
+
         private bool _timerIsRunning;
+
         // DateTime
         private DateTime _currentDay;
         private DateTime _lastDay;
         private TimeSpan _timePassed;
 
         // Shop
-        [Header("Shop")]
-        public GameObject failedBuy;
+        [Header("Shop")] public GameObject failedBuy;
         public GameObject failedBuyLock;
         public GameObject[] buyButtons;
         public GameObject[] equipButtons;
+
+        // Variables para la funcionalidad de confirmación
+        private Action _pendingAction;
+        public TextMeshProUGUI confirmationText;
+
+        // Diccionario para almacenar acciones por ID
+        private Dictionary<string, Action> _actionDictionary = new Dictionary<string, Action>();
+        
+        // En la clase MenuManager
+        private UnityEvent _pendingEvent;
 
 
         private void Awake()
@@ -58,6 +68,7 @@ namespace Managers.Menu
             instructionsPanel.SetActive(false);
             settingsPanel.SetActive(false);
             shopPanel.SetActive(false);
+            confirmationPanel.SetActive(false);  // Asegúrate de desactivar el panel
 
             InitializeTimer();
         }
@@ -68,9 +79,8 @@ namespace Managers.Menu
             UpdateUI("all");
             PlayerPrefs.SetInt("ClientAbailable0", 1);
             PlayerPrefs.SetInt("UsedButton0", 1);
-            
         }
-
+        
         private void Update()
         {
             if (_timerIsRunning)
@@ -91,7 +101,6 @@ namespace Managers.Menu
             else
             {
                 _timerIsRunning = true;
-
             }
 
             UpdateUI("timer");
@@ -101,31 +110,31 @@ namespace Managers.Menu
         {
             // Load saved values or set defaults
             lives = PlayerPrefs.GetInt("saveLives", maxLives);
-            savedScore = PlayerPrefs.GetInt("saveScoreMenu");  // Load high score
-            savedMoney = PlayerPrefs.GetInt("saveMoneyShop");  // Load total money from the shop
-            _newMoney = PlayerPrefs.GetInt("saveScoreGame");  // Load the last game's earned money
-        
+            savedScore = PlayerPrefs.GetInt("saveScoreMenu"); // Load high score
+            savedMoney = PlayerPrefs.GetInt("saveMoneyShop"); // Load total money from the shop
+            _newMoney = PlayerPrefs.GetInt("saveScoreGame"); // Load the last game's earned money
+
             // Add the new money from the last game session to the saved total money
             savedMoney += _newMoney;
-            
+
             // Update high score only if newMoney is higher than savedScore
             if (_newMoney > savedScore)
             {
                 savedScore = _newMoney;
-                PlayerPrefs.SetInt("saveScoreMenu", savedScore);  // Save updated high score
+                PlayerPrefs.SetInt("saveScoreMenu", savedScore); // Save updated high score
             }
-            
+
             // After processing newMoney, reset it
-            PlayerPrefs.SetInt("saveScoreGame", 0);  // Reset to avoid carrying over
+            PlayerPrefs.SetInt("saveScoreGame", 0); // Reset to avoid carrying over
 
             // Save the total money
-            PlayerPrefs.SetInt("saveMoneyShop", savedMoney);  // Save updated total money
-            
-            PlayerPrefs.Save();  // Ensure changes are written to the disk
+            PlayerPrefs.SetInt("saveMoneyShop", savedMoney); // Save updated total money
+
+            PlayerPrefs.Save(); // Ensure changes are written to the disk
 
             Debug.Log($"Loaded Data: Lives={lives}, High Score={savedScore}, Money={savedMoney}, newMoney={_newMoney}");
         }
-     
+
         private void SavePlayerData()
         {
             SaveTime();
@@ -185,6 +194,7 @@ namespace Managers.Menu
                 _lastDay = DateTime.Now;
                 // O registra/loguea el problema aquí si lo deseas
             }
+
             _timePassed = _currentDay - _lastDay;
 
             double minutesPassed = _timePassed.TotalMinutes;
@@ -220,8 +230,6 @@ namespace Managers.Menu
             PlayerPrefs.SetInt("saveMoneyShop", 0);
             PlayerPrefs.SetInt("saveScoreGame", 0);
             PlayerPrefs.SetString("saveTime", DateTime.Now.ToString(CultureInfo.InvariantCulture));
-
-           
 
             PlayerPrefs.SetInt("UsedButton0", 1);
             PlayerPrefs.SetInt("UsedButton1", 0);
@@ -284,7 +292,7 @@ namespace Managers.Menu
         {
             if (savedMoney >= 15)
             {
-                PlayerPrefs.SetInt("ClientAvailable" + clientTag, 1);
+                PlayerPrefs.SetInt("ClientAbailable" + clientTag, 1);
                 savedMoney -= 15;
                 UpdateUI("money");
             }
@@ -294,7 +302,7 @@ namespace Managers.Menu
         {
             SetActivePanel(instructionsPanel);
         }
-        
+
         public void PanelLevelSelect()
         {
             SetActivePanel(lvlSelectPanel);
@@ -390,5 +398,32 @@ namespace Managers.Menu
             }
         }
         
+        public void RegisterAction(string actionId, Action action)
+        {
+            _actionDictionary[actionId] = action;
+        }
+        
+        // Método para mostrar confirmación con UnityEvent
+        public void ShowConfirmationWithEvent(UnityEvent eventToConfirm)
+        {
+            _pendingEvent = eventToConfirm;
+            confirmationPanel.SetActive(true);
+        }
+
+        // Método que se llama cuando el usuario hace clic en "Sí"
+        public void ConfirmAction()
+        {
+            _pendingEvent?.Invoke();
+
+            confirmationPanel.SetActive(false);
+            PlaySound("SFX_UI_Confirm");
+        }
+
+        // Método que se llama cuando el usuario hace clic en "No"
+        public void CancelAction()
+        {
+            confirmationPanel.SetActive(false);
+            PlaySound("SFX_UI_Cancel");
+        }
     }
 }

@@ -1,23 +1,24 @@
-using System.Collections;
-using System.Collections.Generic;
 using Managers.Menu;
 using UnityEngine;
 
-public class ButtonInfo : MonoBehaviour
+namespace Menu
 {
-    public int ButtonTag;
-    public int ButtonNumber;
+    public class ButtonInfo : MonoBehaviour
+    {
+        public int buttonTag;
+        public int buttonNumber;
     
-    public void setPP()
-    {
-        PlayerPrefs.SetInt("UsedButton" + ButtonNumber, 1);
-    }
-
-    public void ByeButton()
-    {
-        if (MenuManager.instance.savedMoney >= 15)
+        public void SetPp()
         {
-            Destroy(this.gameObject, 1);
+            PlayerPrefs.SetInt("UsedButton" + buttonNumber, 1);
+        }
+
+        public void ByeButton()
+        {
+            if (MenuManager.instance.savedMoney >= 15)
+            {
+                Destroy(gameObject, 1);
+            }
         }
     }
 }

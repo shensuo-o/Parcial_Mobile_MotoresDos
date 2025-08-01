@@ -1,25 +1,25 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
-public class DestroyButtons : MonoBehaviour
+namespace Menu
 {
-    public GameObject[] Buttons;
-
-    void Start()
+    public class DestroyButtons : MonoBehaviour
     {
-        for (int i = 0; i < Buttons.Length; i++)
-        {
-            Buttons[i].GetComponent<ButtonInfo>().ButtonTag = PlayerPrefs.GetInt("UsedButton" + Buttons[i].GetComponent<ButtonInfo>().ButtonNumber);
+        public GameObject[] buttons;
 
-            if (Buttons[i].GetComponent<ButtonInfo>().ButtonTag == 1)
+        void Start()
+        {
+            for (int i = 0; i < buttons.Length; i++)
             {
-                Buttons[i].SetActive(false);
-            }
-            else if (Buttons[i].GetComponent<ButtonInfo>().ButtonTag == 0)
-            {
-                Buttons[i].SetActive(true);
+                buttons[i].GetComponent<ButtonInfo>().buttonTag = PlayerPrefs.GetInt("UsedButton" + buttons[i].GetComponent<ButtonInfo>().buttonNumber);
+
+                if (buttons[i].GetComponent<ButtonInfo>().buttonTag == 1)
+                {
+                    buttons[i].SetActive(false);
+                }
+                else if (buttons[i].GetComponent<ButtonInfo>().buttonTag == 0)
+                {
+                    buttons[i].SetActive(true);
+                }
             }
         }
     }
