@@ -20,8 +20,16 @@ namespace Managers
         public Entrada entrada;
         public bool isAlive;
         
+        // Modo de juego: false = modo infinito (vidas), true = modo tiempo limitado
+        public bool isTimeLimitedMode;
+        
+        // Variables para el modo de tiempo limitado
+        public float timeLimit = 180f; // 3 minutos por defecto
+        public enum GameDifficulty { Easy, Hard }
+        public GameDifficulty gameDifficulty = GameDifficulty.Easy;
+        
         public int delayDifficulty;
-        private readonly int _maxDelayDifficulty = 30;
+        private readonly int _maxDelayDifficulty = 7;
 
         private int _attendedClients;
         
@@ -31,16 +39,23 @@ namespace Managers
         public bool canSpawn = true;
 
         private SoundManager _soundManager;
+        private HudManager _hudManager;
 
         private void Start()
         {
             instance = this;
             _soundManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<SoundManager>();
+            _hudManager = FindObjectOfType<HudManager>();
 
             if (RemoteConfigTest.instance.isConfigFetched)
             {
                 InitializeVariables();
                 StartCoroutine(Spawner());
+                
+                if (isTimeLimitedMode)
+                {
+                    SetupTimeLimitedMode();
+                }
             }
             else
             {
@@ -57,11 +72,53 @@ namespace Managers
         {
             InitializeVariables();
             StartCoroutine(Spawner());
+            
+            if (isTimeLimitedMode)
+            {
+                SetupTimeLimitedMode();
+            }
         }
 
         void InitializeVariables()
         {
             _spawnRate = RemoteConfigTest.instance.spawnRate;
+
+            if (isTimeLimitedMode)
+            {
+                delayDifficulty = gameDifficulty == GameDifficulty.Easy ? 2 : // Valor de dificultad baja
+                    _maxDelayDifficulty; // Valor de dificultad alta
+            }
+            else
+            {
+                delayDifficulty = 0; // Dificultad progresiva para modo infinito
+            }
+        }
+
+        private void SetupTimeLimitedMode()
+        {
+            // Reiniciar el temporizador en HudManager
+            if (_hudManager)
+            {
+                _hudManager.timer = 0f;
+                _hudManager.timeLimit = timeLimit;
+                _hudManager.isTimeLimitedMode = true;
+            }
+        }
+
+        private void Update()
+        {
+            // Verificar el tiempo límite en modo tiempo limitado
+            if (isTimeLimitedMode && _hudManager)
+            {
+                if (_hudManager.timer >= timeLimit)
+                {
+                    isAlive = false;
+                    canSpawn = false;
+                    SaveScore();
+                    _soundManager.PlaySfx(_soundManager.lose);
+                    pause.GetComponent<PauseMenu>().EndPanel();
+                }
+            }
         }
 
         private IEnumerator Spawner()
@@ -86,12 +143,17 @@ namespace Managers
         {
             _soundManager.PlaySfx(_soundManager.angry);
             lives--;
-            Status();
+            
+            // Solo verificar vidas en modo infinito
+            if (!isTimeLimitedMode)
+            {
+                Status();
+            }
         }
 
         private void Status()
         {
-            if (lives == 0)
+            if (lives <= 0)
             {
                 isAlive = false;
                 canSpawn = false;
@@ -104,11 +166,12 @@ namespace Managers
         public void TryIncreaseDifficulty()
         {
             _attendedClients++;
-            if (_attendedClients % 5 != 0)
-                return;
             
-            if(delayDifficulty < _maxDelayDifficulty)
+            // Solo aumentar dificultad en modo infinito
+            if (!isTimeLimitedMode && _attendedClients % 5 == 0 && delayDifficulty < _maxDelayDifficulty)
+            {
                 delayDifficulty++;
+            }
         }
         
         public void SaveScore()

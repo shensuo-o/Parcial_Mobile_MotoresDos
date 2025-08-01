@@ -51,13 +51,17 @@ namespace Managers.Menu
 
         // Variables para la funcionalidad de confirmación
         private Action _pendingAction;
-        public TextMeshProUGUI confirmationText;
 
         // Diccionario para almacenar acciones por ID
         private Dictionary<string, Action> _actionDictionary = new Dictionary<string, Action>();
         
         // En la clase MenuManager
         private UnityEvent _pendingEvent;
+
+        // Agregar al inicio de la clase MenuManager después de las declaraciones existentes
+        [Header("Tutorial")]
+        public GameObject tutorialPopupPanel;
+        public string tutorialLevelName = "Tutorial"; // Nombre de la escena del tutorial
 
 
         private void Awake()
@@ -246,6 +250,8 @@ namespace Managers.Menu
             PlayerPrefs.SetInt("ClientAbailable4", 0);
             PlayerPrefs.SetInt("ClientAbailable5", 0);
             PlayerPrefs.SetInt("ClientAbailable6", 0);
+            
+            PlayerPrefs.SetInt("HasPlayedTutorial", 0);
 
             lives = maxLives;
             savedScore = 0;
@@ -374,14 +380,27 @@ namespace Managers.Menu
             Application.Quit();
         }
 
+        // Modificar el método LoadLevel
         public void LoadLevel(string levelName)
         {
             if (lives > 0)
             {
-                PlaySound("SFX_UI_Confirm");
-                lives--;
-                SavePlayerData();
-                LevelManager.instance.LoadScene(levelName);
+                // Verificar si es la primera vez que el jugador juega
+                bool hasPlayedTutorial = PlayerPrefs.GetInt("HasPlayedTutorial", 0) == 1;
+        
+                if (!hasPlayedTutorial && levelName != tutorialLevelName)
+                {
+                    // Mostrar popup de tutorial
+                    ShowTutorialPopup(levelName);
+                }
+                else
+                {
+                    // Proceder normalmente
+                    PlaySound("SFX_UI_Confirm");
+                    lives--;
+                    SavePlayerData();
+                    LevelManager.instance.LoadScene(levelName);
+                }
             }
             else
             {
@@ -424,6 +443,51 @@ namespace Managers.Menu
         {
             confirmationPanel.SetActive(false);
             PlaySound("SFX_UI_Cancel");
+        }
+
+        // Agregar estos nuevos métodos para manejar el popup del tutorial
+        private void ShowTutorialPopup(string originalLevelName)
+        {
+            // Guardar el nivel que el jugador intentaba cargar
+            PlayerPrefs.SetString("OriginalLevelToLoad", originalLevelName);
+    
+            // Mostrar el panel de popup
+            tutorialPopupPanel.SetActive(true);
+    
+            // Ocultar otros paneles si es necesario
+            mainPanel.SetActive(false);
+            lvlSelectPanel.SetActive(false);
+        }
+
+        // Método para cuando el jugador elige jugar el tutorial
+        public void PlayTutorial()
+        {
+            PlaySound("SFX_UI_Confirm");
+            lives--;
+            SavePlayerData();
+    
+            // Marcar que el jugador ha visto la opción de tutorial
+            PlayerPrefs.SetInt("HasPlayedTutorial", 1);
+            PlayerPrefs.Save();
+    
+            // Cargar el nivel de tutorial
+            LevelManager.instance.LoadScene(tutorialLevelName);
+        }
+
+        // Método para cuando el jugador elige saltar el tutorial
+        public void SkipTutorial()
+        {
+            PlaySound("SFX_UI_Confirm");
+    
+            // Marcar que el jugador ha visto la opción de tutorial
+            PlayerPrefs.SetInt("HasPlayedTutorial", 1);
+            PlayerPrefs.Save();
+    
+            // Cargar el nivel original que el jugador intentaba jugar
+            string originalLevel = PlayerPrefs.GetString("OriginalLevelToLoad", "Game");
+            lives--;
+            SavePlayerData();
+            LevelManager.instance.LoadScene(originalLevel);
         }
     }
 }
