@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 using Managers.Level;
 
 
-public class GatchaSystem : MonoBehaviour, IPointerDownHandler , IPointerUpHandler
+public class GachaView : MonoBehaviour, IPointerDownHandler , IPointerUpHandler
 {
     public Animator myAnimator; // Referencia al Animator del cofre
     public GameObject gachaRewardPanel; // Panel que muestra las recompensas del gacha
@@ -18,14 +18,14 @@ public class GatchaSystem : MonoBehaviour, IPointerDownHandler , IPointerUpHandl
     private Vector2 touchStartPos; // Posición inicial del toque
     private bool isTouching = false; // Bandera para saber si el dedo sigue presionado
     AudioSource audioSource;
-    void OnEnable()
-    {
+    //void OnEnable()
+    //{
 
-    }
-    void OnDisable()
-    {
-          ShakeSystem.instance.OnSuccess -= OpenChest; // Desuscribirse al evento
-    }
+    //}
+    //void OnDisable()
+    //{
+    //      ShakeSystem.instance.OnSuccess -= OpenChest; // Desuscribirse al evento
+    //}
     public void PlayOpenSound()
     {
         audioSource.PlayOneShot(openSound);
@@ -91,11 +91,7 @@ public class GatchaSystem : MonoBehaviour, IPointerDownHandler , IPointerUpHandl
     {
         if (isOpen)
             return;
-        if (!eventData.pointerDrag)
-        {
-            
 
-        }
         isTouching = true;
         touchStartPos = eventData.position; // Guarda la posición inicial del toque
         ShakeChest();
@@ -104,10 +100,7 @@ public class GatchaSystem : MonoBehaviour, IPointerDownHandler , IPointerUpHandl
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        if (!eventData.pointerDrag)
-        {
 
-        }
         if (isTouching)
         {
             isTouching = false;
