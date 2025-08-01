@@ -4335,6 +4335,7 @@ GameObject:
   - component: {fileID: 454257415}
   - component: {fileID: 454257414}
   - component: {fileID: 454257413}
+  - component: {fileID: 454257416}
   m_Layer: 5
   m_Name: NotificationTest
   m_TagString: Untagged
@@ -4406,9 +4407,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11216556}
+      - m_Target: {fileID: 454257411}
         m_TargetAssemblyTypeName: Managers.Menu.MenuManager, Assembly-CSharp
-        m_MethodName: LoadLevel
+        m_MethodName: 
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4456,6 +4457,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 454257411}
   m_CullTransparentMesh: 1
+--- !u!114 &454257416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 454257411}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e458b9e087cec14b8e335c29cf68b95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  noti: 0
+  vibrate: 0
+  acelerator: 0
+  tMPro1: {fileID: 0}
+  tMPro2: {fileID: 0}
+  tMPro3: {fileID: 0}
 --- !u!1 &459585766
 GameObject:
   m_ObjectHideFlags: 0
