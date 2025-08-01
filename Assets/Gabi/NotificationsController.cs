@@ -3,53 +3,82 @@ using System.Collections.Generic;
 using Unity.Notifications.Android;
 using UnityEngine;
 using System;
+using UnityEngine.UI;
 
 //using Unity.Notifications.Android;
-public class NotificationsController : MonoBehaviour
+public static class NotificationsController
 {
-
-    public SpriteRenderer _gameObject;
-    AndroidNotification timeToPlayNotification = new AndroidNotification();
-    AndroidNotificationChannel channel1 = new AndroidNotificationChannel();
+    public static AndroidNotificationChannel channel1 = new AndroidNotificationChannel();
+    public static bool IsPermissionPending;
     // Start is called before the first frame update
-    void Start()
+    public static void NotificationStart()
     {
-        //AndroidNotificationCenter.CancelAllDisplayedNotifications();
-        //AndroidNotificationCenter.CancelAllNotifications();
-        //AndroidNotificationCenter.CancelAllScheduledNotifications();
         channel1 = new AndroidNotificationChannel()
         {
             Id = "remind_notif_ch",
             Name = "Generic Channel",
-            Description = "zarasa",
+            Description = "Generic info",
             Importance = Importance.Low
         };
         AndroidNotificationCenter.RegisterNotificationChannel(channel1);
-        timeToPlayNotification = new AndroidNotification()
+        //timeToPlayNotification = new AndroidNotification()
+        //{
+        //    Title = "lovo volve",
+        //    Text = "paso mucho tiempoo te extra",
+        //    FireTime = DateTime.Now,
+        //    SmallIcon = "icon_small",
+        //    LargeIcon = "icon_large"
+        //};
+        //AndroidNotificationCenter.SendNotification(timeToPlayNotification, channel1.Id);
+
+    }
+    
+    //public static void SendNotification(AndroidNotification notif, AndroidNotificationChannel channel)
+    //{
+    //    if (PlayerPrefs.GetInt("isNotificationActive")==1)
+    //    AndroidNotificationCenter.SendNotification(notif, channel.Id);
+
+    //}
+    public static void SendNewNotification(string title, string text, float firetime)
+    {
+        AndroidNotification _notification = new AndroidNotification()
         {
-            Title = "lovo volve",
-            Text = "paso mucho tiempoo te extra",
-            FireTime = DateTime.Now,
-            SmallIcon = "icon_small",
-            LargeIcon = "icon_large"
+            Title = title,
+            Text = text,
+            FireTime = DateTime.Now.AddSeconds(firetime),
         };
+        if (PlayerPrefs.GetInt("isNotificationActive") == 1)
+        {
+            AndroidNotificationCenter.SendNotification(_notification, channel1.Id);
 
-        AndroidNotificationCenter.SendNotification(timeToPlayNotification, channel1.Id);
-
+        }
     }
-    
-    public void SendNotification(AndroidNotification notif, AndroidNotificationChannel channel)
+
+    public static IEnumerator NotificationPermission()
     {
-        AndroidNotificationCenter.SendNotification(notif, channel.Id);
+        var permissionRequest = new PermissionRequest();
+        IsPermissionPending = true;
+        while (permissionRequest.Status== PermissionStatus.RequestPending)
+        {
+            yield return null;
+        }
+        if (permissionRequest.Status == PermissionStatus.Denied)
+        {
+            PlayerPrefs.SetInt("isNotificationActive", 0);
+            PlayerPrefs.Save();
 
+        }
+        else if (permissionRequest.Status == PermissionStatus.Allowed)
+        {
+            PlayerPrefs.SetInt("isNotificationActive", 1);
+            PlayerPrefs.Save();
+        }
+        IsPermissionPending = false;
     }
-    public void SendTestNotification()
+    public  static void SendTestNotification()
     {
-        AndroidNotificationCenter.SendNotification(timeToPlayNotification, channel1.Id);
-        _gameObject.color = Color.blue;
 
+        SendNewNotification("PROBANDO","123 123",0);
     }
-
-    
 }
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 //using UnityEngine.InputSystem; // Asegúrate de incluir este namespace
 using UnityEngine.EventSystems;
+using Managers.Level;
 
 
 public class GatchaSystem : MonoBehaviour, IPointerDownHandler , IPointerUpHandler
@@ -10,33 +11,46 @@ public class GatchaSystem : MonoBehaviour, IPointerDownHandler , IPointerUpHandl
     public Animator myAnimator; // Referencia al Animator del cofre
     public GameObject gachaRewardPanel; // Panel que muestra las recompensas del gacha
     public float minSwipeDistance = 50f;
-
+    [SerializeField] AudioClip[] plateSounds;
+    [SerializeField] AudioClip openSound;
     public GameObject chestOpenEffect; // Partículas o efecto visual al abrir el cofre
     private bool isOpen = false;
     private Vector2 touchStartPos; // Posición inicial del toque
     private bool isTouching = false; // Bandera para saber si el dedo sigue presionado
-
+    AudioSource audioSource;
     void OnEnable()
     {
-    }
 
+    }
     void OnDisable()
     {
-          ShakeSystem.OnSuccess -= OpenChest; // Desuscribirse al evento
+          ShakeSystem.instance.OnSuccess -= OpenChest; // Desuscribirse al evento
     }
+    public void PlayOpenSound()
+    {
+        audioSource.PlayOneShot(openSound);
 
+    }
+    public void PlayTapSound()
+    {
+        audioSource.PlayOneShot(plateSounds[Random.Range(0,plateSounds.Length)]);
+    }
     void Start()
     {
         myAnimator = GetComponent<Animator>();
-        ShakeSystem.OnSuccess += OpenChest;
-        ShakeSystem.OnResetDetected += ResetChest;
-        ShakeSystem.OnShakeDetected += ShakeChest;
+        ShakeSystem.instance.OnSuccess += OpenChest;
+        ShakeSystem.instance.OnResetDetected += ResetChest;
+        ShakeSystem.instance.OnShakeDetected += ShakeChest;
         if (gachaRewardPanel != null)
         {
             gachaRewardPanel.SetActive(false); // Asegúrate de que el panel de recompensas esté oculto al inicio
         }
+        audioSource = GetComponent<AudioSource>();
     }
-
+    public void LevelChange()
+    {
+        LevelManager.instance.LoadScene("Menu");
+    }
     public void OpenChest()
     {
         myAnimator.SetTrigger("Open");

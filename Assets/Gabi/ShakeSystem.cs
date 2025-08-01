@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 using UnityEngine.EventSystems;
-
 using TMPro;
 public class ShakeSystem : MonoBehaviour , IPointerDownHandler, IPointerUpHandler, IDragHandler
 {
@@ -16,17 +15,17 @@ public class ShakeSystem : MonoBehaviour , IPointerDownHandler, IPointerUpHandle
     private bool isShaking = false;
     public TextMeshProUGUI pro;
     public TextMeshProUGUI pro2;
-    static ShakeSystem instance;
-    float record=0;
+    public static ShakeSystem instance;
     // Evento para notificar cuando se detecta una sacudida
-    public static event Action OnSuccess;
-    public static event Action OnResetDetected;
-    public static event Action OnShakeDetected;
+    public event Action OnSuccess;
+    public event Action OnResetDetected;
+    public event Action OnShakeDetected;
     public bool isTouching = false; // Bandera para saber si el dedo sigue presionado
     private Vector2 touchStartPos; // Posición inicial del toque
     public float minSwipeDistance = 150f;
     public float failSwipeDistance = 80f;
-
+    //bool isAccelerometerActive;
+    //bool isVibrationActive;
     private void Awake()
     {
         instance = this;
@@ -34,6 +33,18 @@ public class ShakeSystem : MonoBehaviour , IPointerDownHandler, IPointerUpHandle
     void Start()
     {
         print("hola");
+        //PlayerPrefs.SetInt("isAcceleratorActive", 1);
+        //PlayerPrefs.SetInt("isVibrationActive", 1);
+        //if (!SystemInfo.supportsAccelerometer)
+        //    isAccelerometerActive = false;
+        //else if (PlayerPrefs.GetInt("isAcceleratorActive") != 0)
+        //    isAccelerometerActive = true;
+        //else
+        //    isAccelerometerActive = false;
+        //if (PlayerPrefs.GetInt("isVibrationActive") == 0)
+        //    isVibrationActive = true;
+        //else
+        //    isVibrationActive = false;
     }
     void Update()
     {
@@ -41,6 +52,7 @@ public class ShakeSystem : MonoBehaviour , IPointerDownHandler, IPointerUpHandle
             return;
         int orientationModifier=-1;
         float acceleration = Input.acceleration.x;
+        
         if(Screen.orientation == ScreenOrientation.LandscapeRight)
         {
             orientationModifier = -1;
@@ -49,6 +61,8 @@ public class ShakeSystem : MonoBehaviour , IPointerDownHandler, IPointerUpHandle
         {
             orientationModifier = 1;
         }
+        if (PlayerPrefs.GetInt("isAcceleratorActive") ==0|| !SystemInfo.supportsAccelerometer)
+            return;
         if (acceleration * orientationModifier< -0.3f && !isTouching)
         {
             if (!isShaking)
@@ -66,44 +80,6 @@ public class ShakeSystem : MonoBehaviour , IPointerDownHandler, IPointerUpHandle
 
         pro.text = Input.acceleration.x.ToString();
 
-        //var dirX = Input.acceleration.x;
-
-        //Vector3 currentAcceleration = InputSystem.GetDevice<Accelerometer>().acceleration.ReadValue();
-        //Vector3 deltaAcceleration = currentAcceleration - lastAcceleration;
-
-        //// Calcula la magnitud del cambio de aceleración
-        //float shakeMagnitude = deltaAcceleration.magnitude;
-        //if(record< Mathf.Abs(dirX))
-        //{
-        //    record = Mathf.Abs(dirX);
-        //    pro2.text = record.ToString();
-
-        //}
-        //pro.text = dirX.ToString();
-        //if (shakeMagnitude >= shakeDetectionThreshold)
-        //{
-        //    if (!shaking)
-        //    {
-        //        shaking = true;
-        //        lastShakeTime = Time.time;
-        //    }
-
-        //    // Si ha estado sacudiéndose lo suficiente
-        //    if (Time.time >= lastShakeTime + shakeDetectionDuration)
-        //    {
-        //        if (OnShakeDetected != null)
-        //        {
-        //            OnShakeDetected?.Invoke(); // Dispara el evento
-        //        }
-        //        lastShakeTime = Time.time; // Reinicia el tiempo de la última sacudida
-        //        shaking = false; // Reinicia el estado de sacudida
-        //    }
-        //}
-        //else
-        //{
-        //    shaking = false; // Si la sacudida no es lo suficientemente fuerte, reinicia el estado
-        //}
-        //lastAcceleration = currentAcceleration; // Actualiza la última aceleración
     }
     public void SetOpen()
     {
@@ -155,6 +131,11 @@ public class ShakeSystem : MonoBehaviour , IPointerDownHandler, IPointerUpHandle
                     StartCoroutine(ResetRoutine(0.2f));
             }
         }
+    }
+    public void Vibrate()
+    {
+        if(PlayerPrefs.GetInt("isVibrationActive") == 1)
+            Handheld.Vibrate();
     }
     public void SetShake()
     {

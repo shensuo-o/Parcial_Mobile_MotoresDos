@@ -3,7 +3,6 @@ using System.Globalization;
 using Managers.Level;
 using TMPro;
 using UnityEngine;
-
 namespace Managers.Menu
 {
     public class MenuManager : MonoBehaviour
@@ -18,13 +17,15 @@ namespace Managers.Menu
         public GameObject shopPanel;
         public GameObject settingsPanel;
         public GameObject lvlSelectPanel;
-
         // UI Elements
         [Header("UI Elements")]
         public TextMeshProUGUI timerText;
         public TextMeshProUGUI livesText;
         public TextMeshProUGUI scoreText;
         public TextMeshProUGUI moneyText;
+        // Buttons
+
+        
 
         // Gameplay Variables
         [Header("Gameplay Variables")]
@@ -36,7 +37,6 @@ namespace Managers.Menu
         public int savedMoney;
         private int _newMoney;
         private bool _timerIsRunning;
-
         // DateTime
         private DateTime _currentDay;
         private DateTime _lastDay;
@@ -48,6 +48,7 @@ namespace Managers.Menu
         public GameObject failedBuyLock;
         public GameObject[] buyButtons;
         public GameObject[] equipButtons;
+
 
         private void Awake()
         {
@@ -67,6 +68,7 @@ namespace Managers.Menu
             UpdateUI("all");
             PlayerPrefs.SetInt("ClientAbailable0", 1);
             PlayerPrefs.SetInt("UsedButton0", 1);
+            
         }
 
         private void Update()
@@ -105,24 +107,25 @@ namespace Managers.Menu
         
             // Add the new money from the last game session to the saved total money
             savedMoney += _newMoney;
-
+            
             // Update high score only if newMoney is higher than savedScore
             if (_newMoney > savedScore)
             {
                 savedScore = _newMoney;
                 PlayerPrefs.SetInt("saveScoreMenu", savedScore);  // Save updated high score
             }
-
+            
             // After processing newMoney, reset it
             PlayerPrefs.SetInt("saveScoreGame", 0);  // Reset to avoid carrying over
 
             // Save the total money
             PlayerPrefs.SetInt("saveMoneyShop", savedMoney);  // Save updated total money
+            
             PlayerPrefs.Save();  // Ensure changes are written to the disk
 
             Debug.Log($"Loaded Data: Lives={lives}, High Score={savedScore}, Money={savedMoney}, newMoney={_newMoney}");
         }
-
+     
         private void SavePlayerData()
         {
             SaveTime();
@@ -217,6 +220,8 @@ namespace Managers.Menu
             PlayerPrefs.SetInt("saveMoneyShop", 0);
             PlayerPrefs.SetInt("saveScoreGame", 0);
             PlayerPrefs.SetString("saveTime", DateTime.Now.ToString(CultureInfo.InvariantCulture));
+
+           
 
             PlayerPrefs.SetInt("UsedButton0", 1);
             PlayerPrefs.SetInt("UsedButton1", 0);
@@ -384,6 +389,6 @@ namespace Managers.Menu
                 _audioSrc.PlayOneShot(clickEffect);
             }
         }
-
+        
     }
 }
