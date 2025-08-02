@@ -12,9 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67583200b673e7b4ea25b6aca63ab8d1, type: 3}
   m_Name: ClientPorcupine
   m_EditorClassIdentifier: 
-  itemName: ClientPorcupine
+  itemName: ClientAbailable1
   itemIcon: {fileID: 217762442, guid: f9555a81a8846164c98a0c44cd432e1a, type: 3}
   cost: 15
+  IsLife: 0
+  IsClient: 1
+  clientTag: 2
   IsLimitLes: 0
+  StartBought: 0
   Qty: 1
   rarity: 2

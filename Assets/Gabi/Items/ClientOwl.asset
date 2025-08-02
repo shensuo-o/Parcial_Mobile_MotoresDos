@@ -12,9 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67583200b673e7b4ea25b6aca63ab8d1, type: 3}
   m_Name: ClientOwl
   m_EditorClassIdentifier: 
-  itemName: ClientOwl
+  itemName: ClientAbailable 2
   itemIcon: {fileID: 1459297974, guid: b7c08d34919b0ae48b5589f77d9dc9ed, type: 3}
   cost: 15
+  IsLife: 0
+  IsClient: 1
+  clientTag: 1
   IsLimitLes: 0
+  StartBought: 0
   Qty: 1
   rarity: 2

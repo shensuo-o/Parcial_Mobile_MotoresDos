@@ -12,9 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67583200b673e7b4ea25b6aca63ab8d1, type: 3}
   m_Name: CatWhite
   m_EditorClassIdentifier: 
-  itemName: CatWhite
+  itemName: ClientAbailable6
   itemIcon: {fileID: 1359833800, guid: a2ca07298f2fee541a2b0d9729f5f32f, type: 3}
   cost: 20
+  IsLife: 0
+  IsClient: 1
+  clientTag: 0
   IsLimitLes: 0
-  Qty: 1
+  StartBought: 0
+  Qty: 0
   rarity: 2

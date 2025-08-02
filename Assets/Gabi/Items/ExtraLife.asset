@@ -16,6 +16,9 @@ MonoBehaviour:
   itemIcon: {fileID: 0}
   cost: 15
   IsLife: 1
+  IsClient: 0
+  clientTag: 0
   IsLimitLes: 1
   StartBought: 0
+  Qty: 0
   rarity: 1

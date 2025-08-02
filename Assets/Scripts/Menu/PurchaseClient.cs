@@ -13,7 +13,7 @@ namespace Menu
         {
             foreach (var t in availableClients)
             {
-                if (PlayerPrefs.GetInt("ClientAbailable" + t.clientTag) == 1)
+                if (PlayerPrefs.GetInt("ClientAbailable" + t.clientTag) >0 )
                 {
                     _factorySize++;
                 }
@@ -25,7 +25,7 @@ namespace Menu
             {
                 Debug.Log(PlayerPrefs.GetInt("ClientAbailable" + t.clientTag));
 
-                if (PlayerPrefs.GetInt("ClientAbailable" + t.clientTag) == 1)
+                if (PlayerPrefs.GetInt("ClientAbailable" + t.clientTag) >0)
                 {
                     Debug.Log("Added " + t);
 

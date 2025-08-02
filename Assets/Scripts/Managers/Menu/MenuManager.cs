@@ -268,7 +268,7 @@ namespace Managers.Menu
             timer = 0;
 
             SavePlayerData();
-
+            PlayerPrefs.Save();
             UpdateUI("all");
 
             Debug.Log("Player data has been reset to defaults!");

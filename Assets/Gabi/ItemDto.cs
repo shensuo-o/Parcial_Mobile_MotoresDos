@@ -9,8 +9,11 @@ public class ItemDto : ScriptableObject
     public Sprite itemIcon;
     public int cost;
     public bool IsLife;
+    public bool IsClient;
+    public int clientTag;
     public bool IsLimitLes;
     public bool StartBought;
+    public int Qty;
     //public int Qty;
     public ItemRarity rarity;
 

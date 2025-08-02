@@ -20,7 +20,7 @@ public class ShopManager : MonoBehaviour
             var newItem = Instantiate(itemUIPrefab, shopParent);
             //newItem.OnItemClick += OnSellItem;
             newItem.SetItem(myItems[i]);
-            if (!PlayerPrefs.HasKey(myItems[i].name))
+            if (PlayerPrefs.HasKey(myItems[i].name))
             {
                 PlayerPrefs.SetInt(myItems[i].name,0);
             }

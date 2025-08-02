@@ -16,6 +16,9 @@ MonoBehaviour:
   itemIcon: {fileID: 1825785844, guid: f150fce5ccdfaeb4d9d3e367f5912f95, type: 3}
   cost: 30
   IsLife: 0
+  IsClient: 0
+  clientTag: 0
   IsLimitLes: 0
   StartBought: 0
+  Qty: 0
   rarity: 2

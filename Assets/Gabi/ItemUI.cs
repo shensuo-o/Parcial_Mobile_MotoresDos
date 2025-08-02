@@ -20,17 +20,35 @@ public class ItemUI : MonoBehaviour
         priceText.text = itemToRepresent.cost.ToString();
         if (itemToRepresent.StartBought)
         {
+            if (itemToRepresent.IsClient)
+            {
+                PlayerPrefs.SetInt("ClientAbailable" + itemToRepresent.clientTag, 1);
+            }
+            else
             PlayerPrefs.SetInt(itemToRepresent.name, 1);
             PlayerPrefs.Save();
+
+            ByeButton();
+
         }
-        if (PlayerPrefs.GetInt(itemToRepresent.name)>0 && !itemToRepresent.IsLimitLes)
+        else if (PlayerPrefs.GetInt(itemToRepresent.name)>0 && !itemToRepresent.IsLimitLes)
         {
             ByeButton();
+        }
+        else
+        {
+            buyButton.SetActive(true);
+
         }
     }
     public void ByeButton()
     {
-        if(!itemToRepresent.IsLimitLes && PlayerPrefs.GetInt(itemToRepresent.name)>0)
+        if (itemToRepresent.IsClient && PlayerPrefs.GetInt("ClientAbailable" + itemToRepresent.clientTag)>0)
+        {
+            buyButton.SetActive(false);
+
+        }
+        else if (!itemToRepresent.IsLimitLes && PlayerPrefs.GetInt(itemToRepresent.name)>0)
         buyButton.SetActive(false);
     }
     public void OnClickItem()
@@ -55,10 +73,19 @@ public class ItemUI : MonoBehaviour
     }
     void BuyItem()
     {
-        PlayerPrefs.SetInt(itemToRepresent.name, PlayerPrefs.GetInt(itemToRepresent.name)+ 1);
-        PlayerPrefs.Save();
+        if (itemToRepresent.IsClient)
+        {
+           PlayerPrefs.SetInt("ClientAbailable" + itemToRepresent.clientTag, 1);
 
+        }
+        else
+        {
+            PlayerPrefs.SetInt(itemToRepresent.name, PlayerPrefs.GetInt(itemToRepresent.name) + 1);
+
+        }
+        PlayerPrefs.Save();
         ByeButton();
+
     }
 
 }
