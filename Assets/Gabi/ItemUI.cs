@@ -16,6 +16,7 @@ public class ItemUI : MonoBehaviour
     public void SetItem(ItemDto _item)
     {
         itemToRepresent = _item;
+
         iconImg.sprite = itemToRepresent.itemIcon;
         priceText.text = itemToRepresent.cost.ToString();
         if (itemToRepresent.StartBought)
@@ -23,6 +24,7 @@ public class ItemUI : MonoBehaviour
             if (itemToRepresent.IsClient)
             {
                 PlayerPrefs.SetInt("ClientAbailable" + itemToRepresent.clientTag, 1);
+                _item.Qty = 1;
             }
             else
             PlayerPrefs.SetInt(itemToRepresent.name, 1);
@@ -31,7 +33,7 @@ public class ItemUI : MonoBehaviour
             ByeButton();
 
         }
-        else if (PlayerPrefs.GetInt(itemToRepresent.name)>0 && !itemToRepresent.IsLimitLes)
+        else if (itemToRepresent.Qty> 0 && !itemToRepresent.IsLimitLes)
         {
             ByeButton();
         }
@@ -41,9 +43,30 @@ public class ItemUI : MonoBehaviour
 
         }
     }
+    public void ResetItem(ItemDto _item)
+    {
+        if (!itemToRepresent.StartBought)
+        {
+            if (itemToRepresent.IsClient)
+            {
+                PlayerPrefs.SetInt("ClientAbailable" + itemToRepresent.clientTag, 0);
+                _item.Qty = 0;
+            }
+            else
+            PlayerPrefs.SetInt(itemToRepresent.name, 0);
+            PlayerPrefs.Save();
+
+            ByeButton();
+            buyButton.SetActive(true);
+
+        }
+
+
+    }
+
     public void ByeButton()
     {
-        if (itemToRepresent.IsClient && PlayerPrefs.GetInt("ClientAbailable" + itemToRepresent.clientTag)>0)
+        if (!itemToRepresent.IsLimitLes&&!itemToRepresent.CanBePurchased())
         {
             buyButton.SetActive(false);
 
@@ -57,7 +80,8 @@ public class ItemUI : MonoBehaviour
         //OnItemClick?.Invoke(itemToRepresent);
         if (money >= itemToRepresent.cost)
         {
-            if(!itemToRepresent.IsLife|| !MenuManager.instance.HasFullLife())
+            //if(!itemToRepresent.IsLife|| !MenuManager.instance.HasFullLife())
+            if(itemToRepresent.CanBePurchased())
             {
                 PlayerPrefs.SetInt("saveMoneyShop", money - itemToRepresent.cost);
             }
@@ -65,8 +89,7 @@ public class ItemUI : MonoBehaviour
             {
                 return;
             }
-            if (itemToRepresent.IsLife)
-                MenuManager.instance.AddLife();
+            
             MenuManager.instance.UpdateUI("money");
             BuyItem();
         }
@@ -76,11 +99,15 @@ public class ItemUI : MonoBehaviour
         if (itemToRepresent.IsClient)
         {
            PlayerPrefs.SetInt("ClientAbailable" + itemToRepresent.clientTag, 1);
+            itemToRepresent.Qty = 1;
 
         }
-        else
+        else if (itemToRepresent.IsLife)
+            MenuManager.instance.BuyLife(1);
+        else 
         {
             PlayerPrefs.SetInt(itemToRepresent.name, PlayerPrefs.GetInt(itemToRepresent.name) + 1);
+            itemToRepresent.Qty = PlayerPrefs.GetInt(itemToRepresent.name);
 
         }
         PlayerPrefs.Save();

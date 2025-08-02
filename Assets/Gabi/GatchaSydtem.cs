@@ -9,7 +9,7 @@ public class GatchaSydtem : MonoBehaviour
     [SerializeField] int pullQuantityToPity = 20;
     [SerializeField] int pullQuantityToRare = 7;
     int GatchaOpened;
-
+    int GatchaOpenedSinceRare;
     float totalChance;
 
     private void Start()
@@ -18,25 +18,26 @@ public class GatchaSydtem : MonoBehaviour
         for (int i = 0; i < myPools.Length; i++)
         {
             totalChance += myPools[i].appearChance;
-            for (int j = 0; j < myPools[i].myItems.Length; j++)
-            {
-                myPools[i].myItems[j].rarity = myPools[i].rarity;
-            }
+            //for (int j = 0; j < myPools[i].myItems.Length; j++)
+            //{
+            //    myPools[i].myItems[j].rarity = myPools[i].rarity;
+            //}
         }
-        GatchaOpened=PlayerPrefs.GetInt("GatchaOpened");
+        GatchaOpenedSinceRare = PlayerPrefs.GetInt("GatchaOpenedSinceRare");
+        GatchaOpened = PlayerPrefs.GetInt("GatchaTotalOpened");
     }
 
     public void Pull(int quantity)
     {
-        if (PlayerPrefs.GetInt("GatchasPending") <= 0)
+        if (PlayerPrefs.GetInt("GatchasPending") < quantity)
             return;
-        PlayerPrefs.SetInt("GatchasPending", PlayerPrefs.GetInt("GatchasPending") - 1);
         bool hasRare = false;
         bool forceRare=false;
 
-        if (quantity >= pullQuantityToRare)
+        if (GatchaOpened + quantity >= pullQuantityToRare)
         {
             forceRare = true;
+
         }
         
         for (int i = 0; i < quantity; i++)
@@ -49,35 +50,33 @@ public class GatchaSydtem : MonoBehaviour
 
             if (item.rarity >= ItemRarity.Rare)
             {
-                hasRare = true;
+                //GatchaOpenedSinceRare = 0;
             }
 
             Debug.Log("Me tocó " + item.itemName + " de rareza " + item.rarity);
         }
+        PlayerPrefs.SetInt("GatchasPending", PlayerPrefs.GetInt("GatchasPending") - quantity);
+        PlayerPrefs.SetInt("GatchaOpenedSinceRare", GatchaOpenedSinceRare);
+        PlayerPrefs.SetInt("GatchaTotalOpened", GatchaOpened);
+
     }
 
 
     ItemDto GetRandomItem(bool forceRare = false)
     {
-        
+        GatchaOpened++;
         RarityPool pool = null;
 
         float randomValue = Random.Range(0, totalChance);
-
-        if (GatchaOpened >= pullQuantityToPity)
-        {
-            pool = myPools[myPools.Length - 1];
-            PlayerPrefs.SetInt("GatchaOpened", 0);
-
-        }
-        else
-        {
+               
             var initIndex = 0;
             if (forceRare)
             {
                 initIndex = 1;
+                GatchaOpened = 0;
                 randomValue -= myPools[0].appearChance;
             }
+            
 
             for (int i = initIndex; i < myPools.Length; i++)
             {
@@ -89,11 +88,28 @@ public class GatchaSydtem : MonoBehaviour
                     break;
                 }
             }
-        }
+        
 
-        if (pool.rarity == ItemRarity.UltraMegaHiperRare)
+        if (pool.rarity == ItemRarity.Normal)
         {
-            GatchaOpened = 0;
+            GatchaOpenedSinceRare++;
+            if (GatchaOpenedSinceRare >= pullQuantityToPity)
+            {
+                randomValue = Random.Range(0, totalChance);
+                randomValue -= myPools[0].appearChance;
+                for (int i = 1; i < myPools.Length; i++)
+                {
+                    randomValue -= myPools[i].appearChance;
+
+                    if (randomValue <= 0)
+                    {
+                        pool = myPools[i];
+                        break;
+                    }
+                }
+                GatchaOpenedSinceRare = 0;
+            }
+
         }
 
         int randomIndex = Random.Range(0, pool.myItems.Length);

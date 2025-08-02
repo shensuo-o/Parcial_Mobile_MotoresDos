@@ -7,25 +7,46 @@ public class ShopManager : MonoBehaviour
     [SerializeField] ItemDto[] myItems = new ItemDto[0];
     [SerializeField] ItemUI itemUIPrefab;
     [SerializeField] Transform shopParent;
-
+    public ItemUI[] itemUIs;
     [SerializeField] int gold=100000000;
     private void Start()
     {
+        itemUIs = new ItemUI[myItems.Length];
         SetAllItems();
     }
     public void SetAllItems()
     {
-        for (int i = 0; i < myItems.Length; i++)
+        if (itemUIs[0]==null)
         {
-            var newItem = Instantiate(itemUIPrefab, shopParent);
-            //newItem.OnItemClick += OnSellItem;
-            newItem.SetItem(myItems[i]);
-            if (PlayerPrefs.HasKey(myItems[i].name))
+            for (int i = 0; i < myItems.Length; i++)
             {
-                PlayerPrefs.SetInt(myItems[i].name,0);
+                    var newItem = Instantiate(itemUIPrefab, shopParent);
+                    itemUIs[i]= newItem;
+                    newItem.SetItem(myItems[i]);
+                    if (PlayerPrefs.HasKey(myItems[i].name))
+                    {
+                        newItem.ResetItem(myItems[i]);
+                    }
+                
             }
         }
+        else
+        {
+            for (int i = 0; i < itemUIs.Length; i++)
+            {
+                itemUIs[i].SetItem(myItems[i]);
+                if (PlayerPrefs.HasKey(myItems[i].name))
+                {
+                    itemUIs[i].ResetItem(myItems[i]);
+                }
+            }
+        }
+
+            //newItem.OnItemClick += OnSellItem;
+            
+        }
     }
+
 
     //void OnSellItem(ItemDto item)
     //{
@@ -39,4 +60,4 @@ public class ShopManager : MonoBehaviour
     //        Debug.Log("No tengo suficiente oro");
     //    }
     //}
-}
+

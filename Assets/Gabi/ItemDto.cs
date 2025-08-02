@@ -16,5 +16,39 @@ public class ItemDto : ScriptableObject
     public int Qty;
     //public int Qty;
     public ItemRarity rarity;
+    public bool CanBePurchased()
+    {
+        if (IsClient)
+        {
+            if (PlayerPrefs.GetInt("ClientAbailable" + clientTag) > 0)
+            {
+                return false;
+            }
+            else
+            {
+                Qty++;
+                return true;
+            }
+        }
+        else if (IsLife)
+        {
+            if (PlayerPrefs.GetInt("saveLives") >= 5)
+            {
+                return false;
+            }
+            else 
+            {
+                Qty++;
+                return true;
 
+            }
+
+        }
+        else 
+        {
+            Qty++;
+
+            return true; 
+        }
+    }
 }
