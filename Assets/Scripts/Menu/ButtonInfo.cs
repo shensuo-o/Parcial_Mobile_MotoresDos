@@ -20,5 +20,6 @@ namespace Menu
                 Destroy(gameObject, 1);
             }
         }
+        
     }
 }

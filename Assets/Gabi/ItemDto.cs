@@ -8,8 +8,10 @@ public class ItemDto : ScriptableObject
     public string itemName;
     public Sprite itemIcon;
     public int cost;
+    public bool IsLife;
     public bool IsLimitLes;
-    public int Qty;
+    public bool StartBought;
+    //public int Qty;
     public ItemRarity rarity;
 
 }

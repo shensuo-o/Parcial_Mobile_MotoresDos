@@ -108,8 +108,15 @@ namespace Managers.Menu
             }
 
             UpdateUI("timer");
-        }
 
+        }
+        public void BecameMillionaire()
+        {
+            PlayerPrefs.SetInt("saveMoneyShop", 1000000);
+            PlayerPrefs.Save();
+            savedMoney = PlayerPrefs.GetInt("saveMoneyShop");
+            UpdateUI("money");
+        }
         private void LoadPlayerData()
         {
             // Load saved values or set defaults
@@ -149,7 +156,7 @@ namespace Managers.Menu
             Debug.Log($"Player data saved: Lives={lives}, High Score={savedScore}, Money={savedMoney}");
         }
 
-        private void UpdateUI(string element)
+        public void UpdateUI(string element)
         {
             switch (element.ToLower())
             {
@@ -166,6 +173,7 @@ namespace Managers.Menu
                     break;
 
                 case "money":
+                    savedMoney = savedMoney = PlayerPrefs.GetInt("saveMoneyShop");
                     moneyText.text = savedMoney.ToString();
                     break;
 
@@ -294,15 +302,15 @@ namespace Managers.Menu
             }
         }
 
-        public void BuyClient(int clientTag)
-        {
-            if (savedMoney >= 15)
-            {
-                PlayerPrefs.SetInt("ClientAbailable" + clientTag, 1);
-                savedMoney -= 15;
-                UpdateUI("money");
-            }
-        }
+        //public void BuyClient(int clientTag)
+        //{
+        //    if (savedMoney >= 15)
+        //    {
+        //        PlayerPrefs.SetInt("ClientAbailable" + clientTag, 1);
+        //        savedMoney -= 15;
+        //        UpdateUI("money");
+        //    }
+        //}
 
         public void PanelHowToPlay()
         {
