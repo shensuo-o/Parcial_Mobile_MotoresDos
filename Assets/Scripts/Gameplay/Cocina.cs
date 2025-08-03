@@ -1,71 +1,72 @@
 using System.Collections;
 using System.Collections.Generic;
 using Audio;
-using Gameplay;
 using ObjectPool;
 using UnityEngine;
 
-public class Cocina : MonoBehaviour
+namespace Gameplay
 {
-    public Seat[] placesToPlaceOrders;
-    public List<Plato> finishedFoods;
-
-    SoundManager _soundManager;
-    private void Start()
+    public class Cocina : MonoBehaviour
     {
-        placesToPlaceOrders = GetComponentsInChildren<Seat>();
-        _soundManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<SoundManager>();
-    }
+        public Seat[] placesToPlaceOrders;
+        private Queue<Plato> _finishedFoods = new Queue<Plato>();
 
-    private void Update()
-    {
-        if(finishedFoods.Count > 0)
+        SoundManager _soundManager;
+        private void Start()
         {
-            if (CanPlaceOrders())
+            placesToPlaceOrders = GetComponentsInChildren<Seat>();
+            _soundManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<SoundManager>();
+        }
+
+        private void Update()
+        {
+            if(_finishedFoods.Count > 0)
             {
-                PlaceOrderOnCounter();
+                if (CanPlaceOrders())
+                {
+                    PlaceOrderOnCounter();
+                }
             }
         }
-    }
 
-    public void GetOrder(Plato plato)
-    {
-        StartCoroutine(Cook(plato));
-    }
-
-    private IEnumerator Cook(Plato plato)
-    {
-        Debug.Log("Cocinando: " + plato.foodName);
-        yield return new WaitForSeconds(plato.timeToCook);
-        Debug.Log("Listo: " + plato.foodName);
-        _soundManager.PlaySfx(_soundManager.foodReady);
-        finishedFoods.Add(plato);
-    }
-
-    private void PlaceOrderOnCounter()
-    {
-        foreach (Seat place in placesToPlaceOrders)
+        public void GetOrder(Plato plato)
         {
-            if (place.IsFree())
+            StartCoroutine(Cook(plato));
+        }
+
+        private IEnumerator Cook(Plato plato)
+        {
+            Debug.Log("Cocinando: " + plato.foodName);
+            yield return new WaitForSeconds(plato.timeToCook);
+            Debug.Log("Listo: " + plato.foodName);
+            _soundManager.PlaySfx(_soundManager.foodReady);
+            _finishedFoods.Enqueue(plato);
+        }
+
+        private void PlaceOrderOnCounter()
+        {
+            foreach (Seat place in placesToPlaceOrders)
             {
-                Plato platoListo = finishedFoods[0];
-                Plato nuevoPlato = FoodFactory.instance.GetFood(platoListo);
-                nuevoPlato.MoveTo(place);
-                finishedFoods.Remove(platoListo);
-                break;
+                if (place.IsFree())
+                {
+                    Plato platoListo = _finishedFoods.Dequeue();
+                    Plato nuevoPlato = FoodFactory.instance.GetFood(platoListo);
+                    nuevoPlato.MoveTo(place);
+                    break;
+                }
             }
         }
-    }
 
-    private bool CanPlaceOrders()
-    {
-        foreach (Seat place in placesToPlaceOrders)
+        private bool CanPlaceOrders()
         {
-            if (place.IsFree())
+            foreach (Seat place in placesToPlaceOrders)
             {
-                return true;
+                if (place.IsFree())
+                {
+                    return true;
+                }
             }
+            return false;
         }
-        return false;
     }
 }

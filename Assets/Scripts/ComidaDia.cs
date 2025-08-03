@@ -34,6 +34,8 @@ public class ComidaDia : Plato
 
         defaultSprite = defaultSprites[RemoteConfigTest.instance.spriteNumber];
         frozenSprite = frozenSprites[RemoteConfigTest.instance.spriteNumber];
+        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer.sprite = defaultSprite;
     }
 
     private void OnDestroy()

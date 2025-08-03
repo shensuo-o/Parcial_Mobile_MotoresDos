@@ -9,6 +9,8 @@ namespace Managers
 {
     public class GameManager : MonoBehaviour
     {
+		// Añadir esta variable al inicio de la clase
+		public bool isTutorialMode;
         public string playerName = ""; // Unity Cloud
         public int money;
         public int maxMoney; // Unity Cloud
@@ -19,7 +21,7 @@ namespace Managers
         public Cocina cocina;
         public Entrada entrada;
         public bool isAlive;
-        public bool GachasAdded;
+        public bool gachasAdded;
         // Modo de juego: false = modo infinito (vidas), true = modo tiempo limitado
         public bool isTimeLimitedMode;
 
@@ -41,7 +43,8 @@ namespace Managers
         private SoundManager _soundManager;
         private HudManager _hudManager;
 
-        private void Start()
+		// Modificar el método Start para que no inicie el spawner en modo tutorial
+		private void Start()
         {
             instance = this;
             _soundManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<SoundManager>();
@@ -50,7 +53,12 @@ namespace Managers
             if (RemoteConfigTest.instance.isConfigFetched)
             {
                 InitializeVariables();
-                StartCoroutine(Spawner());
+                
+                // Solo iniciar el spawner automático si NO estamos en modo tutorial
+                if (!isTutorialMode)
+                {
+                    StartCoroutine(Spawner());
+                }
 
                 if (isTimeLimitedMode)
                 {
@@ -61,7 +69,7 @@ namespace Managers
             {
                 RemoteConfigTest.instance.OnConfigFetched += ConfigFetch;
             }
-            GachasAdded = false;
+            gachasAdded = false;
         }
 
         private void OnDestroy()
@@ -69,10 +77,16 @@ namespace Managers
             RemoteConfigTest.instance.OnConfigFetched -= ConfigFetch;
         }
 
-        void ConfigFetch()
+		// Modificar el método ConfigFetch para respetar el modo tutorial
+		void ConfigFetch()
         {
             InitializeVariables();
-            StartCoroutine(Spawner());
+            
+            // Solo iniciar el spawner automático si NO estamos en modo tutorial
+            if (!isTutorialMode)
+            {
+                StartCoroutine(Spawner());
+            }
 
             if (isTimeLimitedMode)
             {
@@ -140,13 +154,14 @@ namespace Managers
             }
         }
 
-        public void ClientGotOut()
+		// Modificar los métodos que afectan la dificultad para que no se activen en modo tutorial
+		public void ClientGotOut()
         {
             _soundManager.PlaySfx(_soundManager.angry);
             lives--;
 
-            // Solo verificar vidas en modo infinito
-            if (!isTimeLimitedMode)
+            // Solo verificar vidas en modo infinito y si no estamos en tutorial
+            if (!isTimeLimitedMode && !isTutorialMode)
             {
                 Status();
             }
@@ -164,12 +179,13 @@ namespace Managers
             }
         }
 
-        public void TryIncreaseDifficulty()
+		// Modificar los métodos que afectan la dificultad para que no se activen en modo tutorial
+		public void TryIncreaseDifficulty()
         {
             _attendedClients++;
 
-            // Solo aumentar dificultad en modo infinito
-            if (!isTimeLimitedMode && _attendedClients % 5 == 0 && delayDifficulty < _maxDelayDifficulty)
+            // Solo aumentar dificultad en modo infinito y si no estamos en tutorial
+            if (!isTimeLimitedMode && !isTutorialMode && _attendedClients % 5 == 0 && delayDifficulty < _maxDelayDifficulty)
             {
                 delayDifficulty++;
             }
@@ -183,17 +199,31 @@ namespace Managers
         }
         public void GainGachas()
         {
-            if (!GachasAdded)
+            if (!gachasAdded)
             {
                 PlayerPrefs.SetInt("GatchasPending", PlayerPrefs.GetInt("GatchasPending") + money / 15);
-                print("sumaste gatchas " + (money / 15).ToString());
-                GachasAdded = true;
-
+                print("sumaste gatchas " + (money / 15));
+                gachasAdded = true;
             }
 
         }
 
-        public void NewOrder(Plato plato)
+		// Añadir este método para que el TutorialManager pueda generar clientes
+		public Client SpawnTutorialClient(int clientType = 0)
+		{
+			// Si se proporciona un tipo específico, usar ese, sino usar el tipo 0 (cliente básico)
+			clientType = Mathf.Clamp(clientType, 0, ClientFactory.Instance.clientPrefabs.Length - 1);
+			
+			var client = ClientFactory.Instance.GetClient(ClientFactory.Instance.clientPrefabs[clientType]);
+			if (client && entrada.PlaceAvailable())
+			{
+				entrada.SpawnClient(client);
+				return client;
+			}
+			return null;
+		}
+
+		public void NewOrder(Plato plato)
         {
             cocina.GetOrder(plato);
         }

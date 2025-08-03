@@ -161,6 +161,7 @@ MonoBehaviour:
   cocina: {fileID: 808991436}
   entrada: {fileID: 1883092844}
   isAlive: 1
+  GachasAdded: 0
   isTimeLimitedMode: 1
   timeLimit: 40
   gameDifficulty: 1
@@ -609,6 +610,7 @@ GameObject:
   - component: {fileID: 226956545}
   - component: {fileID: 226956544}
   - component: {fileID: 226956543}
+  - component: {fileID: 226956546}
   m_Layer: 5
   m_Name: Return
   m_TagString: Untagged
@@ -679,19 +681,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 226956544}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1108850835}
-        m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
-        m_MethodName: LoadMenu
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &226956544
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -730,6 +720,33 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 226956541}
   m_CullTransparentMesh: 1
+--- !u!114 &226956546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 226956541}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc36bbeff1664a0429c4bedc993481cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onConfirm:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1108850835}
+        m_TargetAssemblyTypeName: Menu.PauseMenu, Assembly-CSharp
+        m_MethodName: LoadMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &234969826
 GameObject:
   m_ObjectHideFlags: 0
@@ -2459,7 +2476,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   placesToPlaceOrders: []
-  finishedFoods: []
 --- !u!114 &808991437
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2532,6 +2548,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a42e807c7e4412e47ac2fb26da59d9cc, type: 3}
+--- !u!114 &822309050 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6404299983962235939, guid: a42e807c7e4412e47ac2fb26da59d9cc, type: 3}
+  m_PrefabInstance: {fileID: 822309049}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c70a49af540e424cb13281614582991, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &839171927
 GameObject:
   m_ObjectHideFlags: 0
@@ -3817,6 +3844,7 @@ GameObject:
   - component: {fileID: 1486073644}
   - component: {fileID: 1486073643}
   - component: {fileID: 1486073642}
+  - component: {fileID: 1486073645}
   m_Layer: 5
   m_Name: Exit
   m_TagString: Untagged
@@ -3887,19 +3915,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1486073643}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1108850835}
-        m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
-        m_MethodName: ExitApp
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1486073643
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3938,6 +3954,33 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1486073640}
   m_CullTransparentMesh: 1
+--- !u!114 &1486073645
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1486073640}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc36bbeff1664a0429c4bedc993481cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onConfirm:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1108850835}
+        m_TargetAssemblyTypeName: Menu.PauseMenu, Assembly-CSharp
+        m_MethodName: ExitApp
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1510420373
 GameObject:
   m_ObjectHideFlags: 0
@@ -4789,6 +4832,7 @@ GameObject:
   - component: {fileID: 1785098299}
   - component: {fileID: 1785098298}
   - component: {fileID: 1785098297}
+  - component: {fileID: 1785098300}
   m_Layer: 5
   m_Name: Return
   m_TagString: Untagged
@@ -4859,19 +4903,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1785098298}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1108850835}
-        m_TargetAssemblyTypeName: Menu.PauseMenu, Assembly-CSharp
-        m_MethodName: LoadMenu
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1785098298
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4910,6 +4942,33 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1785098295}
   m_CullTransparentMesh: 1
+--- !u!114 &1785098300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1785098295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc36bbeff1664a0429c4bedc993481cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onConfirm:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1108850835}
+        m_TargetAssemblyTypeName: Menu.PauseMenu, Assembly-CSharp
+        m_MethodName: LoadMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1796540308
 GameObject:
   m_ObjectHideFlags: 0
@@ -5205,7 +5264,7 @@ Transform:
   m_GameObject: {fileID: 1883092841}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.39, y: -5.53625, z: 0}
+  m_LocalPosition: {x: 1.39, y: -4.672017, z: 0}
   m_LocalScale: {x: 3.4172695, y: 9.998572, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5272,7 +5331,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   foodPrefabs:
-  - {fileID: 4921919576896978669, guid: 3710cd4dfd5da0543934d9ec68e4eb6b, type: 3}
   - {fileID: 3180927667851608463, guid: 2f67cf9d6de60e3458fe52a29391fa67, type: 3}
   - {fileID: 7445181815416678521, guid: b6cee2d8454fefd4a8eb14819da17e95, type: 3}
   - {fileID: 9216953541254918152, guid: bd5991eb5f330794ba5a92ec5ca0856b, type: 3}
@@ -5280,7 +5338,7 @@ MonoBehaviour:
   - {fileID: 5156573803488676326, guid: 0eb413692e7e35f4198df576738ce669, type: 3}
   - {fileID: 1683383517701737573, guid: 40c53e31fe4dda34c8df77b62942663f, type: 3}
   - {fileID: 6887555862627269873, guid: e904242aaaac70a4ea6444250df1e0a7, type: 3}
-  - {fileID: 6887555862627269873, guid: a33689ca85e8a1242adaf477bfe3fc3f, type: 3}
+  - {fileID: 822309050}
   stonks: 2
   dynamic: 1
 --- !u!4 &1883131860
@@ -5506,7 +5564,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5.90625
+  orthographic size: 5.042017
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2

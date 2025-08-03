@@ -64,6 +64,14 @@ namespace Clients
         {
             onHandFood = plato; 
             plato.onClientHands = true;
+            
+            // Verificar que el plato recibido coincide con el pedido
+            if (selectedFood && plato.foodName != selectedFood.foodName)
+            {
+                Debug.LogWarning($"Cliente recibió {plato.foodName} pero pidió {selectedFood.foodName}");
+                // Podrías implementar alguna penalización o comportamiento especial aquí
+            }
+            
             _fsm.ChangeState(FSM.ClientStates.Comiendo);
         }
 
