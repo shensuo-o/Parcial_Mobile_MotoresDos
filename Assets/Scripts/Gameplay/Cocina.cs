@@ -31,8 +31,10 @@ namespace Gameplay
 
         public void GetOrder(Plato plato)
         {
-            StartCoroutine(Cook(plato));
+            Plato nuevoPlato = FoodFactory.instance.GetFood(plato);
+            StartCoroutine(Cook(nuevoPlato));
         }
+
 
         private IEnumerator Cook(Plato plato)
         {
@@ -50,8 +52,7 @@ namespace Gameplay
                 if (place.IsFree())
                 {
                     Plato platoListo = _finishedFoods.Dequeue();
-                    Plato nuevoPlato = FoodFactory.instance.GetFood(platoListo);
-                    nuevoPlato.MoveTo(place);
+                    platoListo.MoveTo(place);
                     break;
                 }
             }

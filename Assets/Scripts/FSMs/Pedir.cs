@@ -28,7 +28,20 @@ namespace FSMs
                 _client.EndCoroutine(); // Stop any previous coroutine
             }
         
-            _client.selectedFood = FoodFactory.instance.foodPrefabs[Random.Range(0, FoodFactory.instance.foodPrefabs.Length)];
+            var foodTemplate = FoodFactory.instance.foodPrefabs[Random.Range(0, FoodFactory.instance.foodPrefabs.Length)];
+            
+            if (foodTemplate is ComidaDia)
+            {
+                ComidaDia original = foodTemplate as ComidaDia;
+                ComidaDia copia = Object.Instantiate(original);
+                copia.InitializeVariables();
+                _client.selectedFood = copia;
+            }
+            else
+            {
+                _client.selectedFood = foodTemplate;
+            }
+
 
             if (_client.selectedFood.GetComponent<ComidaDia>())
             {

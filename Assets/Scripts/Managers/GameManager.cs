@@ -22,16 +22,16 @@ namespace Managers
         public Entrada entrada;
         public bool isAlive;
         public bool gachasAdded;
-        // Modo de juego: false = modo infinito (vidas), true = modo tiempo limitado
         public bool isTimeLimitedMode;
-
-        // Variables para el modo de tiempo limitado
-        public float timeLimit = 180f; // 3 minutos por defecto
+        public bool difficultyChosen;
+        
+        public float timeLimit = 180f;
         public enum GameDifficulty { Easy, Hard }
         public GameDifficulty gameDifficulty = GameDifficulty.Easy;
+        public GameObject difficultyPanel;
 
         public int delayDifficulty;
-        private readonly int _maxDelayDifficulty = 7;
+        private readonly int _maxDelayDifficulty = 4;
 
         private int _attendedClients;
 
@@ -42,9 +42,8 @@ namespace Managers
 
         private SoundManager _soundManager;
         private HudManager _hudManager;
-
-		// Modificar el método Start para que no inicie el spawner en modo tutorial
-		private void Start()
+        
+        private void Start()
         {
             instance = this;
             _soundManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<SoundManager>();
@@ -53,17 +52,12 @@ namespace Managers
             if (RemoteConfigTest.instance.isConfigFetched)
             {
                 InitializeVariables();
-                
-                // Solo iniciar el spawner automático si NO estamos en modo tutorial
-                if (!isTutorialMode)
-                {
-                    StartCoroutine(Spawner());
-                }
 
-                if (isTimeLimitedMode)
-                {
+                if (!isTutorialMode && !isTimeLimitedMode)
+                    StartCoroutine(Spawner());
+
+                if (isTimeLimitedMode && difficultyChosen)
                     SetupTimeLimitedMode();
-                }
             }
             else
             {
@@ -72,26 +66,21 @@ namespace Managers
             gachasAdded = false;
         }
 
+        void ConfigFetch()
+        {
+            InitializeVariables();
+
+            if (!isTutorialMode && !isTimeLimitedMode)
+                StartCoroutine(Spawner());
+
+            if (isTimeLimitedMode && difficultyChosen)
+                SetupTimeLimitedMode();
+        }
+
+
         private void OnDestroy()
         {
             RemoteConfigTest.instance.OnConfigFetched -= ConfigFetch;
-        }
-
-		// Modificar el método ConfigFetch para respetar el modo tutorial
-		void ConfigFetch()
-        {
-            InitializeVariables();
-            
-            // Solo iniciar el spawner automático si NO estamos en modo tutorial
-            if (!isTutorialMode)
-            {
-                StartCoroutine(Spawner());
-            }
-
-            if (isTimeLimitedMode)
-            {
-                SetupTimeLimitedMode();
-            }
         }
 
         void InitializeVariables()
@@ -100,18 +89,17 @@ namespace Managers
 
             if (isTimeLimitedMode)
             {
-                delayDifficulty = gameDifficulty == GameDifficulty.Easy ? 2 : // Valor de dificultad baja
-                    _maxDelayDifficulty; // Valor de dificultad alta
+                delayDifficulty = gameDifficulty == GameDifficulty.Easy ? 2 :
+                    _maxDelayDifficulty;
             }
             else
             {
-                delayDifficulty = 0; // Dificultad progresiva para modo infinito
+                delayDifficulty = 0;
             }
         }
-
+        
         private void SetupTimeLimitedMode()
         {
-            // Reiniciar el temporizador en HudManager
             if (_hudManager)
             {
                 _hudManager.timer = 0f;
@@ -119,17 +107,38 @@ namespace Managers
                 _hudManager.isTimeLimitedMode = true;
             }
         }
+        
+        public void ChooseEasyDifficulty()
+        {
+            gameDifficulty = GameDifficulty.Easy;
+            difficultyChosen = true;
+            delayDifficulty = 2;
+            StartTimeLimitedLevel();
+        }
+
+        public void ChooseHardDifficulty()
+        {
+            gameDifficulty = GameDifficulty.Hard;
+            difficultyChosen = true;
+            delayDifficulty = _maxDelayDifficulty;
+            StartTimeLimitedLevel();
+        }
+
+        private void StartTimeLimitedLevel()
+        {
+            SetupTimeLimitedMode();
+            StartCoroutine(Spawner());
+            difficultyPanel.SetActive(false);
+        }
 
         private void Update()
         {
-            // Verificar el tiempo límite en modo tiempo limitado
             if (isTimeLimitedMode && _hudManager)
             {
                 if (_hudManager.timer >= timeLimit)
                 {
                     isAlive = false;
                     canSpawn = false;
-                    SaveScore();
                     _soundManager.PlaySfx(_soundManager.lose);
                     pause.GetComponent<PauseMenu>().EndPanel();
                 }

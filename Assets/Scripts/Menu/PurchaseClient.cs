@@ -23,7 +23,7 @@ namespace Menu
 
             foreach (var t in availableClients)
             {
-                Debug.Log(PlayerPrefs.GetInt("ClientAbailable" + t.clientTag));
+                //Debug.Log(PlayerPrefs.GetInt("ClientAbailable" + t.clientTag));
 
                 if (PlayerPrefs.GetInt("ClientAbailable" + t.clientTag) >0)
                 {

@@ -39,8 +39,17 @@ namespace ObjectPool
                 foodPools[p] = new ObjectPool<Plato>(() => FoodCreator(p), Plato.TurnOnOff, stonks, dynamic);
             }
 
-            return foodPools[p].GetObject();
+            Plato instancia = foodPools[p].GetObject();
+
+            // Si es una instancia de ComidaDia, fijar los valores desde RemoteConfig en este momento
+            if (instancia is ComidaDia comida)
+            {
+                comida.InitializeVariables();
+            }
+
+            return instancia;
         }
+
 
         public Plato GetRandomFood()
         {

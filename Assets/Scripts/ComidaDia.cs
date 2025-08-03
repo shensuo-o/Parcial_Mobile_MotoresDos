@@ -25,7 +25,7 @@ public class ComidaDia : Plato
         }
     }
 
-    void InitializeVariables()
+    public void InitializeVariables()
     {
         price = RemoteConfigTest.instance.foodPrice;
         timeToCook = RemoteConfigTest.instance.cookTime;
@@ -34,8 +34,10 @@ public class ComidaDia : Plato
 
         defaultSprite = defaultSprites[RemoteConfigTest.instance.spriteNumber];
         frozenSprite = frozenSprites[RemoteConfigTest.instance.spriteNumber];
-        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
-        spriteRenderer.sprite = defaultSprite;
+
+        SpriteRenderer sR = GetComponent<SpriteRenderer>();
+        if (sR && defaultSprite)
+            sR.sprite = defaultSprite;
     }
 
     private void OnDestroy()
