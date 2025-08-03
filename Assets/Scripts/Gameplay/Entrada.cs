@@ -1,40 +1,43 @@
 using Clients;
 using UnityEngine;
 
-public class Entrada : MonoBehaviour
+namespace Gameplay
 {
-    private Seat[] _placesToStand;
-
-    private void Start()
+    public class Entrada : MonoBehaviour
     {
-        _placesToStand = GetComponentsInChildren<Seat>();
-        foreach (var place in _placesToStand)
-        {
-            place.IsFree();
-        }
-    }
+        private Seat[] _placesToStand;
 
-    public void SpawnClient(Client client)
-    {
-        foreach (var place in _placesToStand)
+        private void Start()
         {
-            if (place.IsFree())
+            _placesToStand = GetComponentsInChildren<Seat>();
+            foreach (var place in _placesToStand)
             {
-                client.GoToSeat(place);
-                break;
+                place.IsFree();
             }
         }
-    }
 
-    public bool PlaceAvailable()
-    {
-        foreach (Seat seat in _placesToStand)
+        public void SpawnClient(Client client)
         {
-            if (seat.IsFree())
+            foreach (var place in _placesToStand)
             {
-                return true;
+                if (place.IsFree())
+                {
+                    client.GoToSeat(place);
+                    break;
+                }
             }
         }
-        return false;
+
+        public bool PlaceAvailable()
+        {
+            foreach (Seat seat in _placesToStand)
+            {
+                if (seat.IsFree())
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 }

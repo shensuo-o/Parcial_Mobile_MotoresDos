@@ -11,8 +11,8 @@ namespace Clients
 {
     public class Client : MonoBehaviour
     {
-        private float _timerEntrance;
-        private float _timerFoodWait;
+        [HideInInspector] public float timerEntrance;
+        [HideInInspector] public float timerFoodWait;
         [HideInInspector] public float timerConsume;
 
         public Plato selectedFood;
@@ -45,8 +45,8 @@ namespace Clients
         {
             GetComponent<Renderer>().sortingLayerName = "Default";
             GetComponent<Renderer>().sortingOrder = 3;
-            _timerEntrance = Random.Range(10, 15);
-            _timerFoodWait = Random.Range(10, 15);
+            timerEntrance = Random.Range(10, 15);
+            timerFoodWait = Random.Range(10, 15);
             timerConsume = Random.Range(3, 6);
             _fsm.CreateState(FSM.ClientStates.Spawn, new Spawn(_fsm, this));
             _fsm.CreateState(FSM.ClientStates.Pidiendo, new Pedir(_fsm, this));
@@ -101,7 +101,7 @@ namespace Clients
                 gameObject.SetActive(true);
             }
 
-            Co = Wait(_timerEntrance - GameManager.instance.delayDifficulty);
+            Co = Wait(timerEntrance - GameManager.instance.delayDifficulty);
             StartCoroutine(Co);
         }
     
@@ -112,7 +112,7 @@ namespace Clients
                 gameObject.SetActive(true);
             }
 
-            Co = Wait(_timerFoodWait);
+            Co = Wait(timerFoodWait);
             StartCoroutine(Co);
         }
 
@@ -189,8 +189,8 @@ namespace Clients
                 clientSeat = null;
             }
 
-            _timerEntrance = Random.Range(10, 15);
-            _timerFoodWait = Random.Range(10, 15);
+            timerEntrance = Random.Range(10, 15);
+            timerFoodWait = Random.Range(10, 15);
             timerConsume = Random.Range(3, 6);
 
             gameObject.GetComponent<Collider2D>().enabled = true;

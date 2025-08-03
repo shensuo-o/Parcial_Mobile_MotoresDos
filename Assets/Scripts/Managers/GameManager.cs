@@ -207,17 +207,28 @@ namespace Managers
             }
 
         }
-
-		// Añadir este método para que el TutorialManager pueda generar clientes
+        
 		public Client SpawnTutorialClient(int clientType = 0)
 		{
-			// Si se proporciona un tipo específico, usar ese, sino usar el tipo 0 (cliente básico)
 			clientType = Mathf.Clamp(clientType, 0, ClientFactory.Instance.clientPrefabs.Length - 1);
 			
 			var client = ClientFactory.Instance.GetClient(ClientFactory.Instance.clientPrefabs[clientType]);
 			if (client && entrada.PlaceAvailable())
 			{
 				entrada.SpawnClient(client);
+				
+				// Hacer que el cliente no se vaya (tiempos muy largos)
+				client.timerEntrance = 999f;
+				client.timerFoodWait = 999f;
+				
+				// Asegurarse de que el cliente tenga el componente DragDrop habilitado
+				var dragDrop = client.GetComponent<DragAndDrop.DragDrop>();
+				if (dragDrop)
+				{
+					dragDrop.enabled = true;
+					dragDrop.canDrag = true;
+				}
+				
 				return client;
 			}
 			return null;

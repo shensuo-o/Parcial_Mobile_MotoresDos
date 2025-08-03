@@ -6,13 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="7b51b2a5-954b-47c0-b0c8-42b58e825f80" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Parcial_Mobile_MotoresDos/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Parcial_Mobile_MotoresDos/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/LevelInfinite.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/LevelInfinite.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/LevelTimed.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/LevelTimed.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Menu.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Menu.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Tutorial.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Tutorial.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Clients/Client.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Clients/Client.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ComidaDia.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/ComidaDia.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Gameplay/Cocina.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Gameplay/Cocina.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Gameplay/Entrada.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Gameplay/Entrada.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Managers/GameManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/GameManager.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Managers/Tutorial/TutorialManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/Tutorial/TutorialManager.cs" afterDir="false" />
     </list>
@@ -25,6 +21,9 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="mock:///AIAssistantSnippet.." root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///AIAssistantSnippet.." root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///AIAssistantSnippet.." root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///AIAssistantSnippet.." root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///AIAssistantSnippet.." root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///AIAssistantSnippet.." root0="SKIP_HIGHLIGHTING" />
@@ -132,7 +131,7 @@
       <workItem from="1754074378975" duration="4667000" />
       <workItem from="1754083069822" duration="3514000" />
       <workItem from="1754097541617" duration="3490000" />
-      <workItem from="1754243917935" duration="3660000" />
+      <workItem from="1754243917935" duration="11549000" />
     </task>
     <servers />
   </component>

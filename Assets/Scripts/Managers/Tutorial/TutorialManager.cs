@@ -1,8 +1,8 @@
 using System.Collections;
 using Clients;
+using Gameplay;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Managers.Tutorial
 {
@@ -12,99 +12,118 @@ namespace Managers.Tutorial
         public GameObject tutorialUI;
         public TextMeshProUGUI tutorialText;
         public GameObject nextButton;
+        public GameObject endPanel;
+        public Plato foodPrefab;
     
         [Header("Configuración")]
-        public string[] tutorialSteps;
         public float delayBetweenSteps = 0.5f;
-    
-        private int _currentStep = 0;
+        
         private Client _currentClient;
-        private bool _waitingForInput;
+        private Barra _currentBarra;
+        public Plato _currentFood;
+        private bool _canContinue;
+        private bool _waitingForCondition;
     
         void Start()
         {
-            // Configurar modo tutorial en GameManager
             GameManager.instance.isTutorialMode = true;
-        
-            // Iniciar el tutorial
+            
             StartCoroutine(TutorialSequence());
         }
     
         private IEnumerator TutorialSequence()
         {
+            tutorialUI.SetActive(true);
+
+            ShowTutorialMessage("¡Bienvenido al tutorial! Aprenderas como jugar paso a paso.");
+            yield return WaitForNextButton();
+
+            ShowTutorialMessage("Los clientes entraran al restaurante. Tu trabajo es atenderlos.");
+            yield return WaitForNextButton();
+
+            ShowTutorialMessage("¡Aqui viene tu primer cliente!");
+            nextButton.SetActive(false);
+            _canContinue = true;
             yield return new WaitForSeconds(1f);
-        
-            // Paso 1: Bienvenida al tutorial
-            ShowTutorialMessage("¡Bienvenido al tutorial! Aprenderás cómo jugar paso a paso.");
-            yield return WaitForPlayerInput();
-        
-            // Paso 2: Explicar sobre los clientes
-            ShowTutorialMessage("Los clientes entrarán al restaurante. Tu trabajo es atenderlos.");
-            yield return WaitForPlayerInput();
-        
-            // Paso 3: Generar primer cliente
-            ShowTutorialMessage("¡Aquí viene tu primer cliente!");
-            yield return new WaitForSeconds(.1f);
-        
+
             _currentClient = GameManager.instance.SpawnTutorialClient();
-            yield return new WaitForSeconds(.5f); // Esperar a que el cliente se mueva
-        
-            // Paso 4: Explicar cómo sentar al cliente
+            yield return new WaitForSeconds(.3f);
+
             ShowTutorialMessage("Arrastra al cliente a una mesa disponible para sentarlo.");
-            yield return WaitUntilClientIsSeated();
-        
+            yield return WaitUntilConditionMet(() => _currentClient && _currentClient.assignedBar);
+            _currentBarra = _currentClient.assignedBar;
+
+            ShowTutorialMessage("¡Bien hecho! Ahora el cliente hara su pedido.\n Entregalo arrastrandolo a la mesa.");
+            yield return WaitUntilConditionMet(() => _currentClient && !_currentClient.hands.IsFree());
             
-        
-            // Finalizar tutorial
-            ShowTutorialMessage("¡Felicidades! Has completado el tutorial básico.");
-            yield return WaitForPlayerInput();
-        
-            // Volver al modo normal
-            GameManager.instance.isTutorialMode = false;
+            ShowTutorialMessage("¡Bien hecho! Recuerda no hacerlo esperar mucho al cliente, se podria retirar.");
+            yield return WaitUntilConditionMet(() => _currentClient && !_currentClient.clientSeat);
+
+            ShowTutorialMessage("Bien! Ahora recoje el dinero de la mesa.");
+            yield return WaitUntilConditionMet(() => _currentBarra && !_currentBarra.coin.activeSelf);
+            
+            ShowTutorialMessage("Si un cliente se retira y su comida sigue en la barra, deberás tirarla a la basura.");
+            yield return WaitForNextButton();
+            
+            GameManager.instance.NewOrder(foodPrefab);
+            yield return new WaitForSeconds(foodPrefab.timeToCook);
+            yield return null;
+            _currentFood = FindObjectOfType<Plato>();
+            
+            ShowTutorialMessage("Intentemoslo ahora. Arrasta la comida a la basura.");
+            yield return WaitUntilConditionMet(() => !_currentFood.gameObject.activeSelf && _currentFood.place);
+            
+            ShowTutorialMessage("¡Felicidades! Has completado el tutorial basico.");
+            yield return WaitForNextButton();
+            
+            //pantalla de final
             tutorialUI.SetActive(false);
+            endPanel.SetActive(true);
         }
     
         private void ShowTutorialMessage(string message)
         {
             tutorialUI.SetActive(true);
             tutorialText.text = message;
-            nextButton.SetActive(true);
-            _waitingForInput = true;
+            
+            // Solo mostrar el botón Next si no estamos esperando que se cumpla una condición
+            nextButton.SetActive(!_waitingForCondition);
         }
     
-        private IEnumerator WaitForPlayerInput()
+        private IEnumerator WaitForNextButton()
         {
-            while (_waitingForInput)
+            _canContinue = false;
+            _waitingForCondition = false;
+            
+            // Esperar hasta que _canContinue sea true (lo que ocurre cuando se presiona Next)
+            while (!_canContinue)
             {
-                if (Input.GetMouseButtonDown(0) || 
-                    (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began))
-                {
-                    _waitingForInput = false;
-                    nextButton.SetActive(false);
-                }
                 yield return null;
             }
-        
+            
             yield return new WaitForSeconds(delayBetweenSteps);
-            _waitingForInput = true;
         }
-    
-        private IEnumerator WaitUntilClientIsSeated()
+        
+        private IEnumerator WaitUntilConditionMet(System.Func<bool> condition)
         {
-            // Esperar hasta que el cliente esté sentado
-            while (_currentClient != null && !_currentClient.seated)
+            _waitingForCondition = true;
+            nextButton.SetActive(false);
+            
+            // Esperar hasta que se cumpla la condición
+            while (!condition())
             {
                 yield return null;
             }
-        
+            
+            _waitingForCondition = false;
+            
             yield return new WaitForSeconds(delayBetweenSteps);
         }
     
         // Botón de "Siguiente" para UI
         public void NextStep()
         {
-            _waitingForInput = false;
-            nextButton.SetActive(false);
+            _canContinue = true;
         }
     }
 }
