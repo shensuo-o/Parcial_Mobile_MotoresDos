@@ -13072,6 +13072,52 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 6305491351323705725, guid: b796e7ef9db164d49856486e2db9b4ca, type: 3}
+      propertyPath: hints.Array.size
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6305491351323705725, guid: b796e7ef9db164d49856486e2db9b4ca, type: 3}
+      propertyPath: hints.Array.data[0]
+      value: No dejes que se enfrie la comida!
+      objectReference: {fileID: 0}
+    - target: {fileID: 6305491351323705725, guid: b796e7ef9db164d49856486e2db9b4ca, type: 3}
+      propertyPath: hints.Array.data[1]
+      value: "Un gato se acosto sobre el boton de \u2018Continuar\u2019. Estamos
+        negociando."
+      objectReference: {fileID: 0}
+    - target: {fileID: 6305491351323705725, guid: b796e7ef9db164d49856486e2db9b4ca, type: 3}
+      propertyPath: hints.Array.data[2]
+      value: "\xBFSab\xEDas que el 87% de los errores del sistema son culpa de un
+        gato pisando algo?"
+      objectReference: {fileID: 0}
+    - target: {fileID: 6305491351323705725, guid: b796e7ef9db164d49856486e2db9b4ca, type: 3}
+      propertyPath: hints.Array.data[3]
+      value: El sistema se detuvo... porque alguien trajo una caja vacia.
+      objectReference: {fileID: 0}
+    - target: {fileID: 6305491351323705725, guid: b796e7ef9db164d49856486e2db9b4ca, type: 3}
+      propertyPath: hints.Array.data[4]
+      value: Todo listo... solo falta convencer al gato que nos de el paso.
+      objectReference: {fileID: 0}
+    - target: {fileID: 6305491351323705725, guid: b796e7ef9db164d49856486e2db9b4ca, type: 3}
+      propertyPath: hints.Array.data[5]
+      value: "La basura no juzga\u2026 pero el gato de la cocina si."
+      objectReference: {fileID: 0}
+    - target: {fileID: 6305491351323705725, guid: b796e7ef9db164d49856486e2db9b4ca, type: 3}
+      propertyPath: hints.Array.data[6]
+      value: Ese helado sabia que su destino era el tacho.
+      objectReference: {fileID: 0}
+    - target: {fileID: 6305491351323705725, guid: b796e7ef9db164d49856486e2db9b4ca, type: 3}
+      propertyPath: hints.Array.data[7]
+      value: No todos los heroes usan capa. Algunos vacian la basura.
+      objectReference: {fileID: 0}
+    - target: {fileID: 6305491351323705725, guid: b796e7ef9db164d49856486e2db9b4ca, type: 3}
+      propertyPath: hints.Array.data[8]
+      value: "No todos los h\xE9roes usan capa. Algunos vac\xEDan la basura."
+      objectReference: {fileID: 0}
+    - target: {fileID: 6305491351323705725, guid: b796e7ef9db164d49856486e2db9b4ca, type: 3}
+      propertyPath: hints.Array.data[9]
+      value: "No todos los h\xE9roes usan capa. Algunos vac\xEDan la basura."
+      objectReference: {fileID: 0}
     - target: {fileID: 7122621695180906487, guid: b796e7ef9db164d49856486e2db9b4ca, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4.000967
