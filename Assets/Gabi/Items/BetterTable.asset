@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67583200b673e7b4ea25b6aca63ab8d1, type: 3}
   m_Name: BetterTable
   m_EditorClassIdentifier: 
-  itemName: BetterChairs
+  itemName: BetterTable
   itemIcon: {fileID: 1408426178, guid: f150fce5ccdfaeb4d9d3e367f5912f95, type: 3}
   cost: 50
   IsLife: 0
   IsClient: 0
-  clientTag: 0
+  clientTag: 12
   IsLimitLes: 0
   StartBought: 0
   Qty: 0

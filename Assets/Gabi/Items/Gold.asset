@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: Gold
   m_EditorClassIdentifier: 
   itemName: Gold
-  itemIcon: {fileID: 0}
+  itemIcon: {fileID: -753971665, guid: 62b46e9282835ea4c93aacf101f96523, type: 3}
   cost: 0
   IsLife: 0
   IsClient: 0
-  clientTag: 0
+  clientTag: 17
   IsLimitLes: 1
   StartBought: 0
   Qty: 0

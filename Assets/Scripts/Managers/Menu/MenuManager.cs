@@ -18,6 +18,7 @@ namespace Managers.Menu
         public GameObject instructionsPanel;
         public GameObject shopPanel;
         public GameObject settingsPanel;
+        public GameObject gachaPanel;
         public GameObject lvlSelectPanel;
         public GameObject confirmationPanel;
 
@@ -26,6 +27,7 @@ namespace Managers.Menu
         public TextMeshProUGUI livesText;
         public TextMeshProUGUI scoreText;
         public TextMeshProUGUI moneyText;
+        public TextMeshProUGUI gachaText;
 
         // Gameplay Variables
         [Header("Gameplay Variables")] public float timer;
@@ -35,7 +37,7 @@ namespace Managers.Menu
         public int savedScore;
         public int savedMoney;
         private int _newMoney;
-
+        public int gachaPending;
         private bool _timerIsRunning;
 
         // DateTime
@@ -73,6 +75,7 @@ namespace Managers.Menu
             settingsPanel.SetActive(false);
             shopPanel.SetActive(false);
             confirmationPanel.SetActive(false);  // Asegúrate de desactivar el panel
+            Time.timeScale = 1;
 
             InitializeTimer();
         }
@@ -124,7 +127,9 @@ namespace Managers.Menu
             savedScore = PlayerPrefs.GetInt("saveScoreMenu"); // Load high score
             savedMoney = PlayerPrefs.GetInt("saveMoneyShop"); // Load total money from the shop
             _newMoney = PlayerPrefs.GetInt("saveScoreGame"); // Load the last game's earned money
-
+            gachaPending = PlayerPrefs.GetInt("GatchasPending");
+            gachaPending = PlayerPrefs.GetInt("GatchaOpenedSinceRare");
+            gachaPending = PlayerPrefs.GetInt("GatchaTotalOpened");
             // Add the new money from the last game session to the saved total money
             savedMoney += _newMoney;
 
@@ -140,7 +145,6 @@ namespace Managers.Menu
 
             // Save the total money
             PlayerPrefs.SetInt("saveMoneyShop", savedMoney); // Save updated total money
-
             PlayerPrefs.Save(); // Ensure changes are written to the disk
 
             Debug.Log($"Loaded Data: Lives={lives}, High Score={savedScore}, Money={savedMoney}, newMoney={_newMoney}");
@@ -176,12 +180,17 @@ namespace Managers.Menu
                     savedMoney = savedMoney = PlayerPrefs.GetInt("saveMoneyShop");
                     moneyText.text = savedMoney.ToString();
                     break;
+                case "gacha":
+                    gachaPending = PlayerPrefs.GetInt("GatchasPending");
+                    gachaText.text = gachaPending.ToString();
+                    break;
 
                 case "all":
                     UpdateUI("lives");
                     UpdateUI("timer");
                     UpdateUI("score");
                     UpdateUI("money");
+                    UpdateUI("gacha");
                     break;
 
                 default:
@@ -242,6 +251,10 @@ namespace Managers.Menu
             PlayerPrefs.SetInt("saveMoneyShop", 0);
             PlayerPrefs.SetInt("saveScoreGame", 0);
             PlayerPrefs.SetString("saveTime", DateTime.Now.ToString(CultureInfo.InvariantCulture));
+            PlayerPrefs.SetInt("GatchasPending", 0);
+            PlayerPrefs.SetInt("GatchaOpenedSinceRare", 0);
+            PlayerPrefs.SetInt("GatchaTotalOpened", 0);
+
 
             PlayerPrefs.SetInt("UsedButton0", 1);
             PlayerPrefs.SetInt("UsedButton1", 0);
@@ -311,6 +324,11 @@ namespace Managers.Menu
         //        UpdateUI("money");
         //    }
         //}
+        public void AddGacha() 
+        {
+            PlayerPrefs.SetInt("GatchasPending", PlayerPrefs.GetInt("GatchasPending") + 1);
+            UpdateUI("gacha");
+        }
 
         public void PanelHowToPlay()
         {
@@ -332,6 +350,13 @@ namespace Managers.Menu
                 equipButtons[i].SetActive(isBought);
             }
         }
+        public void PanelGacha()
+        {
+            if (gachaPending > 0)
+            {
+                SetActivePanel(gachaPanel);
+            }
+        }
 
         public void BackToMenu()
         {
@@ -351,6 +376,7 @@ namespace Managers.Menu
             shopPanel.SetActive(false);
             settingsPanel.SetActive(false);
             lvlSelectPanel.SetActive(false);
+            gachaPanel.SetActive(false);
 
             panelToActivate.SetActive(true);
         }
@@ -497,5 +523,7 @@ namespace Managers.Menu
             SavePlayerData();
             LevelManager.instance.LoadScene(originalLevel);
         }
+
+
     }
 }

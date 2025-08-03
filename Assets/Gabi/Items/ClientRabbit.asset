@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67583200b673e7b4ea25b6aca63ab8d1, type: 3}
   m_Name: ClientRabbit
   m_EditorClassIdentifier: 
-  itemName: ClientAbailable3
+  itemName: ClientRabbit
   itemIcon: {fileID: 313203648, guid: 5cd1d209ca044464cb390656e623a2d7, type: 3}
   cost: 15
   IsLife: 0

@@ -17,7 +17,7 @@ MonoBehaviour:
   cost: 15
   IsLife: 1
   IsClient: 0
-  clientTag: 0
+  clientTag: 16
   IsLimitLes: 1
   StartBought: 0
   Qty: 0

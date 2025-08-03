@@ -19,20 +19,20 @@ namespace Managers
         public Cocina cocina;
         public Entrada entrada;
         public bool isAlive;
-        
+        public bool GachasAdded;
         // Modo de juego: false = modo infinito (vidas), true = modo tiempo limitado
         public bool isTimeLimitedMode;
-        
+
         // Variables para el modo de tiempo limitado
         public float timeLimit = 180f; // 3 minutos por defecto
         public enum GameDifficulty { Easy, Hard }
         public GameDifficulty gameDifficulty = GameDifficulty.Easy;
-        
+
         public int delayDifficulty;
         private readonly int _maxDelayDifficulty = 7;
 
         private int _attendedClients;
-        
+
         public int lives = 3;
 
         private int _spawnRate;
@@ -51,7 +51,7 @@ namespace Managers
             {
                 InitializeVariables();
                 StartCoroutine(Spawner());
-                
+
                 if (isTimeLimitedMode)
                 {
                     SetupTimeLimitedMode();
@@ -61,6 +61,7 @@ namespace Managers
             {
                 RemoteConfigTest.instance.OnConfigFetched += ConfigFetch;
             }
+            GachasAdded = false;
         }
 
         private void OnDestroy()
@@ -72,7 +73,7 @@ namespace Managers
         {
             InitializeVariables();
             StartCoroutine(Spawner());
-            
+
             if (isTimeLimitedMode)
             {
                 SetupTimeLimitedMode();
@@ -143,7 +144,7 @@ namespace Managers
         {
             _soundManager.PlaySfx(_soundManager.angry);
             lives--;
-            
+
             // Solo verificar vidas en modo infinito
             if (!isTimeLimitedMode)
             {
@@ -166,19 +167,30 @@ namespace Managers
         public void TryIncreaseDifficulty()
         {
             _attendedClients++;
-            
+
             // Solo aumentar dificultad en modo infinito
             if (!isTimeLimitedMode && _attendedClients % 5 == 0 && delayDifficulty < _maxDelayDifficulty)
             {
                 delayDifficulty++;
             }
         }
-        
+
         public void SaveScore()
         {
             PlayerPrefs.SetInt("saveScoreGame", money);
             PlayerPrefs.Save();
             Debug.Log($"Score saved: {money}");
+        }
+        public void GainGachas()
+        {
+            if (!GachasAdded)
+            {
+                PlayerPrefs.SetInt("GatchasPending", PlayerPrefs.GetInt("GatchasPending") + money / 15);
+                print("sumaste gatchas " + (money / 15).ToString());
+                GachasAdded = true;
+
+            }
+
         }
 
         public void NewOrder(Plato plato)

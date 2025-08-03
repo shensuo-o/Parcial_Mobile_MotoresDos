@@ -23,6 +23,7 @@ namespace Menu
         {
             Time.timeScale = 0;
             endPanel.SetActive(true);
+            GameManager.instance.GainGachas();
             endScore.text = "You got " + GameManager.instance.money + " coins!";
         }
 
@@ -37,6 +38,7 @@ namespace Menu
         {
             Time.timeScale = 1;
             GameManager.instance.SaveScore();
+            GameManager.instance.GainGachas();
             LevelManager.instance.LoadScene();
         }
 

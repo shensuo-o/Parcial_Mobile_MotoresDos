@@ -1,20 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Managers.Menu;
 
-public class GatchaSydtem : MonoBehaviour
+public class GatchaSystem : MonoBehaviour
 {
     [SerializeField] RarityPool[] myPools;
 
     [SerializeField] int pullQuantityToPity = 20;
+    [SerializeField] ShakeSystem shakeSystem;
     [SerializeField] int pullQuantityToRare = 7;
     int GatchaOpened;
     int GatchaOpenedSinceRare;
     float totalChance;
-
-    private void Start()
+    [SerializeField] GachaView gachaView;
+    public void SetUpGatcha()
     {
+        gachaView.CloseChest();
+        shakeSystem.ForceReset();
+
+        if (MenuManager.instance.gachaPending <=0)
+            return;
         totalChance = 0;
+        //gachaView = GetComponent<GachaView>();
         for (int i = 0; i < myPools.Length; i++)
         {
             totalChance += myPools[i].appearChance;
@@ -25,25 +33,26 @@ public class GatchaSydtem : MonoBehaviour
         }
         GatchaOpenedSinceRare = PlayerPrefs.GetInt("GatchaOpenedSinceRare");
         GatchaOpened = PlayerPrefs.GetInt("GatchaTotalOpened");
+        ShakeSystem.instance.OnSuccess += Pull;
+
     }
 
-    public void Pull(int quantity)
+    public void Pull()
     {
-        if (PlayerPrefs.GetInt("GatchasPending") < quantity)
-            return;
+        
         bool hasRare = false;
         bool forceRare=false;
 
-        if (GatchaOpened + quantity >= pullQuantityToRare)
+        if (GatchaOpened + 1 >= pullQuantityToRare)
         {
             forceRare = true;
 
         }
         
-        for (int i = 0; i < quantity; i++)
+        for (int i = 0; i < 1; i++)
         {
             ItemDto item = null;
-            if (forceRare && !hasRare && i == quantity - 1)
+            if (forceRare && !hasRare && i == 1 - 1)
                 item = GetRandomItem(true);
             else
                 item = GetRandomItem();
@@ -54,11 +63,14 @@ public class GatchaSydtem : MonoBehaviour
             }
 
             Debug.Log("Me tocó " + item.itemName + " de rareza " + item.rarity);
+            gachaView.gachaReward.sprite = item.itemIcon;
+
         }
-        PlayerPrefs.SetInt("GatchasPending", PlayerPrefs.GetInt("GatchasPending") - quantity);
+        PlayerPrefs.SetInt("GatchasPending", PlayerPrefs.GetInt("GatchasPending") - 1);
+        MenuManager.instance.UpdateUI("gacha");
         PlayerPrefs.SetInt("GatchaOpenedSinceRare", GatchaOpenedSinceRare);
         PlayerPrefs.SetInt("GatchaTotalOpened", GatchaOpened);
-
+        ShakeSystem.instance.OnSuccess -= Pull;
     }
 
 
@@ -109,11 +121,24 @@ public class GatchaSydtem : MonoBehaviour
                 }
                 GatchaOpenedSinceRare = 0;
             }
-
         }
 
         int randomIndex = Random.Range(0, pool.myItems.Length);
+        if (pool.myItems[randomIndex].CanBePurchased())
+        {
+            pool.myItems[randomIndex].AddItem();
+            print(pool.myItems[randomIndex].name);
+            ShopManager.instance.SetAllItems();
+            return pool.myItems[randomIndex];
+        }
+        else
+        {
+            print("me hubiera tocado" + pool.myItems[randomIndex].name);
+            PlayerPrefs.SetInt("saveMoneyShop", PlayerPrefs.GetInt("saveMoneyShop")+pool.CompensationGold);
+            PlayerPrefs.Save();
+            MenuManager.instance.UpdateUI("money");
+            return pool.CompensationItem;
 
-        return pool.myItems[randomIndex];
+        }
     }
 }

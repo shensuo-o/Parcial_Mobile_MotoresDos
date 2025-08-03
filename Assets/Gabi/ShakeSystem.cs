@@ -5,13 +5,15 @@ using UnityEngine.UI;
 using System;
 using UnityEngine.EventSystems;
 using TMPro;
-public class ShakeSystem : MonoBehaviour , IPointerDownHandler, IPointerUpHandler, IDragHandler
+using Managers.Menu;
+public class ShakeSystem : MonoBehaviour , IDragHandler//, IPointerDownHandler, IPointerUpHandler
 {
     public float shakeDetectionThreshold = 0.2f; // Umbral de detección de sacudidas
     public float shakeDetectionDuration = 0.5f; // Duración para considerar una sacudida
     public float cooldownTime = 1.0f; // Tiempo de espera para evitar múltiples detecciones
     bool _isReseting = false;
     bool _isOpen = false;
+    public int GachaAmount;
     private bool isShaking = false;
     public TextMeshProUGUI pro;
     public TextMeshProUGUI pro2;
@@ -46,39 +48,42 @@ public class ShakeSystem : MonoBehaviour , IPointerDownHandler, IPointerUpHandle
         //else
         //    isVibrationActive = false;
     }
+
     void Update()
     {
-        if (_isOpen)
-            return;
-        int orientationModifier=-1;
-        float acceleration = Input.acceleration.x;
-        
-        if(Screen.orientation == ScreenOrientation.LandscapeRight)
+        if (!_isOpen && MenuManager.instance.gachaPending > 0)
         {
-            orientationModifier = -1;
-        }
-        else if (Screen.orientation == ScreenOrientation.LandscapeLeft)
-        {
-            orientationModifier = 1;
-        }
-        if (PlayerPrefs.GetInt("isAcceleratorActive") ==0|| !SystemInfo.supportsAccelerometer)
-            return;
-        if (acceleration * orientationModifier< -0.3f && !isTouching)
-        {
-            if (!isShaking)
-                SetShake();
-        }
-        else if (acceleration * orientationModifier > 0.8f &&isShaking && !isTouching)
-        {
-            SetOpen();
-        }
-        else if(isShaking && !isTouching)
-        {
-            if(!_isReseting)
-            StartCoroutine(ResetRoutine(1f));
-        }
+            int orientationModifier = -1;
+            float acceleration = Input.acceleration.x;
 
-        pro.text = Input.acceleration.x.ToString();
+            if (Screen.orientation == ScreenOrientation.LandscapeRight)
+            {
+                orientationModifier = -1;
+            }
+            else if (Screen.orientation == ScreenOrientation.LandscapeLeft)
+            {
+                orientationModifier = 1;
+            }
+            if (PlayerPrefs.GetInt("isAcceleratorActive") == 0 || !SystemInfo.supportsAccelerometer)
+                return;
+            if (acceleration * orientationModifier < -0.3f && !isTouching)
+            {
+                if (!isShaking)
+                    SetShake();
+            }
+            else if (acceleration * orientationModifier > 0.8f && isShaking && !isTouching)
+            {
+                SetOpen();
+            }
+            else if (isShaking && !isTouching)
+            {
+                if (!_isReseting)
+                    StartCoroutine(ResetRoutine(1f));
+            }
+        }
+            
+        
+
 
     }
     public void SetOpen()
@@ -87,51 +92,49 @@ public class ShakeSystem : MonoBehaviour , IPointerDownHandler, IPointerUpHandle
         StopAllCoroutines();
         OnSuccess.Invoke();
     }
-    public void OnPointerDown(PointerEventData eventData)
-    {
-        if (_isOpen)
-            return;
-        isTouching = true;
-        touchStartPos = eventData.position; // Guarda la posición inicial del toque
-        SetShake();
-        print(2);
-    }
+    //public void OnPointerDown(PointerEventData eventData)
+    //{
+    //    if (!_isOpen && MenuManager.instance.gachaPending <= 0)
+    //        return;
+    //    isTouching = true;
+    //    touchStartPos = eventData.position; // Guarda la posición inicial del toque
+    //    SetShake();
+    //    print(2);
+    //}
 
-    public void OnPointerUp(PointerEventData eventData)
-    {
-        if (!eventData.pointerDrag)
-        {
+    //public void OnPointerUp(PointerEventData eventData)
+    //{
+    //    if (!eventData.pointerDrag)
+    //    {
 
-        }
-        if (isTouching)
-        {
-            isTouching = false;
-            Vector2 touchEndPos = eventData.position;
-            Vector2 swipeVector = touchEndPos - touchStartPos;
-
-            print(1);
-            if (swipeVector.y > 0 && swipeVector.y >= minSwipeDistance)
-            {
-                // Para asegurarnos de que no sea un swipe diagonal demasiado pronunciado hacia los lados
-                // Puedes ajustar este umbral según tus necesidades.
-                //if (Mathf.Abs(swipeVector.x) < swipeVector.y * 0.8f) // Si el movimiento horizontal es menos de la mitad del vertical
-                //{
-                    SetOpen();
-                    _isOpen = true;
-                //}
-                //else
-                //{
-                //    if (!_isReseting)
-                //        StartCoroutine(ResetRoutine(0.2f));
-                //}
-            }
-            else
-            {
-                if (!_isReseting)
-                    StartCoroutine(ResetRoutine(0.2f));
-            }
-        }
-    }
+    //    }
+    //    if (isTouching)
+    //    {
+    //        isTouching = false;
+    //        Vector2 touchEndPos = eventData.position;
+    //        Vector2 swipeVector = touchEndPos - touchStartPos;
+    //        if (swipeVector.y > 0 && swipeVector.y >= minSwipeDistance)
+    //        {
+    //            // Para asegurarnos de que no sea un swipe diagonal demasiado pronunciado hacia los lados
+    //            // Puedes ajustar este umbral según tus necesidades.
+    //            //if (Mathf.Abs(swipeVector.x) < swipeVector.y * 0.8f) // Si el movimiento horizontal es menos de la mitad del vertical
+    //            //{
+    //                SetOpen();
+    //                _isOpen = true;
+    //            //}
+    //            //else
+    //            //{
+    //            //    if (!_isReseting)
+    //            //        StartCoroutine(ResetRoutine(0.2f));
+    //            //}
+    //        }
+    //        else
+    //        {
+    //            if (!_isReseting)
+    //                StartCoroutine(ResetRoutine(0.2f));
+    //        }
+    //    }
+    //}
     public void Vibrate()
     {
         if(PlayerPrefs.GetInt("isVibrationActive") == 1)
@@ -154,9 +157,13 @@ public class ShakeSystem : MonoBehaviour , IPointerDownHandler, IPointerUpHandle
     }
     public void ForceReset()
     {
-        isShaking = false;
-        _isReseting = false;
-        _isOpen = false;
+        if (_isOpen)
+        {
+            isShaking = false;
+            _isReseting = false;
+            _isOpen = false;
+        }
+        
     }
 
     
@@ -164,7 +171,6 @@ public class ShakeSystem : MonoBehaviour , IPointerDownHandler, IPointerUpHandle
     public void OnDrag(PointerEventData eventData)
     {
         Vector2 touchEndPos = eventData.position;
-        pro2.text = (touchStartPos.y - touchEndPos.y).ToString();
         if ( touchEndPos.y+failSwipeDistance<touchStartPos.y)
         {
             isTouching = false;

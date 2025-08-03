@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Managers.Menu;
+
 [CreateAssetMenu(fileName = "Item", menuName = "Custom/New Item", order = 0)]
 
 public class ItemDto : ScriptableObject
@@ -26,7 +28,6 @@ public class ItemDto : ScriptableObject
             }
             else
             {
-                Qty++;
                 return true;
             }
         }
@@ -36,19 +37,57 @@ public class ItemDto : ScriptableObject
             {
                 return false;
             }
-            else 
+            else
             {
-                Qty++;
                 return true;
 
             }
 
         }
-        else 
+        else if (PlayerPrefs.GetInt(name) > 0)
         {
-            Qty++;
 
-            return true; 
+            return false;
+        }
+        else return true;
+
+    }
+    public void AddItem()
+    {
+        if (IsClient)
+        {
+            PlayerPrefs.SetInt("ClientAbailable" + clientTag, 1);
+            Qty++;
+            PlayerPrefs.Save();
+        }
+        else if (IsLife)
+        {
+            MenuManager.instance.AddLife();
+        }
+        else
+        {
+            PlayerPrefs.SetInt(name, PlayerPrefs.GetInt(name) + 1);
+            Qty++;
+            PlayerPrefs.Save();
+
+        }
+    }
+    public void ResetItem()
+    {
+        if (StartBought) return;
+        if (IsClient)
+        {
+            PlayerPrefs.SetInt("ClientAbailable" + clientTag, 0);
+            Qty=0;
+            Debug.Log("ClientAbailable" + clientTag + " vaciado");
+
+        }
+
+        else
+        {
+            PlayerPrefs.SetInt(name, 0);
+            Qty=0;
+
         }
     }
 }

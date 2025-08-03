@@ -1,31 +1,35 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-//using UnityEngine.InputSystem; // Asegúrate de incluir este namespace
 using UnityEngine.EventSystems;
-using Managers.Level;
+using UnityEngine.UI;
+using Managers.Menu;
 
 
 public class GachaView : MonoBehaviour, IPointerDownHandler , IPointerUpHandler
 {
     public Animator myAnimator; // Referencia al Animator del cofre
     public GameObject gachaRewardPanel; // Panel que muestra las recompensas del gacha
+    public Image gachaReward; // Panel que muestra las recompensas del gacha
     public float minSwipeDistance = 50f;
     [SerializeField] AudioClip[] plateSounds;
     [SerializeField] AudioClip openSound;
     public GameObject chestOpenEffect; // Partículas o efecto visual al abrir el cofre
-    private bool isOpen = false;
+    public bool isOpen = false;
     private Vector2 touchStartPos; // Posición inicial del toque
     private bool isTouching = false; // Bandera para saber si el dedo sigue presionado
     AudioSource audioSource;
-    //void OnEnable()
-    //{
+    void OnEnable()
+    {
+        CloseChest();
 
-    //}
+    }
     //void OnDisable()
     //{
-    //      ShakeSystem.instance.OnSuccess -= OpenChest; // Desuscribirse al evento
+    //    CloseChest();
     //}
+    //    //ShakeSystem.instance.OnSuccess -= OpenChest; // Desuscribirse al evento
+
     public void PlayOpenSound()
     {
         audioSource.PlayOneShot(openSound);
@@ -47,15 +51,11 @@ public class GachaView : MonoBehaviour, IPointerDownHandler , IPointerUpHandler
         }
         audioSource = GetComponent<AudioSource>();
     }
-    public void LevelChange()
-    {
-        LevelManager.instance.LoadScene("Menu");
-    }
+    
     public void OpenChest()
     {
         myAnimator.SetTrigger("Open");
         isOpen = true;
-
     }
     public void ShakeChest()
     {
@@ -69,10 +69,14 @@ public class GachaView : MonoBehaviour, IPointerDownHandler , IPointerUpHandler
     }
     public void CloseChest()
     {
-        myAnimator.SetBool("IsShaking", false);
+        if (isOpen) {
+            myAnimator.SetBool("IsShaking", false);
 
-        myAnimator.SetTrigger("Close");
-        isOpen = false;
+            myAnimator.SetTrigger("Close");
+            isOpen = false;
+        }
+
+        
 
     }
     public void ShowGachaRewards()
@@ -89,7 +93,7 @@ public class GachaView : MonoBehaviour, IPointerDownHandler , IPointerUpHandler
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        if (isOpen)
+        if (isOpen || MenuManager.instance.gachaPending <= 0)
             return;
 
         isTouching = true;
@@ -115,6 +119,7 @@ public class GachaView : MonoBehaviour, IPointerDownHandler , IPointerUpHandler
                 if (Mathf.Abs(swipeVector.x) < swipeVector.y * 0.5f) // Si el movimiento horizontal es menos de la mitad del vertical
                 {
                     myAnimator.SetTrigger("Open");
+                    ShakeSystem.instance.SetOpen();
                     isOpen = true;
                 }
                 else

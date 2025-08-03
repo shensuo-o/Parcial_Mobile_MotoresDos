@@ -25,6 +25,8 @@ public class ItemUI : MonoBehaviour
             {
                 PlayerPrefs.SetInt("ClientAbailable" + itemToRepresent.clientTag, 1);
                 _item.Qty = 1;
+                ByeButton();
+
             }
             else
             PlayerPrefs.SetInt(itemToRepresent.name, 1);
@@ -43,36 +45,22 @@ public class ItemUI : MonoBehaviour
 
         }
     }
-    public void ResetItem(ItemDto _item)
+    public void ResetItem()
     {
-        if (!itemToRepresent.StartBought)
-        {
-            if (itemToRepresent.IsClient)
-            {
-                PlayerPrefs.SetInt("ClientAbailable" + itemToRepresent.clientTag, 0);
-                _item.Qty = 0;
-            }
-            else
-            PlayerPrefs.SetInt(itemToRepresent.name, 0);
-            PlayerPrefs.Save();
-
-            ByeButton();
-            buyButton.SetActive(true);
-
-        }
-
+        itemToRepresent.ResetItem();
+        ByeButton();
+        if(!itemToRepresent.StartBought)
+        buyButton.SetActive(true);
 
     }
 
     public void ByeButton()
     {
-        if (!itemToRepresent.IsLimitLes&&!itemToRepresent.CanBePurchased())
+        if (!itemToRepresent.IsLimitLes)
         {
             buyButton.SetActive(false);
 
         }
-        else if (!itemToRepresent.IsLimitLes && PlayerPrefs.GetInt(itemToRepresent.name)>0)
-        buyButton.SetActive(false);
     }
     public void OnClickItem()
     {
@@ -84,6 +72,7 @@ public class ItemUI : MonoBehaviour
             if(itemToRepresent.CanBePurchased())
             {
                 PlayerPrefs.SetInt("saveMoneyShop", money - itemToRepresent.cost);
+                itemToRepresent.AddItem();
             }
             else
             {
@@ -91,28 +80,11 @@ public class ItemUI : MonoBehaviour
             }
             
             MenuManager.instance.UpdateUI("money");
-            BuyItem();
-        }
-    }
-    void BuyItem()
-    {
-        if (itemToRepresent.IsClient)
-        {
-           PlayerPrefs.SetInt("ClientAbailable" + itemToRepresent.clientTag, 1);
-            itemToRepresent.Qty = 1;
+
+            ByeButton();
+            PlayerPrefs.Save();
 
         }
-        else if (itemToRepresent.IsLife)
-            MenuManager.instance.BuyLife(1);
-        else 
-        {
-            PlayerPrefs.SetInt(itemToRepresent.name, PlayerPrefs.GetInt(itemToRepresent.name) + 1);
-            itemToRepresent.Qty = PlayerPrefs.GetInt(itemToRepresent.name);
-
-        }
-        PlayerPrefs.Save();
-        ByeButton();
-
     }
 
 }

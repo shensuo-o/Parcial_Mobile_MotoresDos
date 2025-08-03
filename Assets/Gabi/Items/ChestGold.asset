@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 67583200b673e7b4ea25b6aca63ab8d1, type: 3}
-  m_Name: Rollers
+  m_Name: ChestGold
   m_EditorClassIdentifier: 
-  itemName: Rollers
-  itemIcon: {fileID: 1825785844, guid: f150fce5ccdfaeb4d9d3e367f5912f95, type: 3}
-  cost: 30
+  itemName: GreateGold
+  itemIcon: {fileID: 21300000, guid: dcc69a155b516c647817b3c9bf7db4f0, type: 3}
+  cost: 0
   IsLife: 0
   IsClient: 0
-  clientTag: 20
-  IsLimitLes: 0
+  clientTag: 13
+  IsLimitLes: 1
   StartBought: 0
   Qty: 0
-  rarity: 2
+  rarity: 1
