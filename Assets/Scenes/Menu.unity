@@ -7673,7 +7673,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 98855e6d32bd46445b7ae7b7557152bb, type: 2}
     - {fileID: 11400000, guid: fd2484acd1082404b815c5ce87f47280, type: 2}
     rarity: 0
-    appearChance: 33
+    appearChance: 55
     CompensationItem: {fileID: 11400000, guid: 6664ec382c73fb04e9918511f752dcc3, type: 2}
     CompensationGold: 5
   - myItems:
@@ -7681,21 +7681,21 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 77800add62cdf814f9cd71cd43e6d049, type: 2}
     - {fileID: 11400000, guid: 2c7f4bb6511f1f14692b487db631254a, type: 2}
     rarity: 1
-    appearChance: 33
+    appearChance: 25
     CompensationItem: {fileID: 11400000, guid: 87a854d577dab1f4db856f02499f6f1c, type: 2}
     CompensationGold: 10
   - myItems:
     - {fileID: 11400000, guid: 73a54c57195f05c409977d7243ea07ce, type: 2}
     - {fileID: 11400000, guid: f90733ba2aff1954abcf16928dfc04d5, type: 2}
     rarity: 2
-    appearChance: 33
+    appearChance: 15
     CompensationItem: {fileID: 11400000, guid: cabeea89754f1664daa6557d8691d6ea, type: 2}
     CompensationGold: 15
   - myItems:
     - {fileID: 11400000, guid: f88cef93dee50854382166fa59ab97ca, type: 2}
     - {fileID: 11400000, guid: 9ddbbf885dfa244498d9a8362c100dc8, type: 2}
     rarity: 3
-    appearChance: 33
+    appearChance: 5
     CompensationItem: {fileID: 11400000, guid: 0b00991bfc7ce1b43bf105f33900419c, type: 2}
     CompensationGold: 100
   pullQuantityToPity: 20
