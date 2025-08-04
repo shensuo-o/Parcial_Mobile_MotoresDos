@@ -33,6 +33,16 @@ namespace Clients
 
         public int clientTag;
         public GameObject dialogo;
+        public Animator animator;
+        public Humor humor = Humor.Normal;
+        public IEnumerator humorCoroutine;
+        public enum Humor
+        {
+            Normal,
+            Impaciente,
+            Enojado
+        }
+
 
         private void Awake()
         {
@@ -71,18 +81,32 @@ namespace Clients
             onHandFood = plato; 
             plato.onClientHands = true;
             
-            // Verificar que el plato recibido coincide con el pedido
             if (selectedFood && plato.foodName != selectedFood.foodName)
             {
                 Debug.LogWarning($"Cliente recibió {plato.foodName} pero pidió {selectedFood.foodName}");
-                // Podrías implementar alguna penalización o comportamiento especial aquí
             }
-            
+            if (humorCoroutine != null)
+            {
+                StopCoroutine(humorCoroutine);
+                humorCoroutine = null;
+            }
+
+            humor = Humor.Normal;
+            UpdateAnimator();
+
             _fsm.ChangeState(FSM.ClientStates.Comiendo);
         }
 
         private void Seated()
         {
+            if (humorCoroutine != null)
+            {
+                StopCoroutine(humorCoroutine);
+                humorCoroutine = null;
+            }
+
+            humor = Humor.Normal;
+            UpdateAnimator();
             _fsm.ChangeState(FSM.ClientStates.Pidiendo);
         }
 
@@ -106,9 +130,14 @@ namespace Clients
             {
                 gameObject.SetActive(true);
             }
-
+            float tiempoReal = timerFoodWait * TVTimeModifier;
+            EndCoroutine();
             Co = Wait((timerEntrance - GameManager.instance.delayDifficulty));
             StartCoroutine(Co);
+            if (humorCoroutine != null)
+                StopCoroutine(humorCoroutine);
+            humorCoroutine = CheckHumorProgress(tiempoReal);
+            StartCoroutine(humorCoroutine);
         }
     
         public void StartWaitFood()
@@ -117,9 +146,14 @@ namespace Clients
             {
                 gameObject.SetActive(true);
             }
-
+            float tiempoReal = timerFoodWait * TVTimeModifier;
+            EndCoroutine();
             Co = Wait(timerFoodWait);
             StartCoroutine(Co);
+            if (humorCoroutine != null)
+                StopCoroutine(humorCoroutine);
+            humorCoroutine = CheckHumorProgress(tiempoReal);
+            StartCoroutine(humorCoroutine);
         }
 
         public void EndCoroutine()
@@ -150,6 +184,8 @@ namespace Clients
 
         IEnumerator WaitEat(float time)
         {
+            humor = Humor.Normal;
+            UpdateAnimator();
             yield return new WaitForSeconds(time);
             Debug.Log("Ya comí");
             soundManager.PlaySfx(soundManager.pays);
@@ -173,6 +209,8 @@ namespace Clients
             dialogo.SetActive(false);
             GameManager.instance.TryIncreaseDifficulty();
             ClientFactory.Instance.ReturnClient(this);
+            humor = Humor.Normal;
+            UpdateAnimator();
         }
 
         // ReSharper disable Unity.PerformanceAnalysis
@@ -205,6 +243,43 @@ namespace Clients
             int layerObjects = LayerMask.NameToLayer("Objects");
             gameObject.layer = layerObjects;
             dialogo.gameObject.SetActive(false);
+            humor = Humor.Normal;
+            UpdateAnimator();
+        }
+
+        private IEnumerator CheckHumorProgress(float totalTime)
+        {
+
+            float elapsed = 0f;
+            humor = Humor.Normal;
+            UpdateAnimator();
+
+            while (elapsed < totalTime)
+            {
+                elapsed += Time.deltaTime;
+                float porcentaje = elapsed / totalTime;
+
+                if (porcentaje > 0.6f && humor != Humor.Enojado)
+                {
+                    humor = Humor.Enojado;
+                    UpdateAnimator();
+                }
+                else if (porcentaje > 0.4f && humor == Humor.Normal)
+                {
+                    humor = Humor.Impaciente;
+                    UpdateAnimator();
+                }
+
+                yield return null;
+            }
+
+        }
+
+        private void UpdateAnimator()
+        {
+            if (!animator) return;
+
+            animator.SetInteger("humor", (int)humor);
         }
 
         public void DisableDrag()

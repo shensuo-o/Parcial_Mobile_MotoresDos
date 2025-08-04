@@ -111,7 +111,7 @@ GameObject:
   m_Layer: 3
   m_Name: Manos
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 8418204508859773708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -124,7 +124,7 @@ Transform:
   m_GameObject: {fileID: 3307380631765808219}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.8, y: -1, z: 0}
+  m_LocalPosition: {x: -0.004, y: -0.025, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -169,8 +169,8 @@ Transform:
   m_GameObject: {fileID: 3695421891082704243}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.86, y: 2.77, z: 0}
-  m_LocalScale: {x: 0.13333333, y: 0.13333333, z: 0.04}
+  m_LocalPosition: {x: 0.1, y: 0.09, z: 0}
+  m_LocalScale: {x: 0.005, y: 0.005, z: 0.0015}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 3113869427370869366}
@@ -350,7 +350,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.00000029802322, y: -0.013489291}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -361,7 +361,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 5, y: 5}
+  m_Size: {x: 0.27616757, y: 0.2787815}
   m_EdgeRadius: 0
 --- !u!114 &1812532983941651860
 MonoBehaviour:
@@ -389,6 +389,8 @@ MonoBehaviour:
   soundManager: {fileID: 0}
   clientTag: 1
   dialogo: {fileID: 3695421891082704243}
+  animator: {fileID: 8011764092235757251}
+  humor: 0
 --- !u!95 &8011764092235757251
 Animator:
   serializedVersion: 5
