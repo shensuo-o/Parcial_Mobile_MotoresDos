@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ClientMonkey
   m_EditorClassIdentifier: 
   itemName: ClientMonkey
-  itemIcon: {fileID: 1428033963, guid: f71a7498c31702e438a42080bbb53bf6, type: 3}
+  itemIcon: {fileID: 1053188562, guid: be8b1a8b7ad430e42a1749294f08429d, type: 3}
   cost: 15
   IsLife: 0
   IsClient: 1
