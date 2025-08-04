@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ExtraLife
   m_EditorClassIdentifier: 
   itemName: ExtraLife
-  itemIcon: {fileID: 0}
+  itemIcon: {fileID: 21300000, guid: 1e412329c9224e34eb24029e35904f00, type: 3}
   cost: 15
   IsLife: 1
   IsClient: 0

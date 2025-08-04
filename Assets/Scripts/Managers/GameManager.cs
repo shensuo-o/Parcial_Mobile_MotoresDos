@@ -54,11 +54,11 @@ namespace Managers
             _hudManager = FindObjectOfType<HudManager>();
             if (PlayerPrefs.GetInt("BetterTable") > 0 && PremiumChair != null)
             {
-                PremiumChair.SetActive(true);
+                PremiumChair.SetActive(false);
             }
             else
             {
-                PremiumChair.SetActive(false);
+                PremiumChair.SetActive(true);
 
                 PremiumModifier = 1;
             }

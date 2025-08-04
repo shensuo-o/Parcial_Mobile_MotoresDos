@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: BetterTable
   m_EditorClassIdentifier: 
   itemName: BetterTable
-  itemIcon: {fileID: 1408426178, guid: f150fce5ccdfaeb4d9d3e367f5912f95, type: 3}
+  itemIcon: {fileID: -704291077, guid: 556749953ff4ede4e91f790891882f53, type: 3}
   cost: 50
   IsLife: 0
   IsClient: 0
   clientTag: 12
   IsLimitLes: 0
   StartBought: 0
-  Qty: 0
+  Qty: 1
   rarity: 2
