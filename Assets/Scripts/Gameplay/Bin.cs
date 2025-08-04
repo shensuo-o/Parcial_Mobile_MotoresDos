@@ -10,6 +10,9 @@ public class Bin : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointerEx
     public Sprite highlightSprite;
     public Sprite[] throwSprites;
     private SpriteRenderer _spriteRenderer;
+    public AudioSource audiosource;
+    public AudioClip abreTacho;
+    public AudioClip tiraAlgo;
 
 
     private void Awake()
@@ -17,6 +20,8 @@ public class Bin : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointerEx
         _spriteRenderer = GetComponent<SpriteRenderer>();
         if (_spriteRenderer && normalSprite)
             _spriteRenderer.sprite = normalSprite;
+
+        audiosource = GetComponent<AudioSource>();
     }
 
     public void OnDrop(PointerEventData eventData)
@@ -27,6 +32,7 @@ public class Bin : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointerEx
             p.place.SetFree();
             FoodFactory.instance.ReturnFood(p);
             Debug.Log("Comida tirada!");
+            audiosource.PlayOneShot(tiraAlgo);
 
             StartCoroutine(ThrowAnimation(0.016f));
         }
@@ -37,14 +43,19 @@ public class Bin : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointerEx
         if (eventData.pointerDrag && eventData.pointerDrag.GetComponent<Plato>())
         {
             if (_spriteRenderer && highlightSprite)
+            {
                 _spriteRenderer.sprite = highlightSprite;
+                audiosource.PlayOneShot(abreTacho);
+            }
         }
     }
     
     public void OnPointerExit(PointerEventData eventData)
     {
         if (_spriteRenderer && normalSprite)
+        {
             _spriteRenderer.sprite = normalSprite;
+        }
     }
 
     private IEnumerator ThrowAnimation(float frameTime = 0.1f)
