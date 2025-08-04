@@ -259,7 +259,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 1}
+  m_LocalScale: {x: 6, y: 6, z: 6}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1962907189347279130}
@@ -307,7 +307,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 3
-  m_Sprite: {fileID: 1459297974, guid: b7c08d34919b0ae48b5589f77d9dc9ed, type: 3}
+  m_Sprite: {fileID: 1100378520, guid: e723c9a8d72b8d843b8e07d941d6a5fb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -354,7 +354,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 4.8199997, y: 4.8011713}
+    oldSize: {x: 0.32, y: 0.32}
     newSize: {x: 4.8199997, y: 4.8011713}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -375,6 +375,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10deb6fdc1a2fd848b5d1b39e42aa471, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timerEntrance: 0
+  timerFoodWait: 0
+  timerConsume: 0
+  TVTimeModifier: 0
   selectedFood: {fileID: 0}
   onHandFood: {fileID: 0}
   assignedBar: {fileID: 0}
@@ -385,7 +389,6 @@ MonoBehaviour:
   soundManager: {fileID: 0}
   clientTag: 1
   dialogo: {fileID: 3695421891082704243}
-  aestheticFood: {fileID: 3957807251156317955, guid: 4510ff274b47d6f479d560eff702ee40, type: 3}
 --- !u!95 &8011764092235757251
 Animator:
   serializedVersion: 5
@@ -396,7 +399,7 @@ Animator:
   m_GameObject: {fileID: 5329159590399223849}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 0bef7e54015735641bc5a525b3a22b45, type: 2}
+  m_Controller: {fileID: 9100000, guid: 9712217f81bec954f9866a0ba14b0034, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -419,4 +422,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc60f7f5424a7bb4bbf8fc07435a34b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canDrag: 0
   canDrop: 0
+  lastPos: {x: 0, y: 0, z: 0}

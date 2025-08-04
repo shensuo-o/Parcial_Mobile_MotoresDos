@@ -31,7 +31,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 1}
+  m_LocalScale: {x: 6, y: 6, z: 6}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1323160143759941262}
@@ -79,7 +79,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 3
-  m_Sprite: {fileID: 217762442, guid: f9555a81a8846164c98a0c44cd432e1a, type: 3}
+  m_Sprite: {fileID: 228950107, guid: a7c9a1c89549adc4d94aab127ee984aa, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -126,7 +126,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 4.8199997, y: 4.8011713}
+    oldSize: {x: 0.32, y: 0.32}
     newSize: {x: 4.8199997, y: 4.8011713}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -147,6 +147,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10deb6fdc1a2fd848b5d1b39e42aa471, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timerEntrance: 0
+  timerFoodWait: 0
+  timerConsume: 0
+  TVTimeModifier: 0
   selectedFood: {fileID: 0}
   onHandFood: {fileID: 0}
   assignedBar: {fileID: 0}
@@ -157,7 +161,6 @@ MonoBehaviour:
   soundManager: {fileID: 0}
   clientTag: 2
   dialogo: {fileID: 8802541434368136876}
-  aestheticFood: {fileID: 3957807251156317955, guid: 4510ff274b47d6f479d560eff702ee40, type: 3}
 --- !u!95 &7061115882578657555
 Animator:
   serializedVersion: 5
@@ -168,7 +171,7 @@ Animator:
   m_GameObject: {fileID: 3990408035544324135}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: bc24c463c3b72354e86ec7afee18589a, type: 2}
+  m_Controller: {fileID: 9100000, guid: 083a3cea2567e304aaa008a5732fd147, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -191,7 +194,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc60f7f5424a7bb4bbf8fc07435a34b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canDrag: 0
   canDrop: 0
+  lastPos: {x: 0, y: 0, z: 0}
 --- !u!1 &4892842337114375775
 GameObject:
   m_ObjectHideFlags: 0
