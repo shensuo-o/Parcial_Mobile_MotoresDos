@@ -11,6 +11,7 @@ public static class NotificationsController
     public static AndroidNotificationChannel channel1 = new AndroidNotificationChannel();
     public static AndroidNotificationChannel channel2 = new AndroidNotificationChannel();
     public static AndroidNotificationChannel channel3 = new AndroidNotificationChannel();
+    public static AndroidNotificationChannel channel4 = new AndroidNotificationChannel();
     public static bool IsPermissionPending;
     // Start is called before the first frame update
     public static void NotificationStart()
@@ -25,20 +26,28 @@ public static class NotificationsController
         AndroidNotificationCenter.RegisterNotificationChannel(channel1);
         channel2 = new AndroidNotificationChannel()
         {
-            Id = "remind_notif_ch",
-            Name = "Generic Channel",
+            Id = "remind_notif_ch2",
+            Name = "Generic Channe2",
             Description = "Generic info",
             Importance = Importance.High
         };
         AndroidNotificationCenter.RegisterNotificationChannel(channel2);
         channel3 = new AndroidNotificationChannel()
         {
-            Id = "remind_notif_ch",
-            Name = "Generic Channel",
+            Id = "remind_notif_ch3",
+            Name = "Generic Channe3",
             Description = "Generic info",
             Importance = Importance.High
         };
         AndroidNotificationCenter.RegisterNotificationChannel(channel3);
+        channel4 = new AndroidNotificationChannel()
+        {
+            Id = "remind_notif_ch4",
+            Name = "Generic Channe4",
+            Description = "Generic info",
+            Importance = Importance.High
+        };
+        AndroidNotificationCenter.RegisterNotificationChannel(channel4);
 
     }
 
@@ -72,7 +81,7 @@ public static class NotificationsController
         };
         if (PlayerPrefs.GetInt("isNotificationActive") == 1)
         {
-            AndroidNotificationCenter.SendNotificationWithExplicitID(_notification, channel1.Id, id);
+            AndroidNotificationCenter.SendNotificationWithExplicitID(_notification, channel2.Id, id);
 
         }
     }
@@ -90,7 +99,7 @@ public static class NotificationsController
         };
         if (PlayerPrefs.GetInt("isNotificationActive") == 1)
         {
-            AndroidNotificationCenter.SendNotificationWithExplicitID(_notification, channel2.Id, id);
+            AndroidNotificationCenter.SendNotificationWithExplicitID(_notification, channel3.Id, id);
 
         }
     }
@@ -108,11 +117,25 @@ public static class NotificationsController
         };
         if (PlayerPrefs.GetInt("isNotificationActive") == 1)
         {
-            AndroidNotificationCenter.SendNotificationWithExplicitID(_notification, channel2.Id, id);
+            AndroidNotificationCenter.SendNotificationWithExplicitID(_notification, channel4.Id, id);
 
         }
     }
+    public static void SetNotificationActive(bool active)
+    {
+        if (active)
+        {
+            PlayerPrefs.SetInt("isNotificationActive", 1);
+            PlayerPrefs.Save();
 
+        }
+        else
+        {
+            PlayerPrefs.SetInt("isNotificationActive", 0);
+            PlayerPrefs.Save();
+
+        }
+    }
     public static IEnumerator NotificationPermission()
     {
         var permissionRequest = new PermissionRequest();
@@ -123,14 +146,13 @@ public static class NotificationsController
         }
         if (permissionRequest.Status == PermissionStatus.Denied)
         {
-            PlayerPrefs.SetInt("isNotificationActive", 0);
-            PlayerPrefs.Save();
+            SetNotificationActive(false);
 
         }
         else if (permissionRequest.Status == PermissionStatus.Allowed)
         {
-            PlayerPrefs.SetInt("isNotificationActive", 1);
-            PlayerPrefs.Save();
+            SetNotificationActive(true);
+
         }
         IsPermissionPending = false;
     }

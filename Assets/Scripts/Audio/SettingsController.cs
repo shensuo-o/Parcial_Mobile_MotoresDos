@@ -25,7 +25,7 @@ public class SettingsController : MonoBehaviour
             PlayerPrefs.SetInt("isVibrationActive", 1);
             if(SystemInfo.supportsAccelerometer)
             PlayerPrefs.SetInt("isAcceleratorActive", 1);
-            PlayerPrefs.SetInt("isNotificationActive", 1);
+            NotificationsController.SetNotificationActive(true);
             NotificationsController.NotificationStart();
             NotificationPermissionAsk();
             Load();
@@ -37,7 +37,24 @@ public class SettingsController : MonoBehaviour
             Load();
         }
     }
+    public void ResetAllData()
+    {
+        AudioListener.volume = 1;
+        volumeSlider.value = 1;
+        if (SystemInfo.supportsAccelerometer)
+        {
+            PlayerPrefs.SetInt("isAcceleratorActive", 1);
+            isAccelerometerActive = true;
+            AccelerometerImage.sprite = AcceptImage;
 
+        }
+        NotificationsController.SetNotificationActive(true);
+        PlayerPrefs.SetInt("isVibrationActive", 1);
+        isVibrationActive = true;
+        VibrationImage.sprite = AcceptImage;
+        isNotificationActive = true;
+        NotificationImage.sprite = AcceptImage;
+    }
     public void ChangeVolume()
     {
         AudioListener.volume = volumeSlider.value;
@@ -102,14 +119,14 @@ public class SettingsController : MonoBehaviour
     {
         if (PlayerPrefs.GetInt("isNotificationActive") == 1)
         {
-            PlayerPrefs.SetInt("isNotificationActive", 0);
+            NotificationsController.SetNotificationActive(false);
             isNotificationActive = false;
             NotificationImage.sprite = NotAcceptImage;
             MenuManager.instance.PlaySound("SFX_UI_Exit");
         }
         else
         {
-            PlayerPrefs.SetInt("isNotificationActive", 1);
+            NotificationsController.SetNotificationActive(true);
             isNotificationActive = true;
             NotificationImage.sprite = AcceptImage;
             MenuManager.instance.PlaySound("SFX_UI_Confirm");
