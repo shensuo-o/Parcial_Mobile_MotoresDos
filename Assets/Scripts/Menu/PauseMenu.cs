@@ -48,15 +48,15 @@ namespace Menu
 
         public void ExitApp()
         {
-            //NotificationsController.SendNewRepeatedNotification("Hora de cocinar", "Un restaurante no se atiende solo, es hora de cocinar", 120, 120, 1);
-            //if (PlayerPrefs.GetInt("GatchasPending") > 0)
-            //    NotificationsController.SendNewRepeatedNotification2("Hay nuevas recetas", "Tenes " + PlayerPrefs.GetInt("GatchasPending").ToString() + " recetas para descubrir", 60, 180, 2);
-            //var lives = PlayerPrefs.GetInt("saveLives");
-            //if (lives < 5)
-            //{
-            //    NotificationsController.SendNewNotification("La cocina espera", "Ya has descansado demasiado, es hora de que el cafe abra sus puertas", (5 - lives) * 3*60, 5);
+            NotificationsController.SendNewRepeatedNotification("Hora de cocinar", "Un restaurante no se atiende solo, es hora de cocinar", 120, 120, 1);
+            if (PlayerPrefs.GetInt("GatchasPending") > 0)
+                NotificationsController.SendNewRepeatedNotification2("Hay nuevas recetas", "Tenes " + PlayerPrefs.GetInt("GatchasPending").ToString() + " recetas para descubrir", 60, 180, 2);
+            var lives = PlayerPrefs.GetInt("saveLives");
+            if (lives < 5)
+            {
+                NotificationsController.SendNewNotification("La cocina espera", "Ya has descansado demasiado, es hora de que el cafe abra sus puertas", (5 - lives) * 3 * 60, 5);
 
-            //}
+            }
             Application.Quit();
         }
     }
