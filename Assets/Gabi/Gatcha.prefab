@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 6657502076894258184}
   - component: {fileID: 1229385377412117488}
   - component: {fileID: 9109426680773968213}
-  - component: {fileID: 2512469074725287906}
   m_Layer: 5
   m_Name: Gatcha
   m_TagString: Untagged
@@ -58,6 +57,7 @@ MonoBehaviour:
   shakeDetectionThreshold: 0.2
   shakeDetectionDuration: 0.5
   cooldownTime: 1
+  GachaAmount: 0
   pro: {fileID: 0}
   pro2: {fileID: 0}
   isTouching: 0
@@ -85,6 +85,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: d0dc2663e6571344eb4bd4f802fc0ad3, type: 3}
   openSound: {fileID: 8300000, guid: 2dbb86bcfddb6784c8eb656e85ec9f8e, type: 3}
   chestOpenEffect: {fileID: 0}
+  isOpen: 0
 --- !u!95 &1229385377412117488
 Animator:
   serializedVersion: 5
@@ -202,51 +203,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &2512469074725287906
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3246399672567764921}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: afe201a4ae4be4f45b9d1a5e42e02e7e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  myPools:
-  - myItems:
-    - {fileID: 11400000, guid: eecbcb6e4dc1a0248a539bedd8f4c82d, type: 2}
-    - {fileID: 11400000, guid: 98855e6d32bd46445b7ae7b7557152bb, type: 2}
-    - {fileID: 11400000, guid: fd2484acd1082404b815c5ce87f47280, type: 2}
-    rarity: 0
-    appearChance: 33
-    CompensationItem: {fileID: 11400000, guid: 6664ec382c73fb04e9918511f752dcc3, type: 2}
-    CompensationGold: 5
-  - myItems:
-    - {fileID: 11400000, guid: 289d6f37a7864b74dbf50071817bb272, type: 2}
-    - {fileID: 11400000, guid: 77800add62cdf814f9cd71cd43e6d049, type: 2}
-    - {fileID: 11400000, guid: 2c7f4bb6511f1f14692b487db631254a, type: 2}
-    rarity: 1
-    appearChance: 33
-    CompensationItem: {fileID: 11400000, guid: 87a854d577dab1f4db856f02499f6f1c, type: 2}
-    CompensationGold: 10
-  - myItems:
-    - {fileID: 11400000, guid: 73a54c57195f05c409977d7243ea07ce, type: 2}
-    - {fileID: 11400000, guid: f90733ba2aff1954abcf16928dfc04d5, type: 2}
-    rarity: 2
-    appearChance: 33
-    CompensationItem: {fileID: 11400000, guid: cabeea89754f1664daa6557d8691d6ea, type: 2}
-    CompensationGold: 15
-  - myItems:
-    - {fileID: 11400000, guid: f88cef93dee50854382166fa59ab97ca, type: 2}
-    - {fileID: 11400000, guid: 9ddbbf885dfa244498d9a8362c100dc8, type: 2}
-    rarity: 3
-    appearChance: 33
-    CompensationItem: {fileID: 11400000, guid: 0b00991bfc7ce1b43bf105f33900419c, type: 2}
-    CompensationGold: 100
-  pullQuantityToPity: 20
-  pullQuantityToRare: 7
 --- !u!1 &4017024039843301779
 GameObject:
   m_ObjectHideFlags: 0

@@ -9,6 +9,7 @@ using UnityEngine.UI;
 public static class NotificationsController
 {
     public static AndroidNotificationChannel channel1 = new AndroidNotificationChannel();
+    public static AndroidNotificationChannel channel2 = new AndroidNotificationChannel();
     public static bool IsPermissionPending;
     // Start is called before the first frame update
     public static void NotificationStart()
@@ -18,38 +19,69 @@ public static class NotificationsController
             Id = "remind_notif_ch",
             Name = "Generic Channel",
             Description = "Generic info",
-            Importance = Importance.Low
+            Importance = Importance.High
         };
         AndroidNotificationCenter.RegisterNotificationChannel(channel1);
-        //timeToPlayNotification = new AndroidNotification()
-        //{
-        //    Title = "lovo volve",
-        //    Text = "paso mucho tiempoo te extra",
-        //    FireTime = DateTime.Now,
-        //    SmallIcon = "icon_small",
-        //    LargeIcon = "icon_large"
-        //};
-        //AndroidNotificationCenter.SendNotification(timeToPlayNotification, channel1.Id);
+        channel2 = new AndroidNotificationChannel()
+        {
+            Id = "remind_notif_ch",
+            Name = "Generic Channel",
+            Description = "Generic info",
+            Importance = Importance.High
+        };
+        AndroidNotificationCenter.RegisterNotificationChannel(channel2);
 
     }
-    
-    //public static void SendNotification(AndroidNotification notif, AndroidNotificationChannel channel)
-    //{
-    //    if (PlayerPrefs.GetInt("isNotificationActive")==1)
-    //    AndroidNotificationCenter.SendNotification(notif, channel.Id);
 
-    //}
-    public static void SendNewNotification(string title, string text, float firetime)
+
+    public static void SendNewNotification(string title, string text, float firetime,int id )
     {
         AndroidNotification _notification = new AndroidNotification()
         {
             Title = title,
             Text = text,
             FireTime = DateTime.Now.AddSeconds(firetime),
+            SmallIcon= "icon_small",
+            LargeIcon= "icon_large",
         };
         if (PlayerPrefs.GetInt("isNotificationActive") == 1)
         {
-            AndroidNotificationCenter.SendNotification(_notification, channel1.Id);
+            AndroidNotificationCenter.SendNotificationWithExplicitID(_notification, channel1.Id, id);
+        }
+    }
+    public static void SendNewRepeatedNotification(string title, string text, float firetime, float repeatTime, int id)
+    {
+        AndroidNotification _notification = new AndroidNotification()
+        {
+            Title = title,
+            Text = text,
+            FireTime = DateTime.Now.AddSeconds(firetime),
+            RepeatInterval = TimeSpan.FromSeconds(repeatTime),
+            SmallIcon = "icon_small",
+            LargeIcon = "icon_large",
+
+        };
+        if (PlayerPrefs.GetInt("isNotificationActive") == 1)
+        {
+            AndroidNotificationCenter.SendNotificationWithExplicitID(_notification, channel1.Id, id);
+
+        }
+    }
+    public static void SendNewRepeatedNotification2(string title, string text, float firetime, float repeatTime, int id)
+    {
+        AndroidNotification _notification = new AndroidNotification()
+        {
+            Title = title,
+            Text = text,
+            FireTime = DateTime.Now.AddSeconds(firetime),
+            RepeatInterval = TimeSpan.FromSeconds(repeatTime),
+            SmallIcon = "icon_small",
+            LargeIcon = "icon_large",
+
+        };
+        if (PlayerPrefs.GetInt("isNotificationActive") == 1)
+        {
+            AndroidNotificationCenter.SendNotificationWithExplicitID(_notification, channel2.Id, id);
 
         }
     }
@@ -75,10 +107,36 @@ public static class NotificationsController
         }
         IsPermissionPending = false;
     }
-    public  static void SendTestNotification()
+    public static void SendTestNotification()
     {
 
-        SendNewNotification("PROBANDO","123 123",0);
+        SendNewNotification("PROBANDO", "123 123", 10,0);
     }
+    public static void SendTestNotification2()
+    {
+        SendNewRepeatedNotification("PROBANDO", "156 456", 60,120,1);
+    }
+    public static void SendTestNotification3()
+    {
+
+        SendNewRepeatedNotification("PROBANDO", "uygyuyhuinmoi 456", 60, 80,2);
+    }
+
+
+    public static void CancelNotifications()
+    {
+        AndroidNotificationCenter.CancelAllNotifications();
+        AndroidNotificationCenter.CancelAllScheduledNotifications();
+
+    }
+    public static void NotitficationTest3()
+    {
+        NotificationsController.SendTestNotification2();
+    }
+    public static void NotitficationTest4()
+    {
+        NotificationsController.SendTestNotification3();
+    }
+
 }
 

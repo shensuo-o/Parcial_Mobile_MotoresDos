@@ -28,7 +28,6 @@ namespace Managers.Menu
         public TextMeshProUGUI scoreText;
         public TextMeshProUGUI moneyText;
         public TextMeshProUGUI gachaText;
-
         // Gameplay Variables
         [Header("Gameplay Variables")] public float timer;
         public float liveGetTime = 3f;
@@ -39,6 +38,8 @@ namespace Managers.Menu
         private int _newMoney;
         public int gachaPending;
         private bool _timerIsRunning;
+        public int gachaOpenedSinceRare;
+        public int gachaTotalOpened;
 
         // DateTime
         private DateTime _currentDay;
@@ -70,7 +71,7 @@ namespace Managers.Menu
         {
             instance = this;
             _audioSrc = GetComponent<AudioSource>();
-
+            NotificationsController .CancelNotifications();
             instructionsPanel.SetActive(false);
             settingsPanel.SetActive(false);
             shopPanel.SetActive(false);
@@ -122,14 +123,16 @@ namespace Managers.Menu
         }
         private void LoadPlayerData()
         {
+            if (!PlayerPrefs.HasKey("saveLives"))
+                ResetPlayerData();
             // Load saved values or set defaults
             lives = PlayerPrefs.GetInt("saveLives", maxLives);
             savedScore = PlayerPrefs.GetInt("saveScoreMenu"); // Load high score
             savedMoney = PlayerPrefs.GetInt("saveMoneyShop"); // Load total money from the shop
             _newMoney = PlayerPrefs.GetInt("saveScoreGame"); // Load the last game's earned money
             gachaPending = PlayerPrefs.GetInt("GatchasPending");
-            gachaPending = PlayerPrefs.GetInt("GatchaOpenedSinceRare");
-            gachaPending = PlayerPrefs.GetInt("GatchaTotalOpened");
+            gachaOpenedSinceRare = PlayerPrefs.GetInt("GatchaOpenedSinceRare");
+            gachaTotalOpened = PlayerPrefs.GetInt("GatchaTotalOpened");
             // Add the new money from the last game session to the saved total money
             savedMoney += _newMoney;
 
@@ -148,6 +151,12 @@ namespace Managers.Menu
             PlayerPrefs.Save(); // Ensure changes are written to the disk
 
             Debug.Log($"Loaded Data: Lives={lives}, High Score={savedScore}, Money={savedMoney}, newMoney={_newMoney}");
+        }
+        public void UpdateGacha() 
+        {
+            gachaOpenedSinceRare = PlayerPrefs.GetInt("GatchaOpenedSinceRare");
+            gachaTotalOpened = PlayerPrefs.GetInt("GatchaTotalOpened");
+            gachaPending = PlayerPrefs.GetInt("GatchasPending");
         }
 
         private void SavePlayerData()
@@ -411,6 +420,9 @@ namespace Managers.Menu
         public void ExitApp()
         {
             SavePlayerData();
+            NotificationsController.SendNewRepeatedNotification("Hora de cocinar", "Un restaurante no se atiende solo, es hora de cocinar a la hora "+ DateTime.Now.ToString(), 120,300,1);
+            if (gachaPending > 0)
+                NotificationsController.SendNewRepeatedNotification2("Hay nuevas recetas", "Tenes " + gachaPending.ToString() + " recetas para descubrir a la hora " + DateTime.Now.ToString(), 60, 160,2);
             Application.Quit();
         }
 

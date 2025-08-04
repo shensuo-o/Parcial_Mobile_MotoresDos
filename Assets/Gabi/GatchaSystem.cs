@@ -31,8 +31,8 @@ public class GatchaSystem : MonoBehaviour
             //    myPools[i].myItems[j].rarity = myPools[i].rarity;
             //}
         }
-        GatchaOpenedSinceRare = PlayerPrefs.GetInt("GatchaOpenedSinceRare");
-        GatchaOpened = PlayerPrefs.GetInt("GatchaTotalOpened");
+        GatchaOpenedSinceRare = MenuManager.instance.gachaOpenedSinceRare;
+        GatchaOpened = MenuManager.instance.gachaTotalOpened ;
         ShakeSystem.instance.OnSuccess += Pull;
 
     }
@@ -66,11 +66,12 @@ public class GatchaSystem : MonoBehaviour
             gachaView.gachaReward.sprite = item.itemIcon;
 
         }
-        PlayerPrefs.SetInt("GatchasPending", PlayerPrefs.GetInt("GatchasPending") - 1);
+        PlayerPrefs.SetInt("GatchasPending", MenuManager.instance.gachaPending - 1);
         MenuManager.instance.UpdateUI("gacha");
         PlayerPrefs.SetInt("GatchaOpenedSinceRare", GatchaOpenedSinceRare);
         PlayerPrefs.SetInt("GatchaTotalOpened", GatchaOpened);
         ShakeSystem.instance.OnSuccess -= Pull;
+        MenuManager.instance.UpdateGacha();
     }
 
 

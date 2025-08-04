@@ -9,8 +9,12 @@ namespace Managers
 {
     public class GameManager : MonoBehaviour
     {
-		// Añadir esta variable al inicio de la clase
-		public bool isTutorialMode;
+        [SerializeField] GameObject TV;
+        [SerializeField] GameObject PremiumChair;
+        [SerializeField] int PremiumModifier=20;
+
+        // Añadir esta variable al inicio de la clase
+        public bool isTutorialMode;
         public string playerName = ""; // Unity Cloud
         public int money;
         public int maxMoney; // Unity Cloud
@@ -48,6 +52,21 @@ namespace Managers
             instance = this;
             _soundManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<SoundManager>();
             _hudManager = FindObjectOfType<HudManager>();
+            if (PlayerPrefs.GetInt("BetterTable") > 0 && PremiumChair != null)
+            {
+                PremiumChair.SetActive(true);
+            }
+            else
+            {
+                PremiumChair.SetActive(false);
+
+                PremiumModifier = 1;
+            }
+            if (PlayerPrefs.GetInt("ClientTv") > 0 && TV != null)
+            {
+                TV.SetActive(true);
+            }
+            else TV.SetActive(false);
 
             if (RemoteConfigTest.instance.isConfigFetched)
             {
@@ -259,7 +278,7 @@ namespace Managers
         public void GetBarMoney(int d)
         {
             _soundManager.PlaySfx(_soundManager.collectPayment);
-            money += d;
+            money += d* PremiumModifier;
             SaveScore();
         }
     }

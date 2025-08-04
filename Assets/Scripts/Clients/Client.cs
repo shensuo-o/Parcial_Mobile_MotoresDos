@@ -14,6 +14,7 @@ namespace Clients
         [HideInInspector] public float timerEntrance;
         [HideInInspector] public float timerFoodWait;
         [HideInInspector] public float timerConsume;
+        [HideInInspector] public float TVTimeModifier;
 
         public Plato selectedFood;
         public Plato onHandFood;
@@ -43,6 +44,11 @@ namespace Clients
 
         void Start()
         {
+            if (PlayerPrefs.GetInt("ClientTv") > 0)
+            {
+                TVTimeModifier = 1.5f;
+            }
+            else TVTimeModifier = 1;
             GetComponent<Renderer>().sortingLayerName = "Default";
             GetComponent<Renderer>().sortingOrder = 3;
             timerEntrance = Random.Range(10, 15);
@@ -101,7 +107,7 @@ namespace Clients
                 gameObject.SetActive(true);
             }
 
-            Co = Wait(timerEntrance - GameManager.instance.delayDifficulty);
+            Co = Wait((timerEntrance - GameManager.instance.delayDifficulty));
             StartCoroutine(Co);
         }
     
@@ -128,7 +134,8 @@ namespace Clients
         // ReSharper disable Unity.PerformanceAnalysis
         private IEnumerator Wait(float time)
         {
-            yield return new WaitForSeconds(time);
+            yield return new WaitForSeconds(time* TVTimeModifier);
+            
             GameManager.instance.ClientGotOut();
             Debug.Log("Me voy");
             Exit();

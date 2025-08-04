@@ -172,6 +172,8 @@ MonoBehaviour:
   savedScore: 0
   savedMoney: 0
   gachaPending: 0
+  gachaOpenedSinceRare: 0
+  gachaTotalOpened: 0
   failedBuy: {fileID: 8527380663252346494, guid: e32ee4470a2ba9343a4792f46a9d4016, type: 3}
   failedBuyLock: {fileID: 461791904}
   buyButtons: []
@@ -2679,7 +2681,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 454257416}
-        m_TargetAssemblyTypeName: PLayerRefTEST, Assembly-CSharp
+        m_TargetAssemblyTypeName: PlayerRefTest2, Assembly-CSharp
         m_MethodName: NotitficationTest
         m_Mode: 1
         m_Arguments:
@@ -2737,13 +2739,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 454257411}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e458b9e087cec14b8e335c29cf68b95, type: 3}
+  m_Script: {fileID: 11500000, guid: b2312bd7108d4a4489e69cee296d1ea4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   noti: 0
   vibrate: 0
   acelerator: 0
-  tMPro1: {fileID: 0}
+  tMPros1: {fileID: 0}
   tMPro2: {fileID: 0}
   tMPro3: {fileID: 0}
 --- !u!1 &459585766
