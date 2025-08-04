@@ -6,7 +6,7 @@ using UnityEngine.UI;
 using Managers.Menu;
 
 
-public class GachaView : MonoBehaviour, IPointerDownHandler , IPointerUpHandler
+public class GachaView : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
     public Animator myAnimator; // Referencia al Animator del cofre
     public GameObject gachaRewardPanel; // Panel que muestra las recompensas del gacha
@@ -14,11 +14,13 @@ public class GachaView : MonoBehaviour, IPointerDownHandler , IPointerUpHandler
     public float minSwipeDistance = 50f;
     [SerializeField] AudioClip[] plateSounds;
     [SerializeField] AudioClip openSound;
+    [SerializeField] AudioClip opened;
     public GameObject chestOpenEffect; // Partículas o efecto visual al abrir el cofre
     public bool isOpen = false;
     private Vector2 touchStartPos; // Posición inicial del toque
     private bool isTouching = false; // Bandera para saber si el dedo sigue presionado
-    AudioSource audioSource;
+    [SerializeField] AudioSource audioSource;
+    [SerializeField] AudioSource secondAudioSource;
     void OnEnable()
     {
         CloseChest();
@@ -33,6 +35,7 @@ public class GachaView : MonoBehaviour, IPointerDownHandler , IPointerUpHandler
     public void PlayOpenSound()
     {
         audioSource.PlayOneShot(openSound);
+        secondAudioSource.PlayOneShot(opened);
 
     }
     public void PlayTapSound()
@@ -49,7 +52,6 @@ public class GachaView : MonoBehaviour, IPointerDownHandler , IPointerUpHandler
         {
             gachaRewardPanel.SetActive(false); // Asegúrate de que el panel de recompensas esté oculto al inicio
         }
-        audioSource = GetComponent<AudioSource>();
     }
     
     public void OpenChest()
