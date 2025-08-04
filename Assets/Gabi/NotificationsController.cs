@@ -10,6 +10,7 @@ public static class NotificationsController
 {
     public static AndroidNotificationChannel channel1 = new AndroidNotificationChannel();
     public static AndroidNotificationChannel channel2 = new AndroidNotificationChannel();
+    public static AndroidNotificationChannel channel3 = new AndroidNotificationChannel();
     public static bool IsPermissionPending;
     // Start is called before the first frame update
     public static void NotificationStart()
@@ -30,11 +31,19 @@ public static class NotificationsController
             Importance = Importance.High
         };
         AndroidNotificationCenter.RegisterNotificationChannel(channel2);
+        channel3 = new AndroidNotificationChannel()
+        {
+            Id = "remind_notif_ch",
+            Name = "Generic Channel",
+            Description = "Generic info",
+            Importance = Importance.High
+        };
+        AndroidNotificationCenter.RegisterNotificationChannel(channel3);
 
     }
 
 
-    public static void SendNewNotification(string title, string text, float firetime,int id )
+    public static void SendNewNotification(string title, string text, double firetime,int id )
     {
         AndroidNotification _notification = new AndroidNotification()
         {
@@ -49,7 +58,7 @@ public static class NotificationsController
             AndroidNotificationCenter.SendNotificationWithExplicitID(_notification, channel1.Id, id);
         }
     }
-    public static void SendNewRepeatedNotification(string title, string text, float firetime, float repeatTime, int id)
+    public static void SendNewRepeatedNotification(string title, string text, double firetime, double repeatTime, int id)
     {
         AndroidNotification _notification = new AndroidNotification()
         {
@@ -67,7 +76,25 @@ public static class NotificationsController
 
         }
     }
-    public static void SendNewRepeatedNotification2(string title, string text, float firetime, float repeatTime, int id)
+    public static void SendNewRepeatedNotification2(string title, string text, double firetime, double repeatTime, int id)
+    {
+        AndroidNotification _notification = new AndroidNotification()
+        {
+            Title = title,
+            Text = text,
+            FireTime = DateTime.Now.AddSeconds(firetime),
+            RepeatInterval = TimeSpan.FromSeconds(repeatTime),
+            SmallIcon = "icon_small",
+            LargeIcon = "icon_large",
+
+        };
+        if (PlayerPrefs.GetInt("isNotificationActive") == 1)
+        {
+            AndroidNotificationCenter.SendNotificationWithExplicitID(_notification, channel2.Id, id);
+
+        }
+    }
+    public static void SendNewRepeatedNotification3(string title, string text, double firetime, double repeatTime, int id)
     {
         AndroidNotification _notification = new AndroidNotification()
         {

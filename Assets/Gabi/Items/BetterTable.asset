@@ -20,5 +20,5 @@ MonoBehaviour:
   clientTag: 12
   IsLimitLes: 0
   StartBought: 0
-  Qty: 1
+  Qty: 0
   rarity: 2

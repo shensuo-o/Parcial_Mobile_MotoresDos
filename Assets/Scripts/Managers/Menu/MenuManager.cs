@@ -123,8 +123,8 @@ namespace Managers.Menu
         }
         private void LoadPlayerData()
         {
-            if (!PlayerPrefs.HasKey("saveLives"))
-                ResetPlayerData();
+            //if (!PlayerPrefs.HasKey("saveLives"))
+            //    ResetPlayerData();
             // Load saved values or set defaults
             lives = PlayerPrefs.GetInt("saveLives", maxLives);
             savedScore = PlayerPrefs.GetInt("saveScoreMenu"); // Load high score
@@ -228,6 +228,7 @@ namespace Managers.Menu
             _timePassed = _currentDay - _lastDay;
 
             double minutesPassed = _timePassed.TotalMinutes;
+            
             while (minutesPassed >= liveGetTime && lives < maxLives)
             {
                 AddLife();
@@ -420,9 +421,14 @@ namespace Managers.Menu
         public void ExitApp()
         {
             SavePlayerData();
-            NotificationsController.SendNewRepeatedNotification("Hora de cocinar", "Un restaurante no se atiende solo, es hora de cocinar a la hora "+ DateTime.Now.ToString(), 120,300,1);
-            if (gachaPending > 0)
-                NotificationsController.SendNewRepeatedNotification2("Hay nuevas recetas", "Tenes " + gachaPending.ToString() + " recetas para descubrir a la hora " + DateTime.Now.ToString(), 60, 160,2);
+            //NotificationsController.SendNewRepeatedNotification("Hora de cocinar", "Un cafe no se atiende solo, es hora de cocinar a la hora "+ DateTime.Now.ToString(), 120,300,1);
+            //if (gachaPending > 0)
+            //    NotificationsController.SendNewRepeatedNotification2("Hay nuevas recetas", "Tenes " + gachaPending.ToString() + " recetas para descubrir a la hora " + DateTime.Now.ToString(), 60, 160, 2);
+            //if (lives < 5)
+            //{
+            //    NotificationsController.SendNewNotification("La cocina espera", "Ya has descansado demasiado, es hora de que el cafe abra sus puertas", (liveGetTime - _timePassed.TotalMinutes) + (5 - lives) * 3*60, 5);
+
+            //}
             Application.Quit();
         }
 

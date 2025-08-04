@@ -29,6 +29,7 @@ namespace Managers.Level
 
         public async void LoadScene(string sceneName = "Menu")
         {
+            print("yendo al menu");
             progressBar.fillAmount = 0;
             _progress = 0;
         
